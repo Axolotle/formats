@@ -1,4 +1,4 @@
-from math import sqrt, ceil
+from math import sqrt, floor
 from json import load, dump
 
 
@@ -23,6 +23,14 @@ def defineFormats():
         width = round(width * 1000000)
         object['sizeMM'] = [width, height]
 
+        n = 0
+        while height > 1000:
+            if height > width:
+                height = floor(height / 2)
+            else:
+                width = floor(width / 2)
+            n += 1
+        object['number'] = str(n) + ' (' + str(width) + ', ' + str(height) +')'
         formats.append(object)
 
     with open('output.json', 'w') as f:
