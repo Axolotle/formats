@@ -1,14 +1,34 @@
 [
     {
-        "name": "Earth",
-        "surface": 510067420
+        "name": "Mercury",
+        "surface": 74800000
     },
     {
-        "name": "Moon",
-        "surface": 37871220.85
+        "name": "Venus",
+        "surface": 460230000
+    },
+    {
+        "name": "Earth",
+        "surface": 510072000
+    },
+    {
+        "name": "Mars",
+        "surface": 144798500
     },
     {
         "name": "Jupiter",
         "surface": 61400000000
+    },
+    {
+        "name": "Saturn",
+        "surface": 42700000000
+    },
+    {
+        "name": "Uranus",
+        "surface": 8115600000
+    },
+    {
+        "name": "Neptune",
+        "surface": 7618300000
     }
 ]

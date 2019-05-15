@@ -11,16 +11,13 @@ def defineFormat():
 
     for object in objects:
         object['result'] = []
-        surface = round(object['surface'] / 1000000)
-        object['surfaceApprox'] = surface
-        prevY = surface + 1
+        surface = object['surfaceApprox'] = y = round(object['surface'] / 100000, 1)
         x = 1
-        while x < prevY:
+        while x <= y:
             result = surface / x
             y = round(result, 2)
-            if y == result:
+            if y == result and 0.5 <= y / x <= 2:
                 object['result'].append([x, y])
-                prevY = y
             x = round(x + 0.01, 2)
         formats.append(object)
 
