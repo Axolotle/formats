@@ -1,42 +1,58 @@
 [
     {
-        "planet": "Mercury",
+        "name": "Mercury",
+        "radius": [2439.7, 2439.7],
+        "meanVolumetricRadius": 2439.7,
         "serie": "Ε",
-        "surface": 74800000
+        "surfaceWikipedia": 74800000
     },
     {
-        "planet": "Venus",
+        "name": "Venus",
+        "radius": [6051.8, 6051.8],
+        "meanVolumetricRadius": 6051.8,
         "serie": "Α",
-        "surface": 460230000
+        "surfaceWikipedia": 460230000
     },
     {
-        "planet": "Earth",
+        "name": "Earth",
+        "radius": [6378.137, 6356.752],
+        "meanVolumetricRadius": 6371,
         "serie": "Γ",
-        "surface": 510072000
+        "surfaceWikipedia": 510072000
     },
     {
-        "planet": "Mars",
+        "name": "Mars",
+        "radius": [3396.2, 3376.2],
+        "meanVolumetricRadius": 3389.5,
         "serie": "Ά",
-        "surface": 144798500
+        "surfaceWikipedia": 144798500
     },
     {
-        "planet": "Jupiter",
+        "name": "Jupiter",
+        "radius": [71492, 66854],
+        "meanVolumetricRadius": 69911,
         "serie": "Ζ",
-        "surface": 61400000000
+        "surfaceWikipedia": 61400000000
     },
     {
-        "planet": "Saturn",
+        "name": "Saturn",
+        "radius": [60268, 54364],
+        "meanVolumetricRadius": 58232,
         "serie": "Κ",
-        "surface": 42700000000
+        "surfaceWikipedia": 42700000000
     },
     {
-        "planet": "Uranus",
+        "name": "Uranus",
+        "radius": [25559, 24973],
+        "meanVolumetricRadius": 25362,
         "serie": "Ο",
-        "surface": 8115600000
+        "surfaceWikipedia": 8115600000
     },
     {
-        "planet": "Neptune",
+        "name": "Neptune",
+        "radius": [24764, 24341],
+        "meanVolumetricRadius": 24622,
         "serie": "Π",
-        "surface": 7618300000
+        "surfaceWikipedia": 7618300000
     }
 ]

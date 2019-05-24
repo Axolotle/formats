@@ -1,4 +1,4 @@
-from math import sqrt, floor
+from math import sqrt, floor, pi, atanh
 from json import load, dump
 
 
@@ -6,18 +6,41 @@ def getJson(filename):
     with open(filename, 'r') as f:
         return load(f)
 
+def surfaceAreaOfOblateEllipsoid(a, b):
+    # http://www.numericana.com/answer/geometry.htm#oblate
+    # e = √(1-b²/a²)
+    # S = 2πa² [1 + (b/a)² atanh(e)/e]
+
+    if a == b:
+        # if it's a sphere return with Archimedes's formula
+        return 4 * pi * a**2
+    e = sqrt(1 - b**2 / a**2)
+    return 2 * pi * a**2 * (1 + (b/a)**2 * atanh(e) / e)
+
+def surfaceAreaOfOblateSpheroid(a, b):
+    # http://www.numericana.com/answer/ellipsoid.htm#oblate
+    # e = √(1-b²/a²)
+    # A = 2π [a² + b² atanh(e)/e]
+    e = sqrt(1 - b**2 / a**2)
+    return 2 * pi * (a**2 + b**2 * atanh(e) / e)
+
+def radiusOfSphere(surfaceArea):
+    # r = √[A / (4 * π)]
+    print(sqrt(surfaceArea / (4 * pi)))
+
 def rectSize(surfaceArea):
     # Define rectangle's size so height * width == surfaceArea
-    # and height / width == √2 == 1.4142135623730951
+    # and height / width == √2 ~= 1.4142135623730951
     height = sqrt(surfaceArea * 1.4142135623730951)
     return [surfaceArea / height, height]
 
 def defineFormats():
     for planet in getJson('surfaces.json'):
         # 'surface' is in km²
-        surface = planet['surface']
+        surface = surfaceAreaOfOblateEllipsoid(*planet['radius'])
         serie = planet['serie']
         width, height = rectSize(surface)
+        planet['surface'] = surface
         planet['size_km'] = [width, height]
 
         # turn kilometers into millimeter and round to the nearest integrer
@@ -47,8 +70,11 @@ def defineFormats():
                 a4equi = [width, height] if height > width else [height, width]
                 planet['a4equi'] = {'number': serieNumber, 'format': a4equi}
 
-        with open('series/' + planet['planet'].lower() + '.json', 'w') as f:
+        with open('series/' + planet['name'].lower() + '.json', 'w') as f:
             dump(planet, f, ensure_ascii=False, indent=2, separators=(',', ': '))
 
 if __name__ == '__main__':
     defineFormats()
+    # for planet in getJson('surfaces.json'):
+    # radiusOfSphere(510067420)
+    # radiusOfSphere(surfaceAreaOfOblateEllipsoid())
