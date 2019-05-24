@@ -1,0 +1,416 @@
+[
+  {
+    "formatNumber": 1,
+    "total": 2,
+    "distribution": [1, 2],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 2,
+    "total": 4,
+    "distribution": [2, 2],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 3,
+    "total": 8,
+    "distribution": [2, 4],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 4,
+    "total": 16,
+    "distribution": [4, 4],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 5,
+    "total": 32,
+    "distribution": [4, 8],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 6,
+    "total": 64,
+    "distribution": [8, 8],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 7,
+    "total": 128,
+    "distribution": [8, 16],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 8,
+    "total": 256,
+    "distribution": [16, 16],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 9,
+    "total": 512,
+    "distribution": [16, 32],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 10,
+    "total": 1024,
+    "distribution": [32, 32],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 11,
+    "total": 2048,
+    "distribution": [32, 64],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 12,
+    "total": 4096,
+    "distribution": [64, 64],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 13,
+    "total": 8192,
+    "distribution": [64, 128],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 14,
+    "total": 16384,
+    "distribution": [128, 128],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 15,
+    "total": 32768,
+    "distribution": [128, 256],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 16,
+    "total": 65536,
+    "distribution": [256, 256],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 17,
+    "total": 131072,
+    "distribution": [256, 512],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 18,
+    "total": 262144,
+    "distribution": [512, 512],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 19,
+    "total": 524288,
+    "distribution": [512, 1024],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 20,
+    "total": 1048576,
+    "distribution": [1024, 1024],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 21,
+    "total": 2097152,
+    "distribution": [1024, 2048],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 22,
+    "total": 4194304,
+    "distribution": [2048, 2048],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 23,
+    "total": 8388608,
+    "distribution": [2048, 4096],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 24,
+    "total": 16777216,
+    "distribution": [4096, 4096],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 25,
+    "total": 33554432,
+    "distribution": [4096, 8192],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 26,
+    "total": 67108864,
+    "distribution": [8192, 8192],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 27,
+    "total": 134217728,
+    "distribution": [8192, 16384],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 28,
+    "total": 268435456,
+    "distribution": [16384, 16384],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 29,
+    "total": 536870912,
+    "distribution": [16384, 32768],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 30,
+    "total": 1073741824,
+    "distribution": [32768, 32768],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 31,
+    "total": 2147483648,
+    "distribution": [32768, 65536],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 32,
+    "total": 4294967296,
+    "distribution": [65536, 65536],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 33,
+    "total": 8589934592,
+    "distribution": [65536, 131072],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 34,
+    "total": 17179869184,
+    "distribution": [131072, 131072],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 35,
+    "total": 34359738368,
+    "distribution": [131072, 262144],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 36,
+    "total": 68719476736,
+    "distribution": [262144, 262144],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 37,
+    "total": 137438953472,
+    "distribution": [262144, 524288],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 38,
+    "total": 274877906944,
+    "distribution": [524288, 524288],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 39,
+    "total": 549755813888,
+    "distribution": [524288, 1048576],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 40,
+    "total": 1099511627776,
+    "distribution": [1048576, 1048576],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 41,
+    "total": 2199023255552,
+    "distribution": [1048576, 2097152],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 42,
+    "total": 4398046511104,
+    "distribution": [2097152, 2097152],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 43,
+    "total": 8796093022208,
+    "distribution": [2097152, 4194304],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 44,
+    "total": 17592186044416,
+    "distribution": [4194304, 4194304],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 45,
+    "total": 35184372088832,
+    "distribution": [4194304, 8388608],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 46,
+    "total": 70368744177664,
+    "distribution": [8388608, 8388608],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 47,
+    "total": 140737488355328,
+    "distribution": [8388608, 16777216],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 48,
+    "total": 281474976710656,
+    "distribution": [16777216, 16777216],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 49,
+    "total": 562949953421312,
+    "distribution": [16777216, 33554432],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 50,
+    "total": 1125899906842624,
+    "distribution": [33554432, 33554432],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 51,
+    "total": 2251799813685248,
+    "distribution": [33554432, 67108864],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 52,
+    "total": 4503599627370496,
+    "distribution": [67108864, 67108864],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 53,
+    "total": 9007199254740992,
+    "distribution": [67108864, 134217728],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 54,
+    "total": 18014398509481984,
+    "distribution": [134217728, 134217728],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 55,
+    "total": 36028797018963968,
+    "distribution": [134217728, 268435456],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 56,
+    "total": 72057594037927936,
+    "distribution": [268435456, 268435456],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 57,
+    "total": 144115188075855872,
+    "distribution": [268435456, 536870912],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 58,
+    "total": 288230376151711744,
+    "distribution": [536870912, 536870912],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 59,
+    "total": 576460752303423488,
+    "distribution": [536870912, 1073741824],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 60,
+    "total": 1152921504606846976,
+    "distribution": [1073741824, 1073741824],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 61,
+    "total": 2305843009213693952,
+    "distribution": [1073741824, 2147483648],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 62,
+    "total": 4611686018427387904,
+    "distribution": [2147483648, 2147483648],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 63,
+    "total": 9223372036854775808,
+    "distribution": [2147483648, 4294967296],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 64,
+    "total": 18446744073709551616,
+    "distribution": [4294967296, 4294967296],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 65,
+    "total": 36893488147419103232,
+    "distribution": [4294967296, 8589934592],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 66,
+    "total": 73786976294838206464,
+    "distribution": [8589934592, 8589934592],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 67,
+    "total": 147573952589676412928,
+    "distribution": [8589934592, 17179869184],
+    "orientation": "landscape"
+  },
+  {
+    "formatNumber": 68,
+    "total": 295147905179352825856,
+    "distribution": [17179869184, 17179869184],
+    "orientation": "portrait"
+  },
+  {
+    "formatNumber": 69,
+    "total": 590295810358705651712,
+    "distribution": [17179869184, 34359738368],
+    "orientation": "landscape"
+  }
+]
