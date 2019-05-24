@@ -32,22 +32,17 @@ def defineFormats():
         planet['formats'].append(
             '{}0: {} × {} mm'.format(serie, width, height)
         )
+        a4equi = None
 
-        # Based on Earth format serie 'E', E49 seems to be the closest format
-        # to A0 and can be contained in it. We also choose to stop calculating
-        # formats after 59 iterations (E59 ~= A10).
-        while serieNumber < 59:
+        while serieNumber < 61:
             serieNumber += 1
-            if height > width:
-                height = floor(height / 2)
-                planet['formats'].append(
-                    '{}{}: {} × {} mm'.format(serie, serieNumber, height, width)
-                )
-            else:
-                width = floor(width / 2)
-                planet['formats'].append(
-                    '{}{}: {} × {} mm'.format(serie, serieNumber, width, height)
-                )
+            [height, width] = [width, floor(height / 2)]
+            planet['formats'].append(
+                '{}{}: {} × {} mm'.format(serie, serieNumber, width, height)
+            )
+            if a4equi is None and height <= 297:
+                a4equi = [width, height] if height > width else [height, width]
+                planet['a4equi'] = {'number': serieNumber, 'format': a4equi}
 
         with open('series/' + serie + '.json', 'w') as f:
             dump(planet, f, ensure_ascii=False, indent=2, separators=(',', ': '))
