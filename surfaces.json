@@ -1,42 +1,42 @@
 [
     {
         "planet": "Mercury",
-        "serie": "Me",
+        "serie": "Ε",
         "surface": 74800000
     },
     {
         "planet": "Venus",
-        "serie": "V",
+        "serie": "Α",
         "surface": 460230000
     },
     {
         "planet": "Earth",
-        "serie": "E",
+        "serie": "Γ",
         "surface": 510072000
     },
     {
         "planet": "Mars",
-        "serie": "Ma",
+        "serie": "Ά",
         "surface": 144798500
     },
     {
         "planet": "Jupiter",
-        "serie": "J",
+        "serie": "Ζ",
         "surface": 61400000000
     },
     {
         "planet": "Saturn",
-        "serie": "S",
+        "serie": "Κ",
         "surface": 42700000000
     },
     {
         "planet": "Uranus",
-        "serie": "U",
+        "serie": "Ο",
         "surface": 8115600000
     },
     {
         "planet": "Neptune",
-        "serie": "N",
+        "serie": "Π",
         "surface": 7618300000
     }
 ]

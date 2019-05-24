@@ -26,25 +26,28 @@ def defineFormats():
         height = round(height * 1000000)
         width = round(width * 1000000)
         planet['rounded_size_mm'] = [width, height]
+        planet['a4equi'] = {}
 
         serieNumber = 0
-        planet['formats'] = []
-        planet['formats'].append(
-            '{}0: {} × {} mm'.format(serie, width, height)
+        planet['formats_mm'] = []
+        planet['formats_mm'].append(
+            # '{}0: {} × {} mm'.format(serie, width, height)
+            {'name': serie + str(serieNumber), 'size': [width, height]}
         )
         a4equi = None
 
         while serieNumber < 61:
             serieNumber += 1
             [height, width] = [width, floor(height / 2)]
-            planet['formats'].append(
-                '{}{}: {} × {} mm'.format(serie, serieNumber, width, height)
+            planet['formats_mm'].append(
+                # '{}{}: {} × {} mm'.format(serie, serieNumber, width, height)
+                {'name': serie + str(serieNumber), 'size': [width, height]}
             )
             if a4equi is None and height <= 297:
                 a4equi = [width, height] if height > width else [height, width]
                 planet['a4equi'] = {'number': serieNumber, 'format': a4equi}
 
-        with open('series/' + serie + '.json', 'w') as f:
+        with open('series/' + planet['planet'].lower() + '.json', 'w') as f:
             dump(planet, f, ensure_ascii=False, indent=2, separators=(',', ': '))
 
 if __name__ == '__main__':
