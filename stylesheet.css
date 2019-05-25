@@ -1,0 +1,50 @@
+line, ellipse {
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+}
+
+text {
+    font-family: 'Fira Code';
+    font-size: 4.0625;
+}
+
+text.center {
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+text.rotated {
+}
+
+#cover-text {
+    font-size: 65;
+}
+
+.f0 {
+    font-size: 65;
+    fill: white;
+    stroke: black;
+    stroke-width: 1;
+}
+.f1 { font-size: 45.96194077712559; }
+.f2 { font-size: 32.5; }
+.f3 { font-size: 22.980970388562795; }
+.f4 { font-size: 16.25; }
+.f5 { font-size: 11.490485194281398; }
+.f6 { font-size: 8.125; }
+.f7 { font-size: 5.745242597140699; }
+.f8 { font-size: 4.0625; }
+.f9 { font-size: 2.8726212985703494; }
+.f10 { font-size: 2.03125; }
+.f11 { font-size: 1.4363106492851747; }
+.f12 { font-size: 1.015625; }
+.f13 { font-size: 0.7181553246425874; }
+.f14 { font-size: 0.5078125; }
+.f15 { font-size: 0.3590776623212937; }
+.f16 { font-size: 0.25390625; }
+.f17 { font-size: 0.17953883116064684; }
+.f18 { font-size: 0.126953125; }
+.f19 { font-size: 0.08976941558032342; }
+.f20 { font-size: 0.0634765625; }
+.f21 { font-size: 0.04488470779016171; }

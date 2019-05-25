@@ -5,6 +5,10 @@ def getJson(filename):
     with open(filename, 'r') as f:
         return load(f)
 
+def getText(filename):
+    with open(filename, 'r') as f:
+        return f.read()
+
 def dumpJson(filename, data):
     with open(filename, 'w') as f:
         dump(data, f, ensure_ascii=False, indent=2, separators=(',', ': '))
