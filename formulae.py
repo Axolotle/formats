@@ -1,6 +1,9 @@
 from math import pi, sqrt, atanh
 
 
+sqrt2 = 1.4142135623730951
+sqrt1_2 = 0.7071067811865476
+
 def surfaceAreaOfOblateEllipsoid(a, b):
     # http://www.numericana.com/answer/geometry.htm#oblate
     # e = √(1-b²/a²)
@@ -26,5 +29,5 @@ def radiusOfSphere(surfaceArea):
 def rectSize(surfaceArea):
     # Define rectangle's size so height * width == surfaceArea
     # and height / width == √2 ~= 1.4142135623730951
-    height = sqrt(surfaceArea * 1.4142135623730951)
+    height = sqrt(surfaceArea * sqrt2)
     return [surfaceArea / height, height]

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Fira Code';
+    src: url('/usr/share/fonts/TTF/FiraCode-Regular.ttf');
+}
+
 line, ellipse, path {
     fill: none;
     stroke: black;
@@ -11,9 +16,6 @@ text {
 text.center {
     text-anchor: middle;
     dominant-baseline: central;
-}
-
-text.rotated {
 }
 
 #cover-text {
