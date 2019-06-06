@@ -1,5 +1,9 @@
 from json import load
 from copy import deepcopy
+from PyPDF2 import PdfFileMerger
+from tempfile import NamedTemporaryFile
+import subprocess
+from io import BytesIO
 from svgwrite import Drawing
 from svgwrite.container import Style, Group
 from svgwrite.shapes import Ellipse, Line, Rect
@@ -44,9 +48,9 @@ class Catalog():
         doc.defs.add(Style(getText('stylesheet.css')))
         page = self.drawLines(deepcopy(doc))
         self.pages.append(self.drawCoverRecto(deepcopy(doc)))
-        self.pages.append(self.drawPageRecto(deepcopy(page), 0))
-        self.pages.append(self.drawPageRecto(deepcopy(page), 1))
-        
+        for n in range(self.times + 1):
+            self.pages.append(self.drawPageRecto(deepcopy(page), n))
+
         return self
 
     def drawCoverRecto(self, page):
@@ -121,13 +125,35 @@ class Catalog():
         pass
 
     def saveAsSVG(self, folder='print/svg/', page=None):
+        ''' Generate every svg as single files.
+        '''
         for i, page in enumerate(self.pages):
             print(i, page)
             page.saveas('{}{}-p{}.svg'.format(folder, self.name, i), pretty=True)
 
     def saveAsPDF(self, folder='print/'):
-        pass
+        ''' Generate a single pdf with every page.
+        '''
+        pdf = PdfFileMerger()
+        for page in self.pages:
+            # Had to use a temp file so inkscape can open it.
+            # Had to use inkscape since other svg2pdf converters can't manage
+            # 'font-variant-ligature' nor 'dominant-baseline' css rules.
+            with NamedTemporaryFile() as temp:
+                temp.write(page.tostring().encode('utf-8'))
+                temp.flush()
+                process = subprocess.run(
+                    ['inkscape', temp.name, '--export-pdf=-'],
+                    input=temp.read(),
+                    stdout=subprocess.PIPE
+                )
+                pdf.append(BytesIO(process.stdout))
+
+        with open('{}{}.pdf'.format(folder, self.name.lower()), 'wb') as target:
+            pdf.write(target)
 
 if __name__ == '__main__':
     earth = Catalog(getJson('series/earth.json'))
-    earth.generate().saveAsSVG()
+    earth.generate()
+    # earth.saveAsSVG()
+    earth.saveAsPDF()
