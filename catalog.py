@@ -42,8 +42,11 @@ class Catalog():
             # profile='tiny',
         )
         doc.defs.add(Style(getText('stylesheet.css')))
+        page = self.drawLines(deepcopy(doc))
         self.pages.append(self.drawCoverRecto(deepcopy(doc)))
-
+        self.pages.append(self.drawPageRecto(deepcopy(page), 0))
+        self.pages.append(self.drawPageRecto(deepcopy(page), 1))
+        
         return self
 
     def drawCoverRecto(self, page):
@@ -81,10 +84,38 @@ class Catalog():
         pass
 
     def drawLines(self, page):
-        pass
+        lines = Group()
+        w, h = self.w, self.h
+        thickness = 1
+        number = 1
+        for n in range(1, 21):
+            if n % 2 != 0:
+                h /= 2
+                line = 'M{},{} h{}'.format(self.w - w, h, w)
+            else:
+                w /= 2
+                line = 'M{},{} v{}'.format(self.w - w, 0, h)
+            lines.add(Path(d=line, stroke_width=round(thickness, 3)))
+            number += 1
+            thickness *= sqrt1_2
 
-    def drawPageRecto(self, page):
-        pass
+        page.add(lines)
+        return page
+
+    def drawPageRecto(self, page, number):
+        w, h = self.w, self.h
+        page.add(Text(self.symbol + str(number), insert=self.c, class_='center f0'))
+        number += 1
+        for n in range(1, 21):
+            if n % 2 != 0:
+                h /= 2
+                textPos = [self.w - w / 2, h + h / 2]
+            else:
+                w /= 2
+                textPos = [self.w - w - w / 2, h / 2]
+            page.add(Text(self.symbol + str(number), insert=textPos, class_='center f' + str(n)))
+            number += 1
+        return page
 
     def drawPageVerso(self, page):
         pass
