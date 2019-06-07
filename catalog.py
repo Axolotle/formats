@@ -11,7 +11,7 @@ from svgwrite.path import Path
 from svgwrite.text import Text
 
 from utils import getJson, getText, km2mm
-from formulae import sqrt2, sqrt1_2
+from formulae import sqrt2, sqrt1_2, radiusOfSphere
 
 
 class Catalog():
@@ -33,19 +33,19 @@ class Catalog():
         # [0] = equatorial, [1] = polar
         ratio = self.h / km2mm(planet['size_km'][1])
         self.radius = [ratio * km2mm(planet['radius'][0]), ratio * km2mm(planet['radius'][1])]
-        self.fontSize = (self.radius[0] + self.radius[1]) / 2
+        self.fontSizes = [round(self.radius[1] * sqrt1_2**n, 3)
+                          for n in range(21)]
 
         self.pages = []
-
-        print(self.fontSize)
 
     def generate(self):
         doc = Drawing(
             size=(str(self.w) + 'mm', str(self.h) + 'mm'),
             viewBox='0 0 {} {}'.format(self.w, self.h),
-            # profile='tiny',
         )
-        doc.defs.add(Style(getText('stylesheet.css')))
+        doc.defs.add(Style(
+            getText('stylesheet.css').replace('MAINFONTSIZE', str(self.fontSizes[8]))
+        ))
         page = self.drawLines(deepcopy(doc))
         self.pages.append(self.drawCoverRecto(deepcopy(doc)))
         for n in range(self.times + 1):
@@ -63,7 +63,12 @@ class Catalog():
             self.radius[0]
         )))
         # title (greek caps)
-        page.add(Text(self.symbol, insert=self.c, id='cover-text', class_='center'))
+        page.add(Text(
+            self.symbol,
+            insert=self.c,
+            class_='center',
+            style='font-size:{};'.format(self.fontSizes[0])
+        ))
         page.add(Text('1', insert=(self.c[0], self.m[1] + 5), class_='center'))
         page.add(Text(
             '√2',
@@ -99,7 +104,7 @@ class Catalog():
             else:
                 w /= 2
                 line = 'M{},{} v{}'.format(self.w - w, 0, h)
-            lines.add(Path(d=line, stroke_width=round(thickness, 3)))
+            lines.add(Path(d=line, style='stroke-width:{};'.format(round(thickness, 3))))
             number += 1
             thickness *= sqrt1_2
 
@@ -108,7 +113,12 @@ class Catalog():
 
     def drawPageRecto(self, page, number):
         w, h = self.w, self.h
-        page.add(Text(self.symbol + str(number), insert=self.c, class_='center f0'))
+        page.add(Text(
+            self.symbol + str(number),
+            insert=self.c,
+            class_='center filledstroked',
+            style='font-size:{};'.format(self.fontSizes[0])
+        ))
         number += 1
         for n in range(1, 21):
             if n % 2 != 0:
@@ -117,19 +127,27 @@ class Catalog():
             else:
                 w /= 2
                 textPos = [self.w - w - w / 2, h / 2]
-            page.add(Text(self.symbol + str(number), insert=textPos, class_='center f' + str(n)))
+            page.add(Text(
+                self.symbol + str(number),
+                insert=textPos,
+                class_='center',
+                style='font-size:{};'.format(self.fontSizes[n])
+            ))
             number += 1
         return page
 
     def drawPageVerso(self, page):
         pass
 
-    def saveAsSVG(self, folder='print/svg/', page=None):
-        ''' Generate every svg as single files.
+    def saveAsSVG(self, folder='print/svg/', pages=None):
+        ''' Generate one, a range or every svg as single files.
         '''
-        for i, page in enumerate(self.pages):
-            print(i, page)
-            page.saveas('{}{}-p{}.svg'.format(folder, self.name, i), pretty=True)
+        if type(pages) is int:
+            self.pages[pages].saveas('{}{}-p{}.svg'.format(folder, self.name, pages), pretty=True)
+        else:
+            pages = pages if type(pages) is range else range(len(self.pages))
+            for i in pages:
+                self.pages[i].saveas('{}{}-p{}.svg'.format(folder, self.name, i), pretty=True)
 
     def saveAsPDF(self, folder='print/'):
         ''' Generate a single pdf with every page.
@@ -152,8 +170,9 @@ class Catalog():
         with open('{}{}.pdf'.format(folder, self.name.lower()), 'wb') as target:
             pdf.write(target)
 
+
 if __name__ == '__main__':
     earth = Catalog(getJson('series/earth.json'))
     earth.generate()
-    # earth.saveAsSVG()
-    earth.saveAsPDF()
+    earth.saveAsSVG(pages=range(2))
+    # earth.saveAsPDF()
