@@ -7,10 +7,10 @@ from formulae import surfaceAreaOfOblateEllipsoid, rectSize
 
 def defineFormats():
     planets = {}
-    for planet in getJson('surfaces.json'):
+    for planet in getJson('data/planetsInput.json'):
         # 'surface' is in km²
         surface = surfaceAreaOfOblateEllipsoid(*planet['radius'])
-        serie = planet['serie']
+        symbol = planet['symbol']
         width, height = rectSize(surface)
         planet['surface'] = surface
         planet['size_km'] = [width, height]
@@ -20,25 +20,23 @@ def defineFormats():
         # to the nearest millimeter) so height / width is now ~= √2
         height = round(height * 1000000)
         width = round(width * 1000000)
-        planet['rounded_size_mm'] = [width, height]
-        planet['a4equi'] = {}
+        planet['a4like'] = {}
 
-        serieNumber = 0
         planet['formats_mm'] = []
-        planet['formats_mm'].append(
-            {'name': serie + str(serieNumber), 'size': [width, height]}
-        )
-        a4equi = None
+        planet['formats_mm'].append([width, height])
+        a4like = None
 
-        while serieNumber < 61:
-            serieNumber += 1
+        i = 0
+        # search for folded versions until we reach the equivalent of A10
+        while i < 8:
             [height, width] = [width, floor(height / 2)]
-            planet['formats_mm'].append(
-                {'name': serie + str(serieNumber), 'size': [width, height]}
-            )
-            if a4equi is None and height <= 297:
-                a4equi = [width, height] if height > width else [height, width]
-                planet['a4equi'] = {'number': serieNumber, 'format': a4equi}
+            planet['formats_mm'].append([width, height])
+            if a4like is None and height <= 297:
+                a4like = [width, height] if height > width else [height, width]
+                planet['a4like'] = a4like
+                i = 1
+            if i > 0:
+                i += 1
 
         planets[planet['name']] = planet
     return planets
@@ -46,4 +44,4 @@ def defineFormats():
 if __name__ == '__main__':
     planets = defineFormats()
     for planet in planets.values():
-        dumpJson('series/' + planet['name'].lower() + '.json', planet)
+        dumpJson('data/planets/' + planet['name'].lower() + '.json', planet)

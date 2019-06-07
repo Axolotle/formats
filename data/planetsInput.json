@@ -1,58 +1,66 @@
 [
     {
         "name": "Mercury",
+        "symbol": "Ε",
+        "symbolName": "epsilon",
         "radius": [2439.7, 2439.7],
         "meanVolumetricRadius": 2439.7,
-        "serie": "Ε",
         "surfaceWikipedia": 74800000
     },
     {
         "name": "Venus",
+        "symbol": "Α",
+        "symbolName": "alpha",
         "radius": [6051.8, 6051.8],
         "meanVolumetricRadius": 6051.8,
-        "serie": "Α",
         "surfaceWikipedia": 460230000
     },
     {
         "name": "Earth",
+        "symbol": "Γ",
+        "symbolName": "gamma",
         "radius": [6378.137, 6356.752],
         "meanVolumetricRadius": 6371,
-        "serie": "Γ",
         "surfaceWikipedia": 510072000
     },
     {
         "name": "Mars",
+        "symbol": "α",
+        "symbolName": "alpha-minor",
         "radius": [3396.2, 3376.2],
         "meanVolumetricRadius": 3389.5,
-        "serie": "Ά",
         "surfaceWikipedia": 144798500
     },
     {
         "name": "Jupiter",
+        "symbol": "Ζ",
+        "symbolName": "zêta",
         "radius": [71492, 66854],
         "meanVolumetricRadius": 69911,
-        "serie": "Ζ",
         "surfaceWikipedia": 61400000000
     },
     {
         "name": "Saturn",
+        "symbol": "Κ",
+        "symbolName": "kappa",
         "radius": [60268, 54364],
         "meanVolumetricRadius": 58232,
-        "serie": "Κ",
         "surfaceWikipedia": 42700000000
     },
     {
         "name": "Uranus",
+        "symbol": "Ο",
+        "symbolName": "omicron",
         "radius": [25559, 24973],
         "meanVolumetricRadius": 25362,
-        "serie": "Ο",
         "surfaceWikipedia": 8115600000
     },
     {
         "name": "Neptune",
+        "symbol": "Π",
+        "symbolName": "pi",
         "radius": [24764, 24341],
         "meanVolumetricRadius": 24622,
-        "serie": "Π",
         "surfaceWikipedia": 7618300000
     }
 ]

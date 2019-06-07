@@ -1,6 +1,5 @@
 @font-face {
     font-family: 'Fira Code';
-    src: url('/usr/share/fonts/TTF/FiraCode-Regular.ttf');
 }
 
 line, ellipse, path {
@@ -11,6 +10,7 @@ line, ellipse, path {
 
 text {
     font-family: 'Fira Code';
+    font-weight: 300;
     font-size: MAINFONTSIZE;
 }
 

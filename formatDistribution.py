@@ -22,5 +22,5 @@ def formatsInFormat0():
 if __name__ == '__main__':
     result = formatsInFormat0()
 
-    with open('series/formatsDistribution.json', 'w') as f:
+    with open('data/formatsDistribution.json', 'w') as f:
         dump(result, f, ensure_ascii=False, indent=2, separators=(',', ': '))

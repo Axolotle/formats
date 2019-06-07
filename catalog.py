@@ -19,16 +19,16 @@ class Catalog():
     """
 
     def __init__(self, planet):
-        self.symbol = planet['serie']
+        self.symbol = planet['symbol']
         self.name = planet['name']
         # width and height of the document
-        [self.w, self.h] = planet['a4equi']['format']
+        [self.w, self.h] = planet['a4like']
         # center x and y of the format
         self.c = [self.w / 2, self.h / 2]
         # margins x and y of the format
         self.m = [self.w / 16, self.h / 16]
         # number of folding to operate to get a format that can be filled in a A4
-        self.times = planet['a4equi']['number']
+        self.times = planet['formats_mm'].index(planet['a4like'])
         # radius of the planet scaled to planet's A4-like
         # [0] = equatorial, [1] = polar
         ratio = self.h / km2mm(planet['size_km'][1])
@@ -43,9 +43,9 @@ class Catalog():
             size=(str(self.w) + 'mm', str(self.h) + 'mm'),
             viewBox='0 0 {} {}'.format(self.w, self.h),
         )
-        doc.defs.add(Style(
-            getText('stylesheet.css').replace('MAINFONTSIZE', str(self.fontSizes[8]))
-        ))
+        doc.defs.add(Style(''.join(
+            getText('data/stylesheet.css').replace('MAINFONTSIZE', str(self.fontSizes[8])
+        ).split())))
         page = self.drawLines(deepcopy(doc))
         self.pages.append(self.drawCoverRecto(deepcopy(doc)))
         for n in range(self.times + 1):
@@ -172,7 +172,7 @@ class Catalog():
 
 
 if __name__ == '__main__':
-    earth = Catalog(getJson('series/earth.json'))
+    earth = Catalog(getJson('data/planets/earth.json'))
     earth.generate()
     earth.saveAsSVG(pages=range(2))
     # earth.saveAsPDF()
