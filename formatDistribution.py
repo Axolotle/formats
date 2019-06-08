@@ -4,7 +4,9 @@ from json import dump
 
 def formatsInFormat0():
     total = 1
-    formatsInSerie = []
+    formatsInSerie = [{
+        'formatNumber': 0, 'total': 1, 'distribution': [1, 1], 'orientation': 'portrait'
+    }]
     for n in range(1, 70):
         step = {'formatNumber': n, 'total': total * 2}
         if n % 2 is 0:

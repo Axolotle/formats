@@ -1,5 +1,11 @@
 [
   {
+    "formatNumber": 0,
+    "total": 1,
+    "distribution": [1, 1],
+    "orientation": "portrait"
+  },
+  {
     "formatNumber": 1,
     "total": 2,
     "distribution": [1, 2],

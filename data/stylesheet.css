@@ -18,6 +18,9 @@ text.center {
     text-anchor: middle;
     dominant-baseline: central;
 }
+text.right {
+    text-anchor: end;
+}
 
 .filledstroked {
     fill: white;
