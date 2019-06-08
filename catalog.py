@@ -29,6 +29,8 @@ class Catalog():
         self.c = [self.w / 2, self.h / 2]
         # margins x and y of the document
         self.m = [self.w / 16, self.h / 16]
+        # extra distance of text from line
+        self.dist = 7
         # list of every formats in mm
         self.formats = planet['formats_mm']
         # surface in km² of the format[0]
@@ -38,7 +40,8 @@ class Catalog():
         # radius of the planet scaled to planet's A4-like
         # [0] = equatorial, [1] = polar
         ratio = self.h / km2mm(planet['size_km'][1])
-        self.radius = [ratio * km2mm(planet['radius'][0]), ratio * km2mm(planet['radius'][1])]
+        self.realRadius = planet['radius']
+        self.radius = [ratio * km2mm(rad) for rad in self.realRadius]
         self.fontSizes = [round(self.radius[1] * sqrt1_2**n, 3)
                           for n in range(21)]
         # define line-height for successive text span
@@ -127,23 +130,36 @@ class Catalog():
             self.symbol,
             insert=self.c,
             class_='center',
-            style='font-size:{};'.format(self.fontSizes[1])
+            style='font-size:{};'.format(self.fontSizes[2])
         ))
-        page.add(Text('1', insert=(self.c[0], self.m[1] + 5), class_='center'))
+        page.add(Text('1', insert=(self.c[0], self.m[1]), class_='center'))
         page.add(Text(
             '√2',
-            insert=(self.m[0] + 5, self.c[1]),
-            transform='rotate(-90 {} {})'.format(self.m[0] + 5, self.c[1]),
+            insert=(self.m[0], self.c[1]),
+            transform='rotate(-90 {} {})'.format(self.m[0], self.c[1]),
             class_='center'
         ))
         page.add(Text(
-            '{}0 -> {}{}'.format(self.symbol, self.symbol, self.times),
-            insert=(self.c[0], self.h - self.m[1] - 5),
+            '{}0 -> {}{}'.format(self.symbol, self.symbol, self.times - 1),
+            insert=(self.c[0], self.h - self.m[1]),
             class_='center'
         ))
         page.add(Text(
             '{}0 ±=== {} SURFACE'.format(self.symbol, self.name.upper()),
-            insert=(self.c[0], self.h - self.m[1] - 3 - (self.c[1] - self.radius[1] - self.m[1]) / 2),
+            insert=(self.c[0], self.h - self.m[1] - (self.c[1] - self.radius[1] - self.m[1]) / 2),
+            class_='center'
+        ))
+        page.add(Text(
+            '{} km'.format(self.realRadius[0]),
+            insert=(self.c[0] + self.radius[0] / 2, self.c[1] + self.dist),
+            class_='center'
+        ))
+        page.add(Text(
+            '{} km'.format(self.realRadius[1]),
+            insert=(self.c[0] + self.dist, self.c[1] - self.radius[1] / 2),
+            transform='rotate(-90 {} {})'.format(
+                self.c[0] + self.dist, self.c[1] - self.radius[1] / 2
+            ),
             class_='center'
         ))
 
@@ -180,13 +196,13 @@ class Catalog():
 
         page.add(Text(
             '{} mm'.format(width),
-            insert=(self.c[0], self.m[1] + 7),
+            insert=(self.c[0], self.m[1] + self.dist),
             class_='center',
         ))
         page.add(Text(
             '{} mm'.format(height),
             insert=(self.m[0] + 5, self.c[1]),
-            transform='rotate(-90 {} {})'.format(self.m[0] + 7, self.c[1]),
+            transform='rotate(-90 {} {})'.format(self.m[0] + self.dist, self.c[1]),
             class_='center',
         ))
 
@@ -240,6 +256,6 @@ class Catalog():
 
 if __name__ == '__main__':
     earth = Catalog(getJson('data/planets/earth.json'))
-    earth.generate(pages=None)
+    earth.generate(pages=0)
     earth.saveAsSVG()
     # earth.saveAsPDF()
