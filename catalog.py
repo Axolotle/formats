@@ -22,7 +22,10 @@ class Catalog():
     def __init__(self, planet):
         self.symbol = planet['symbol']
         self.name = planet['name']
+        self.nameDesc = planet['nameDesc']
         self.surface = planet['surface']
+        self.size = planet['size_km']
+        self.intro = planet['text']
         # width and height of the document (A4 like) in mm
         [self.w, self.h] = planet['a4like']
         # center x and y of the document
@@ -71,11 +74,11 @@ class Catalog():
             if n == 0:
                 self.pages[n] = self.drawCoverRecto(deepcopy(doc))
             elif n == 1:
-                pass
+                self.pages[n] = self.drawCoverVerso(deepcopy(pageVerso))
             elif n % 2 == 0:
                 self.pages[n] = self.drawPageRecto(deepcopy(pageRecto), round(n / 2) - 1)
             else:
-                self.pages[n] = self.drawPageVerso(deepcopy(pageVerso), round(n / 2) - 1)
+                self.pages[n] = self.drawPageVerso(deepcopy(pageVerso), round((n - 1) / 2) - 1)
 
         return self
 
@@ -166,7 +169,45 @@ class Catalog():
         return page
 
     def drawCoverVerso(self, page):
-        pass
+        [width, height] = self.size
+
+        page.add(Text(
+            '{} km'.format(width),
+            insert=(self.c[0], self.m[1] + self.dist),
+            class_='center',
+        ))
+        page.add(Text(
+            '{} km'.format(height),
+            insert=(self.m[0] + 5, self.c[1]),
+            transform='rotate(-90 {} {})'.format(self.m[0] + self.dist, self.c[1]),
+            class_='center',
+        ))
+
+        textBot = Text(
+            '', insert=(0, 0), class_='right',
+            transform='translate({}, {})'.format(
+                self.w - self.m[0], self.h - self.m[1] - self.leading
+            )
+        )
+        spans = [
+            TSpan(self.nameDesc),
+            TSpan('{} km² = {} × {} km'.format(self.surface, *self.size), x=[0], y=[self.leading]),
+        ]
+        for span in spans:
+            textBot.add(span)
+        page.add(textBot)
+
+        intro = Text(
+            '', insert=(0, 0),
+            transform='translate({}, {})'.format(
+                self.c[0] + self.m[0] / 2 - 62.3,
+                self.c[1] + self.m[0] / 2 - len(self.intro) / 2 * self.leading + self.leading
+            )
+        )
+        for i, sentence in enumerate(self.intro):
+            intro.add(TSpan(sentence, x=[0], y=[self.leading * i]))
+        page.add(intro)
+        return page
 
     def drawPageRecto(self, page, number):
         w, h = self.w, self.h
@@ -240,15 +281,16 @@ class Catalog():
             # Had to use a temp file so inkscape can open it.
             # Had to use inkscape since other svg2pdf converters can't manage
             # 'font-variant-ligature' nor 'dominant-baseline' css rules.
-            with NamedTemporaryFile() as temp:
-                temp.write(page.tostring().encode('utf-8'))
-                temp.flush()
-                process = subprocess.run(
-                    ['inkscape', temp.name, '--export-pdf=-'],
-                    input=temp.read(),
-                    stdout=subprocess.PIPE
-                )
-                pdf.append(BytesIO(process.stdout))
+            if page is not None:
+                with NamedTemporaryFile() as temp:
+                    temp.write(page.tostring().encode('utf-8'))
+                    temp.flush()
+                    process = subprocess.run(
+                        ['inkscape', temp.name, '--export-pdf=-', '-z'],
+                        input=temp.read(),
+                        stdout=subprocess.PIPE
+                    )
+                    pdf.append(BytesIO(process.stdout))
 
         with open('{}{}.pdf'.format(folder, self.name.lower()), 'wb') as target:
             pdf.write(target)
@@ -256,6 +298,6 @@ class Catalog():
 
 if __name__ == '__main__':
     earth = Catalog(getJson('data/planets/earth.json'))
-    earth.generate(pages=0)
-    earth.saveAsSVG()
-    # earth.saveAsPDF()
+    earth.generate(pages=range(4))
+    # earth.saveAsSVG()
+    earth.saveAsPDF()
