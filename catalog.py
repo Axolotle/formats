@@ -52,11 +52,20 @@ class Catalog():
         self.totalPages = 2 + self.times * 2
         self.pages = [None] * self.totalPages
 
-    def generate(self, pages=None):
-        doc = Drawing(
-            size=(str(self.w) + 'mm', str(self.h) + 'mm'),
-            viewBox='0 0 {} {}'.format(self.w, self.h),
-        )
+    def generate(self, pages=None, paperSize=None):
+        if paperSize is None:
+            doc = Drawing(
+                size=(str(self.w) + 'mm', str(self.h) + 'mm'),
+                viewBox='0 0 {} {}'.format(self.w, self.h)
+            )
+        else:
+            extraWidth = (paperSize[0] - self.w) / 2
+            extraHeight = (paperSize[1] - self.h) / 2
+            doc = self.drawCutLines(Drawing(
+                size=(str(paperSize[0])+ 'mm', str(paperSize[1]) + 'mm'),
+                viewBox='{} {} {} {}'.format(-extraWidth, -extraHeight, self.w + extraWidth * 2, self.h + extraHeight * 2)
+            ), extraWidth, extraHeight)
+
         doc.defs.add(Style(''.join(
             getText('data/stylesheet.css').replace('MAINFONTSIZE', str(self.fontSizes[8])
         ).split())))
@@ -81,6 +90,20 @@ class Catalog():
                 self.pages[n] = self.drawPageVerso(deepcopy(pageVerso), round((n - 1) / 2) - 1)
 
         return self
+
+    def drawCutLines(self, page, mx, my):
+        cutLines = Group()
+        lines = [
+            Path(d='M{0},0 h{2} M{1},0 h{2}'.format(-mx, self.w + 1, mx - 1), class_='cutLines'),
+            Path(d='M{0},{3} h{2} M{1},{3} h{2}'.format(-mx, self.w + 1, mx - 1, self.h), class_='cutLines'),
+            Path(d='M0,{0} v{2} M0,{1} v{2}'.format(-my, self.h + 1, my - 1), class_='cutLines'),
+            Path(d='M{3},{0} v{2} M{3},{1} v{2}'.format(-my, self.h + 1, my - 1, self.w), class_='cutLines')
+        ]
+        # cutLines.add(Rect(insert=(0, 0), size=(200, 282)))
+        for line in lines:
+            cutLines.add(line)
+        page.add(cutLines)
+        return page
 
     def drawHelpers(self, page):
         helpers = Group()
@@ -298,6 +321,6 @@ class Catalog():
 
 if __name__ == '__main__':
     earth = Catalog(getJson('data/planets/earth.json'))
-    earth.generate(pages=range(4))
-    # earth.saveAsSVG()
+    earth.generate(paperSize=[210, 297])
+    earth.saveAsSVG()
     earth.saveAsPDF()

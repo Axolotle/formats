@@ -27,3 +27,7 @@ text.right {
     stroke: black;
     stroke-width: 1;
 }
+
+.cutLines {
+    stroke-width: 0.05;
+}
