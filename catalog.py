@@ -28,17 +28,17 @@ class Catalog():
         # margins x and y of the format
         self.m = [self.w / 16, self.h / 16]
         # number of folding to operate to get a format that can be filled in a A4
-        self.times = planet['formats_mm'].index(planet['a4like'])
+        self.times = planet['formats_mm'].index(planet['a4like']) + 1
         # radius of the planet scaled to planet's A4-like
         # [0] = equatorial, [1] = polar
         ratio = self.h / km2mm(planet['size_km'][1])
         self.radius = [ratio * km2mm(planet['radius'][0]), ratio * km2mm(planet['radius'][1])]
         self.fontSizes = [round(self.radius[1] * sqrt1_2**n, 3)
                           for n in range(21)]
+        self.totalPages = 2 + self.times * 2
+        self.pages = [None] * self.totalPages
 
-        self.pages = []
-
-    def generate(self):
+    def generate(self, pages=None):
         doc = Drawing(
             size=(str(self.w) + 'mm', str(self.h) + 'mm'),
             viewBox='0 0 {} {}'.format(self.w, self.h),
@@ -46,10 +46,24 @@ class Catalog():
         doc.defs.add(Style(''.join(
             getText('data/stylesheet.css').replace('MAINFONTSIZE', str(self.fontSizes[8])
         ).split())))
-        page = self.drawLines(deepcopy(doc))
-        self.pages.append(self.drawCoverRecto(deepcopy(doc)))
-        for n in range(self.times + 1):
-            self.pages.append(self.drawPageRecto(deepcopy(page), n))
+
+        pageRecto = self.drawLines(deepcopy(doc))
+
+        if pages == None:
+            pages = range(self.totalPages)
+        elif type(pages) is int:
+            pages = [pages]
+
+        for n in pages:
+            print(n)
+            if n == 0:
+                self.pages[n] = self.drawCoverRecto(deepcopy(doc))
+            elif n == 1:
+                pass
+            elif n % 2 == 0:
+                self.pages[n] = self.drawPageRecto(deepcopy(pageRecto), round(n / 2 - 1))
+            else:
+                pass
 
         return self
 
@@ -113,41 +127,36 @@ class Catalog():
 
     def drawPageRecto(self, page, number):
         w, h = self.w, self.h
-        page.add(Text(
-            self.symbol + str(number),
-            insert=self.c,
-            class_='center filledstroked',
-            style='font-size:{};'.format(self.fontSizes[0])
-        ))
-        number += 1
-        for n in range(1, 21):
-            if n % 2 != 0:
+        klass = 'center filledstroked'
+        for i in range(0, 21):
+            if i == 0:
+                textPos = self.c
+            elif i % 2 != 0:
                 h /= 2
                 textPos = [self.w - w / 2, h + h / 2]
             else:
                 w /= 2
                 textPos = [self.w - w - w / 2, h / 2]
             page.add(Text(
-                self.symbol + str(number),
+                self.symbol + str(i + number),
                 insert=textPos,
-                class_='center',
-                style='font-size:{};'.format(self.fontSizes[n])
+                class_=klass,
+                style='font-size:{};'.format(self.fontSizes[i])
             ))
-            number += 1
+            if i == 0:
+                klass = 'center'
+
         return page
 
     def drawPageVerso(self, page):
         pass
 
-    def saveAsSVG(self, folder='print/svg/', pages=None):
-        ''' Generate one, a range or every svg as single files.
+    def saveAsSVG(self, folder='print/svg/'):
+        ''' Save every generated svg as single files.
         '''
-        if type(pages) is int:
-            self.pages[pages].saveas('{}{}-p{}.svg'.format(folder, self.name, pages), pretty=True)
-        else:
-            pages = pages if type(pages) is range else range(len(self.pages))
-            for i in pages:
-                self.pages[i].saveas('{}{}-p{}.svg'.format(folder, self.name, i), pretty=True)
+        for i, page in enumerate(self.pages):
+            if page is not None:
+                page.saveas('{}{}-p{}.svg'.format(folder, self.name, i), pretty=True)
 
     def saveAsPDF(self, folder='print/'):
         ''' Generate a single pdf with every page.
@@ -174,5 +183,5 @@ class Catalog():
 if __name__ == '__main__':
     earth = Catalog(getJson('data/planets/earth.json'))
     earth.generate()
-    earth.saveAsSVG(pages=range(2))
+    earth.saveAsSVG()
     # earth.saveAsPDF()
