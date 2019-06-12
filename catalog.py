@@ -142,6 +142,31 @@ class Catalog():
         page.add(lines)
         return page
 
+    def drawLinesSpiral(self, page):
+        lines = Group()
+        w, h = self.w, self.h
+        cx = self.w, cy = self.h / 2
+        thickness = 1
+        number = 1
+        dir = -1
+        for n in range(1, 21):
+            if n % 2 != 0:
+                line = 'M{},{} h{}'.format(cx, cy, w * dir)
+                cx += (w / 2) * dir
+                h /= 2
+            else:
+                line = 'M{},{} v{}'.format(cx, cy, h * dir)
+                cy += (h / 2) * dir
+                w /= 2
+                dir *= -1
+
+            lines.add(Path(d=line, style='stroke-width:{};'.format(round(thickness, 3))))
+            number += 1
+            thickness *= sqrt1_2
+
+        page.add(lines)
+        return page
+
     def drawCoverRecto(self, page):
         page.add(Ellipse(center=self.c, r=self.radius))
         # planet's polar and equatorial radius
@@ -233,7 +258,7 @@ class Catalog():
         return page
 
     def drawPageRecto(self, page, number):
-        w, h = self.w, self.h
+        w, h = self.w / 2, self.h / 2
         klass = 'center filledstroked'
         for i in range(0, 21):
             if i == 0:
@@ -244,6 +269,34 @@ class Catalog():
             else:
                 w /= 2
                 textPos = [self.w - w - w / 2, h / 2]
+            page.add(Text(
+                self.symbol + str(i + number),
+                insert=textPos,
+                class_=klass,
+                style='font-size:{};'.format(self.fontSizes[i])
+            ))
+            if i == 0:
+                klass = 'center'
+
+        return page
+
+    def drawPageRectoSpiral(self, page, number):
+        w, h = self.w / 2, self.h / 2
+        cx = w, cy = h
+        dir = -1
+        klass = 'center filledstroked'
+        for i in range(0, 21):
+            if i == 0:
+                textPos = self.c
+            elif i % 2 != 0:
+                h /= 2
+                textPos = [cx, cy + h * -dir]
+                cy += h * dir
+                dir *= -1
+            else:
+                w /= 2
+                textPos = [cx + w * -dir, cy]
+                cx += w * dir
             page.add(Text(
                 self.symbol + str(i + number),
                 insert=textPos,
@@ -321,6 +374,6 @@ class Catalog():
 
 if __name__ == '__main__':
     earth = Catalog(getJson('data/planets/earth.json'))
-    earth.generate(paperSize=[210, 297])
+    earth.generate(2)
     earth.saveAsSVG()
-    earth.saveAsPDF()
+    # earth.saveAsPDF()
