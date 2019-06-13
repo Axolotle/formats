@@ -8,6 +8,10 @@ html, body {
     background-color: black;
 }
 
+rect {
+    fill: white;
+}
+
 path {
     fill: none;
     stroke: black;

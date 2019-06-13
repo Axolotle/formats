@@ -91,6 +91,19 @@ class Catalog():
 
         return self
 
+    def generateWebVersion(self):
+        doc = Drawing(
+            size=(str(self.w) + 'mm', str(self.h) + 'mm'),
+            viewBox='0 0 {} {}'.format(self.w, self.h)
+        )
+        main = Group(id='main')
+        main.add(Rect(insert=(0, 0), size=(self.w, self.h)))
+        main.add(self.drawLinesSpiral())
+        main.add(self.drawPageRectoSpiral(0))
+        doc.add(main)
+
+        return doc.tostring()
+
     def drawCutLines(self, page, mx, my):
         cutLines = Group()
         lines = [
@@ -142,10 +155,10 @@ class Catalog():
         page.add(lines)
         return page
 
-    def drawLinesSpiral(self, page):
+    def drawLinesSpiral(self):
         lines = Group()
         w, h = self.w, self.h
-        cx = self.w, cy = self.h / 2
+        cx, cy = self.w, self.h / 2
         thickness = 1
         number = 1
         dir = -1
@@ -164,8 +177,7 @@ class Catalog():
             number += 1
             thickness *= sqrt1_2
 
-        page.add(lines)
-        return page
+        return lines
 
     def drawCoverRecto(self, page):
         page.add(Ellipse(center=self.c, r=self.radius))
@@ -280,9 +292,10 @@ class Catalog():
 
         return page
 
-    def drawPageRectoSpiral(self, page, number):
+    def drawPageRectoSpiral(self, number):
+        texts = Group(id='texts')
         w, h = self.w / 2, self.h / 2
-        cx = w, cy = h
+        cx, cy = w, h
         dir = -1
         klass = 'center filledstroked'
         for i in range(0, 21):
@@ -297,16 +310,18 @@ class Catalog():
                 w /= 2
                 textPos = [cx + w * -dir, cy]
                 cx += w * dir
-            page.add(Text(
+            texts.add(Text(
                 self.symbol + str(i + number),
                 insert=textPos,
                 class_=klass,
-                style='font-size:{};'.format(self.fontSizes[i])
+                font_size=str(self.fontSizes[i]) + 'px'
             ))
             if i == 0:
                 klass = 'center'
 
-        return page
+        texts.elements = texts.elements[::-1]
+
+        return texts
 
     def drawPageVerso(self, page, number):
         [width, height] = self.formats[number]
