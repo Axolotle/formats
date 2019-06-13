@@ -1,11 +1,142 @@
-@font-face {
-    font-family: 'Fira Code';
+:root {
+    font-family: 'Fira Code', monospace;
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 1.4rem;
+    color: white;
 }
 
-html, body {
-    padding: 0;
-    margin: 0;
+/* based on http://meyerweb.com/eric/tools/css/reset/ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1rem;
+	font: inherit;
+	vertical-align: baseline;
+	box-sizing: border-box;
+}
+li {
+    list-style: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+
+html {
     background-color: black;
+}
+body {
+
+}
+main {
+    margin: 2rem;
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+}
+header {
+    display: flex;
+    padding: 2rem;
+    justify-content: space-between;
+    height: 6rem;
+    background-color: black;
+}
+
+nav li {
+    display: inline-block;
+}
+nav a {
+    color: white;
+    padding: 0.25rem 0.5rem;
+}
+nav a:hover {
+    color: black;
+    background-color: white;
+    text-decoration: none;
+}
+
+h1 {
+    height: 2rem;
+    line-height: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+h2 {
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
+p {
+    margin: 1rem 0;
+}
+
+.side {
+    width: 25%;
+}
+li {
+    display: block;
+    cursor: pointer;
+}
+li.selected {
+    background-color: white;
+    color: black;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: -1rem;
+}
+.side ul span {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+#svg {
+    /* display: flex; */
+    padding: 0 4rem;
+    position: sticky;
+    top: 6rem;
+}
+svg {
+    height: calc(100vh - 12rem);
+    width: calc((100vh - 12rem) * 0.7071067811865476);
+    cursor: pointer;
+}
+svg * {
+    pointer-events: none;
+}
+.height {
+    position: absolute;
+    transform: rotate(-90deg);
+    margin-top: calc(100vh - 15rem);
+    transform-origin: bottom left;
+}
+#svg span {
+    display: block;
+    height: 3rem;
+    text-align: center;
+}
+.height span {
+    /* background-color: yellow; */
+    line-height: 3rem;
+    width: calc(100vh - 12rem);
+}
+.width span {
+    line-height: 2.3rem;
+    width: calc((100vh - 12rem) * 0.7071067811865476);
 }
 
 rect {
@@ -22,7 +153,6 @@ text {
     font-family: 'Fira Code';
     font-weight: 300;
 }
-
 text.center {
     text-anchor: middle;
     dominant-baseline: central;
@@ -37,6 +167,7 @@ text.right {
     stroke-width: 1;
 }
 
-.cutLines {
-    stroke-width: 0.05;
+
+@font-face {
+    font-family: 'Fira Code';
 }
