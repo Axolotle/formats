@@ -4,6 +4,17 @@ from catalog import Catalog
 from utils import getJson
 
 
+planets = [
+    ['Ε', 'mercury'],
+    ['Α', 'venus'],
+    ['Γ', 'earth'],
+    ['α', 'mars'],
+    ['Ζ', 'jupiter'],
+    ['Κ', 'saturn'],
+    ['Ο', 'uranus'],
+    ['Π', 'neptune'],
+]
+
 def generate(planet, svg):
     doc, tag, text, line = Doc().ttl()
     doc.asis('<!DOCTYPE html>')
@@ -31,6 +42,25 @@ def generate(planet, svg):
     with open('web/{}.html'.format(planet['name'].lower()), 'w') as output:
         output.write(indent(doc.getvalue()))
 
+def generateIndex():
+    doc, tag, text, line = Doc().ttl()
+    doc.asis('<!DOCTYPE html>')
+    with tag('html', lang='fr'):
+        doc.asis(head('home'))
+        with tag('body'):
+            with tag('header'):
+                line('h1', 'Planetary Formats')
+                doc.asis(menu())
+            with tag('main', id='home'):
+                with tag('div', id='planets'):
+                    for planet in planets:
+                        with tag('div', id=planet[1].lower()):
+                            line('p', planet[1])
+                            line('a', planet[0], href=planet[1].lower() + '.html')
+
+    with open('web/{}.html'.format('index'), 'w') as output:
+        output.write(indent(doc.getvalue()))
+
 def head(name):
     doc, tag, text, line = Doc().ttl()
     with tag('head'):
@@ -42,17 +72,7 @@ def head(name):
 
 def menu():
     doc, tag, text, line = Doc().ttl()
-    menu = [
-        ['home', 'index'],
-        ['Ε', 'mercury'],
-        ['Α', 'venus'],
-        ['Γ', 'earth'],
-        ['α', 'mars'],
-        ['Ζ', 'jupiter'],
-        ['Κ', 'saturn'],
-        ['Ο', 'uranus'],
-        ['Π', 'neptune'],
-    ]
+    menu = [['home', 'index']] + planets
     with tag('nav'):
         with tag('ul'):
             for elem in menu:
@@ -94,6 +114,7 @@ def mainText(planet):
     return doc.getvalue()
 
 if __name__ == '__main__':
-    data = getJson('data/planets/earth.json')
-    earth = Catalog(data)
-    generate(data, earth.generateWebVersion())
+    # data = getJson('data/planets/earth.json')
+    # earth = Catalog(data)
+    # generate(data, earth.generateWebVersion())
+    generateIndex()

@@ -49,6 +49,10 @@ main {
     display: flex;
     justify-content: space-between;
 }
+main#home {
+    justify-content: flex-start;
+    margin: 0;
+}
 header {
     display: flex;
     padding: 2rem;
@@ -84,6 +88,140 @@ h2 {
 p {
     margin: 1rem 0;
 }
+
+
+
+/* HOME */
+#planets {
+    display: flex;
+    margin-left: 2rem;
+    margin-top: 4rem;
+}
+#planets > div {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#planets a {
+    color: black;
+    position: absolute;
+}
+
+@media (orientation: landscape) {
+    #planets {
+        width: calc(100vw - 6rem);
+        height: calc((100vw - 6rem) * 0.50388);
+        align-items: flex-start;
+    }
+    #planets > div {
+        border-right: 1mm solid black;
+    }
+
+    #planets div:nth-last-child(-n + 4) p {
+        position: relative;
+        top: calc(-50% - 2rem);
+    }
+    #planets div:nth-child(-n + 4) p {
+        position: absolute;
+        transform: rotate(-90deg);
+        margin-bottom: 8vw;
+        align-self: flex-end;
+        width: 3rem;
+    }
+
+    #mercury {
+        width: 1.157%;
+        height: 3.318%;
+    }
+    #venus {
+        width: 3.083%;
+        height: 8.653%;
+    }
+    #earth {
+        width: 3.246%;
+        height: 9.110%;
+    }
+    #mars {
+        width: 1.727%;
+        height: 4.848%;
+    }
+    #jupiter {
+        width: 35.629%;
+        height: 100%;
+    }
+    #saturn {
+        width: 29.694%;
+        height: 83.341%;
+    }
+    #uranus {
+        width: 12.921%;
+        height: 36.265%;
+    }
+    #neptune {
+        width: 12.544%;
+        height: 35.206%;
+    }
+}
+
+@media (orientation: portrait) {
+    #planets {
+        flex-direction: column;
+        width: calc(100vw - 4rem);
+        height: calc((100vw - 4rem) * 3.97023);
+        max-width: 600px;
+        max-height: calc(600px * 3.97023);
+        align-items: flex-start;
+    }
+    #planets > div {
+        border-bottom: 1px solid black;
+    }
+    #planets p {
+        align-self: flex-start;
+        color: black;
+    }
+    #planets div:nth-child(-n + 4) p {
+        color: white;
+        align-self: center;
+        position: absolute;
+        margin-left: 10rem;
+    }
+
+    #mercury {
+        width: 3.248%;
+        height: 1.182%;
+    }
+    #venus {
+        width: 8.653%;
+        height: 3.082%;
+    }
+    #earth {
+        width: 9.109%;
+        height: 3.245%;
+    }
+    #mars {
+        width: 4.846%;
+        height: 1.726%;
+    }
+    #jupiter {
+        width: 100%;
+        height: 35.620%;
+    }
+    #saturn {
+        width: 83.340%;
+        height: 29.686%;
+    }
+    #uranus {
+        width: 36.264%;
+        height: 12.918%;
+    }
+    #neptune {
+        width: 35.206%;
+        height: 12.540%;
+    }
+}
+
+
 
 .side {
     width: 25%;
