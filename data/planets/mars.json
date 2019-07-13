@@ -1,13 +1,20 @@
 {
-  "name": "Mars",
+  "name": {
+    "fr": "Mars",
+    "en": "Mars"
+  },
   "symbol": "α",
-  "symbolName": "alpha-minor",
+  "symbolName": "alpha minor",
+  "greekGod": {
+    "fr": "Arès",
+    "en": "Ares"
+  },
+  "ancientGreekName": "Άρης",
   "radius": [3396.2, 3376.2],
   "meanVolumetricRadius": 3389.5,
   "surfaceWikipedia": 144798500,
   "surface": 144374008.20673034,
   "size_km": [10103.852741903025, 14289.005579819843],
-  "a4like": [150, 212],
   "formats_mm": [
     [10103852742, 14289005580],
     [7144502790, 10103852742],
@@ -68,5 +75,51 @@
     [37, 53],
     [26, 37],
     [18, 26]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 48,
+      "size": [602, 851]
+    },
+    "1": {
+      "number": 49,
+      "size": [425, 602]
+    },
+    "2": {
+      "number": 50,
+      "size": [301, 425]
+    },
+    "3": {
+      "number": 51,
+      "size": [212, 301]
+    },
+    "4": {
+      "number": 52,
+      "size": [150, 212]
+    },
+    "5": {
+      "number": 53,
+      "size": [106, 150]
+    },
+    "6": {
+      "number": 54,
+      "size": [75, 106]
+    },
+    "7": {
+      "number": 55,
+      "size": [53, 75]
+    },
+    "8": {
+      "number": 56,
+      "size": [37, 53]
+    },
+    "9": {
+      "number": 57,
+      "size": [26, 37]
+    },
+    "10": {
+      "number": 58,
+      "size": [18, 26]
+    }
+  }
 }

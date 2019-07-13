@@ -1,13 +1,20 @@
 {
-  "name": "Uranus",
+  "name": {
+    "fr": "Uranus",
+    "en": "Uranus"
+  },
   "symbol": "Ο",
   "symbolName": "omicron",
+  "greekGod": {
+    "fr": "Ouranos",
+    "en": "Uranus"
+  },
+  "ancientGreekName": "Οὐρανός",
   "radius": [25559, 24973],
   "meanVolumetricRadius": 25362,
   "surfaceWikipedia": 8115600000,
   "surface": 8083954117.074621,
   "size_km": [75605.67951539338, 106922.57736310302],
-  "a4like": [199, 281],
   "formats_mm": [
     [75605679515, 106922577363],
     [53461288681, 75605679515],
@@ -73,5 +80,51 @@
     [49, 70],
     [35, 49],
     [24, 35]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 53,
+      "size": [796, 1126]
+    },
+    "1": {
+      "number": 54,
+      "size": [563, 796]
+    },
+    "2": {
+      "number": 55,
+      "size": [398, 563]
+    },
+    "3": {
+      "number": 56,
+      "size": [281, 398]
+    },
+    "4": {
+      "number": 57,
+      "size": [199, 281]
+    },
+    "5": {
+      "number": 58,
+      "size": [140, 199]
+    },
+    "6": {
+      "number": 59,
+      "size": [99, 140]
+    },
+    "7": {
+      "number": 60,
+      "size": [70, 99]
+    },
+    "8": {
+      "number": 61,
+      "size": [49, 70]
+    },
+    "9": {
+      "number": 62,
+      "size": [35, 49]
+    },
+    "10": {
+      "number": 63,
+      "size": [24, 35]
+    }
+  }
 }

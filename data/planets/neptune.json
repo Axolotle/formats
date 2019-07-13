@@ -1,13 +1,20 @@
 {
-  "name": "Neptune",
+  "name": {
+    "fr": "Neptune",
+    "en": "Neptune"
+  },
   "symbol": "Π",
   "symbolName": "pi",
+  "greekGod": {
+    "fr": "Poséidon",
+    "en": "Poseidon"
+  },
+  "ancientGreekName": "Ποσειδῶν",
   "radius": [24764, 24341],
   "meanVolumetricRadius": 24622,
   "surfaceWikipedia": 7618300000,
   "surface": 7618793138.629264,
   "size_km": [73398.23085594292, 103800.77353066589],
-  "a4like": [193, 273],
   "formats_mm": [
     [73398230856, 103800773531],
     [51900386765, 73398230856],
@@ -73,5 +80,51 @@
     [48, 68],
     [34, 48],
     [24, 34]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 53,
+      "size": [773, 1093]
+    },
+    "1": {
+      "number": 54,
+      "size": [546, 773]
+    },
+    "2": {
+      "number": 55,
+      "size": [386, 546]
+    },
+    "3": {
+      "number": 56,
+      "size": [273, 386]
+    },
+    "4": {
+      "number": 57,
+      "size": [193, 273]
+    },
+    "5": {
+      "number": 58,
+      "size": [136, 193]
+    },
+    "6": {
+      "number": 59,
+      "size": [96, 136]
+    },
+    "7": {
+      "number": 60,
+      "size": [68, 96]
+    },
+    "8": {
+      "number": 61,
+      "size": [48, 68]
+    },
+    "9": {
+      "number": 62,
+      "size": [34, 48]
+    },
+    "10": {
+      "number": 63,
+      "size": [24, 34]
+    }
+  }
 }

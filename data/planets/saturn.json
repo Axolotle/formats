@@ -1,13 +1,20 @@
 {
-  "name": "Saturn",
+  "name": {
+    "fr": "Saturne",
+    "en": "Saturn"
+  },
   "symbol": "Κ",
   "symbolName": "kappa",
+  "greekGod": {
+    "fr": "Cronos",
+    "en": "Cronus"
+  },
+  "ancientGreekName": "Κρόνος",
   "radius": [60268, 54364],
   "meanVolumetricRadius": 58232,
   "surfaceWikipedia": 42700000000,
   "surface": 42693977386.376686,
   "size_km": [173750.39834697376, 245720.16981001812],
-  "a4like": [161, 228],
   "formats_mm": [
     [173750398347, 245720169810],
     [122860084905, 173750398347],
@@ -76,5 +83,51 @@
     [40, 57],
     [28, 40],
     [20, 28]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 56,
+      "size": [647, 915]
+    },
+    "1": {
+      "number": 57,
+      "size": [457, 647]
+    },
+    "2": {
+      "number": 58,
+      "size": [323, 457]
+    },
+    "3": {
+      "number": 59,
+      "size": [228, 323]
+    },
+    "4": {
+      "number": 60,
+      "size": [161, 228]
+    },
+    "5": {
+      "number": 61,
+      "size": [114, 161]
+    },
+    "6": {
+      "number": 62,
+      "size": [80, 114]
+    },
+    "7": {
+      "number": 63,
+      "size": [57, 80]
+    },
+    "8": {
+      "number": 64,
+      "size": [40, 57]
+    },
+    "9": {
+      "number": 65,
+      "size": [28, 40]
+    },
+    "10": {
+      "number": 66,
+      "size": [20, 28]
+    }
+  }
 }

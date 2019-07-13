@@ -1,37 +1,20 @@
 {
-  "name": "Earth",
+  "name": {
+    "fr": "Terre",
+    "en": "Earth"
+  },
   "symbol": "Γ",
   "symbolName": "gamma",
-  "nameDesc": "Earth <=> Tellus <=> Gaia === Γαία --> Γ (gamma)",
-  "text": [
-    "Earth surface is defined here as a 510 065 605 km²",
-    "plane with aspect ratio of 1:√2. This is the same",
-    "ratio that is used in the ISO 216 paper size ",
-    "standard (the series \"A\", \"B\" and \"C\").",
-    "510 065 605 km² can be represented as a 18 991 × ",
-    "26 858 km rectangle. Turned into millimeters and ",
-    "rounded to the nearest integrer, it define the",
-    "first format named Γ0 after the first character of",
-    "Gaïa in greek (Γαία).",
-    "This format has a width of 18 991 455 186 mm and a",
-    "height of 26 857 973 494 mm.",
-    "This first approximation with a millimeter ",
-    "precision result in an error of a missing",
-    "1923.153920 m² surface.",
-    "",
-    "This catalog presents on each page the folded",
-    "format of the previous page format until we reach",
-    "the first format that can be filled in a A4 which",
-    "is the number 53 (a Γ0 folded in half by its",
-    "larger side 53 times). The Γ53 is printed here at",
-    "its real scale, the size of this catalog."
-  ],
+  "greekGod": {
+    "fr": "Gaïa",
+    "en": "Gaia"
+  },
+  "ancientGreekName": "Γαῖα",
   "radius": [6378.137, 6356.752],
   "meanVolumetricRadius": 6371,
   "surfaceWikipedia": 510072000,
   "surface": 510065604.94420606,
   "size_km": [18991.33613272291, 26857.80512648294],
-  "a4like": [200, 282],
   "formats_mm": [
     [18991336133, 26857805126],
     [13428902563, 18991336133],
@@ -93,5 +76,51 @@
     [50, 70],
     [35, 50],
     [25, 35]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 49,
+      "size": [800, 1131]
+    },
+    "1": {
+      "number": 50,
+      "size": [565, 800]
+    },
+    "2": {
+      "number": 51,
+      "size": [400, 565]
+    },
+    "3": {
+      "number": 52,
+      "size": [282, 400]
+    },
+    "4": {
+      "number": 53,
+      "size": [200, 282]
+    },
+    "5": {
+      "number": 54,
+      "size": [141, 200]
+    },
+    "6": {
+      "number": 55,
+      "size": [100, 141]
+    },
+    "7": {
+      "number": 56,
+      "size": [70, 100]
+    },
+    "8": {
+      "number": 57,
+      "size": [50, 70]
+    },
+    "9": {
+      "number": 58,
+      "size": [35, 50]
+    },
+    "10": {
+      "number": 59,
+      "size": [25, 35]
+    }
+  }
 }

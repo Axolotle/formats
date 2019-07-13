@@ -1,13 +1,20 @@
 {
-  "name": "Mercury",
+  "name": {
+    "fr": "Mercure",
+    "en": "Mercury"
+  },
   "symbol": "Ε",
   "symbolName": "epsilon",
+  "greekGod": {
+    "fr": "Hermès",
+    "en": "Hermes"
+  },
+  "ancientGreekName": "Ἑρμῆς",
   "radius": [2439.7, 2439.7],
   "meanVolumetricRadius": 2439.7,
   "surfaceWikipedia": 74800000,
   "surface": 74796748.05404268,
   "size_km": [7272.502166360302, 10284.871196054453],
-  "a4like": [153, 216],
   "formats_mm": [
     [7272502166, 10284871196],
     [5142435598, 7272502166],
@@ -67,5 +74,51 @@
     [38, 54],
     [27, 38],
     [19, 27]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 47,
+      "size": [613, 866]
+    },
+    "1": {
+      "number": 48,
+      "size": [433, 613]
+    },
+    "2": {
+      "number": 49,
+      "size": [306, 433]
+    },
+    "3": {
+      "number": 50,
+      "size": [216, 306]
+    },
+    "4": {
+      "number": 51,
+      "size": [153, 216]
+    },
+    "5": {
+      "number": 52,
+      "size": [108, 153]
+    },
+    "6": {
+      "number": 53,
+      "size": [76, 108]
+    },
+    "7": {
+      "number": 54,
+      "size": [54, 76]
+    },
+    "8": {
+      "number": 55,
+      "size": [38, 54]
+    },
+    "9": {
+      "number": 56,
+      "size": [27, 38]
+    },
+    "10": {
+      "number": 57,
+      "size": [19, 27]
+    }
+  }
 }

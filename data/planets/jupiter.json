@@ -1,13 +1,20 @@
 {
-  "name": "Jupiter",
+  "name": {
+    "fr": "Jupiter",
+    "en": "Jupiter"
+  },
   "symbol": "Ζ",
   "symbolName": "zêta",
+  "greekGod": {
+    "fr": "Zeus",
+    "en": "Zeus"
+  },
+  "ancientGreekName": "Ζεύς",
   "radius": [71492, 66854],
   "meanVolumetricRadius": 69911,
   "surfaceWikipedia": 61400000000,
   "surface": 61468931220.621735,
   "size_km": [208482.84845135608, 294839.2718020824],
-  "a4like": [194, 274],
   "formats_mm": [
     [208482848451, 294839271802],
     [147419635901, 208482848451],
@@ -76,5 +83,51 @@
     [48, 68],
     [34, 48],
     [24, 34]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 56,
+      "size": [776, 1098]
+    },
+    "1": {
+      "number": 57,
+      "size": [549, 776]
+    },
+    "2": {
+      "number": 58,
+      "size": [388, 549]
+    },
+    "3": {
+      "number": 59,
+      "size": [274, 388]
+    },
+    "4": {
+      "number": 60,
+      "size": [194, 274]
+    },
+    "5": {
+      "number": 61,
+      "size": [137, 194]
+    },
+    "6": {
+      "number": 62,
+      "size": [97, 137]
+    },
+    "7": {
+      "number": 63,
+      "size": [68, 97]
+    },
+    "8": {
+      "number": 64,
+      "size": [48, 68]
+    },
+    "9": {
+      "number": 65,
+      "size": [34, 48]
+    },
+    "10": {
+      "number": 66,
+      "size": [24, 34]
+    }
+  }
 }

@@ -22,10 +22,8 @@ class Catalog():
     def __init__(self, planet):
         self.symbol = planet['symbol']
         self.name = planet['name']
-        self.nameDesc = planet['nameDesc']
         self.surface = planet['surface']
         self.size = planet['size_km']
-        self.intro = planet['text']
         # width and height of the document (A4 like) in mm
         [self.w, self.h] = planet['a4like']
         # center x and y of the document

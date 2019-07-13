@@ -1,13 +1,20 @@
 {
-  "name": "Venus",
+  "name": {
+    "fr": "Vénus",
+    "en": "Venus"
+  },
   "symbol": "Α",
   "symbolName": "alpha",
+  "greekGod": {
+    "fr": "Aphrodite",
+    "en": "Aphrodite"
+  },
+  "ancientGreekName": "Ἀφροδίτη",
   "radius": [6051.8, 6051.8],
   "meanVolumetricRadius": 6051.8,
   "surfaceWikipedia": 460230000,
   "surface": 460234316.6791032,
   "size_km": [18039.811702413936, 25512.146372210664],
-  "a4like": [190, 268],
   "formats_mm": [
     [18039811702, 25512146372],
     [12756073186, 18039811702],
@@ -69,5 +76,51 @@
     [47, 67],
     [33, 47],
     [23, 33]
-  ]
+  ],
+  "serieAequi": {
+    "0": {
+      "number": 49,
+      "size": [760, 1075]
+    },
+    "1": {
+      "number": 50,
+      "size": [537, 760]
+    },
+    "2": {
+      "number": 51,
+      "size": [380, 537]
+    },
+    "3": {
+      "number": 52,
+      "size": [268, 380]
+    },
+    "4": {
+      "number": 53,
+      "size": [190, 268]
+    },
+    "5": {
+      "number": 54,
+      "size": [134, 190]
+    },
+    "6": {
+      "number": 55,
+      "size": [95, 134]
+    },
+    "7": {
+      "number": 56,
+      "size": [67, 95]
+    },
+    "8": {
+      "number": 57,
+      "size": [47, 67]
+    },
+    "9": {
+      "number": 58,
+      "size": [33, 47]
+    },
+    "10": {
+      "number": 59,
+      "size": [23, 33]
+    }
+  }
 }
