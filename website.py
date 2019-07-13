@@ -1,7 +1,8 @@
 from yattag import Doc, indent
+from markdown import markdown
 
 from catalog import Catalog
-from utils import getJson
+from utils import getJson, getYaml
 
 
 planets = [
@@ -14,71 +15,128 @@ planets = [
     ['Ο', 'uranus'],
     ['Π', 'neptune'],
 ]
+langs = []
 
-def generate(planet, svg):
-    doc, tag, text, line = Doc().ttl()
-    doc.asis('<!DOCTYPE html>')
-    with tag('html', lang='fr'):
-        doc.asis(head(planet['name']))
-        with tag('body'):
-            with tag('header'):
-                line('h1', '{} => {} ({}) serie'.format(planet['name'].upper(), planet['symbol'], planet['symbolName']))
-                doc.asis(menu())
-            with tag('main'):
-                with tag('div', klass='side'):
-                    line('h2', 'DAC|PlanetaryFormats({}):2019'.format(planet['symbol']))
-                    doc.asis(mainText(planet))
-                with tag('div'):
-                    with tag('div', id='svg'):
-                        with tag('div', klass='height'):
-                            line('span', '26857805126 mm')
-                        doc.asis(svg)
-                        with tag('div', klass='width'):
-                            line('span', '18991336133 mm')
-                with tag('div', klass='side'):
-                    doc.asis(formatList(planet))
-                line('script', '', type='text/javascript', src='script.js')
+class WebPage():
+    def __init__(self, lang, projectTitle, homeName, planetsName):
+        self.lang = lang
+        self.projectTitle = projectTitle
+        self.title = None
+        self.isHome = False
+        self.homeName = homeName
+        self.planetsName = planetsName
 
-    with open('web/{}.html'.format(planet['name'].lower()), 'w') as output:
-        output.write(indent(doc.getvalue()))
+    def build(self, title, *args):
+        doc, tag, text, line = Doc().ttl()
+        doc.asis('<!DOCTYPE html>')
+        with tag('html', lang=self.lang):
+            doc.asis(self.head())
+            with tag('body'):
+                with tag('header', klass='flex'):
+                    line('h1', title)
+                    doc.asis(self.menu())
+                doc.asis(self.main(*args))
+                if not self.isHome:
+                    line('script', '', type='text/javascript', src='../../script.js')
 
-def generateIndex():
-    doc, tag, text, line = Doc().ttl()
-    doc.asis('<!DOCTYPE html>')
-    with tag('html', lang='fr'):
-        doc.asis(head('home'))
-        with tag('body'):
-            with tag('header'):
-                line('h1', 'Planetary Formats')
-                doc.asis(menu())
-            with tag('main', id='home'):
-                with tag('div', id='planets'):
-                    for planet in planets:
-                        with tag('div', id=planet[1].lower()):
-                            line('p', planet[1])
-                            line('a', planet[0], href=planet[1].lower() + '.html')
+        with open('web/{}/{}'.format(self.lang, self.fileName), 'w') as output:
+            output.write(indent(doc.getvalue()))
 
-    with open('web/{}.html'.format('index'), 'w') as output:
-        output.write(indent(doc.getvalue()))
+    def head(self):
+        doc, tag, text, line = Doc().ttl()
+        with tag('head'):
+            doc.stag('meta', charset='utf-8')
+            doc.stag('meta', name='viewport', content='width=device-width, initial-scale=1')
+            line('title', '{} - {}'.format(self.projectTitle, self.title))
+            doc.stag('link',
+                rel='stylesheet',
+                href='../{}stylesheet.css'.format('' if self.isHome else '../')
+            )
+        return doc.getvalue()
 
-def head(name):
-    doc, tag, text, line = Doc().ttl()
-    with tag('head'):
-        doc.stag('meta', charset='utf-8')
-        doc.stag('meta', name='viewport', content='width=device-width, initial-scale=1')
-        line('title', 'Planetary Formats - ' + name)
-        doc.stag('link', rel='stylesheet', href='stylesheet.css')
-    return doc.getvalue()
-
-def menu():
-    doc, tag, text, line = Doc().ttl()
-    menu = [['home', 'index']] + planets
-    with tag('nav'):
-        with tag('ul'):
-            for elem in menu:
+    def menu(self):
+        doc, tag, text, line = Doc().ttl()
+        with tag('nav', klass='flex'):
+            with tag('ul', klass='lang'):
+                for lang in langs:
+                    with tag('li'):
+                        if lang is not self.lang:
+                            line('a', lang, href='../{}{}/{}'.format(
+                                '' if self.isHome else '../',
+                                lang,
+                                self.fileName,
+                            ))
+            with tag('ul'):
                 with tag('li'):
-                    line('a', elem[0], href=elem[1]+'.html')
-    return doc.getvalue()
+                    line('a', self.homeName,
+                        href='{}index.html'.format('' if self.isHome else '../'))
+                for planet in planets:
+                    with tag('li'):
+                        line('a', planet[0],
+                            href='{}{}.html'.format(
+                                'planets/' if self.isHome else '', planet[1],
+                            ),
+                            title=self.planetsName[planet[1]],
+                        )
+        return doc.getvalue()
+
+
+class IndexPage(WebPage):
+    def __init__(self, lang, projectTitle, homeName, planetsName, texts):
+        super().__init__(lang, projectTitle, homeName, planetsName)
+        self.fileName = 'index.html'
+        self.title = homeName
+        self.isHome = True
+
+        self.build(self.projectTitle, texts['intro'], texts['content'])
+
+    def main(self, intro, content):
+        doc, tag, text, line = Doc().ttl()
+        with tag('main'):
+            doc.asis(markdown(intro))
+            with tag('div', id='planets'):
+                for planet in planets:
+                    with tag('div', id=planet[1].lower()):
+                        line('p', self.planetsName[planet[1]])
+                        line('a', planet[0], href='planets/{}.html'.format(planet[1].lower()))
+            doc.asis(markdown(content))
+
+        return doc.getvalue()
+
+
+class PlanetPage(WebPage):
+    def __init__(self, lang, projectTitle, homeName, planetsName, texts, planet, svg):
+        super().__init__(lang, projectTitle, homeName, planetsName)
+        self.fileName = 'planets/{}.html'.format(planet['name']['en'].lower())
+        self.title = texts['title'].format(
+            name=planet['name'][self.lang].upper(),
+            symbol=planet['symbol'],
+            symbolName=planet['symbolName']
+        )
+
+        self.build(self.title, texts, planet, svg)
+
+    def main(self, texts, planet, svg):
+        doc, tag, text, line = Doc().ttl()
+        with tag('main', klass='flex'):
+            with tag('div', klass='side'):
+                line('h2', texts['standard'].format(symbol=planet['symbol']))
+                doc.asis(mainText(planet, texts['content'], lang))
+                line('a',
+                    texts['download'],
+                    klass='download',
+                    href='{}-{}Catalogue.pdf'.format(planet['name']['en'].lower(), planet['symbolName']),
+                )
+            with tag('div'):
+                with tag('div', id='svg'):
+                    with tag('div', klass='height'):
+                        line('span', '{} mm'.format(planet['formats_mm'][0][1]))
+                    doc.asis(svg)
+                    with tag('div', klass='width'):
+                        line('span', '{} mm'.format(planet['formats_mm'][0][0]))
+            with tag('div', klass='side'):
+                doc.asis(formatList(planet))
+        return doc.getvalue()
 
 def formatList(planet):
     doc, tag, text, line = Doc().ttl()
@@ -100,21 +158,33 @@ def formatList(planet):
             ))
     return doc.getvalue()
 
-def mainText(planet):
+def mainText(planet, content, lang):
     doc, tag, text, line = Doc().ttl()
-    concat = ''
-    for line in planet['text']:
-        if line.endswith('.') or line == '':
-            with tag('p'):
-                text(concat + ' ' + line)
-            concat = ''
-        else:
-            concat += ' ' + line
-
-    return doc.getvalue()
+    content = content.format(
+        name=planet['name'][lang],
+        greekGod=planet['greekGod'][lang],
+        ancientGreekName=planet['ancientGreekName'],
+        surface=planet['surface'],
+        wkm=planet['size_km'][0],
+        hkm=planet['size_km'][1],
+        symbol=planet['symbol'],
+        w0=planet['formats_mm'][0][0],
+        h0=planet['formats_mm'][0][1],
+        error='#',
+        a10equiNumber=planet['serieAequi']['10']['number'],
+        a4equiNumber=planet['serieAequi']['4']['number'],
+    )
+    return markdown(content)
 
 if __name__ == '__main__':
-    # data = getJson('data/planets/earth.json')
-    # earth = Catalog(data)
-    # generate(data, earth.generateWebVersion())
-    generateIndex()
+    texts = getYaml('data/texts.yaml')
+    langs = list(texts.keys())
+    for lang, content in texts.items():
+        homeName = content['homeName']
+        planetsName = content['planetsName']
+        projectTitle = content['projectTitle']
+        IndexPage(lang, projectTitle, homeName, planetsName, content['home'])
+        for _, name in planets:
+            data = getJson('data/planets/{}.json'.format(name))
+            catalog = Catalog(data)
+            PlanetPage(lang, projectTitle, homeName, planetsName, content['planets'], data, catalog.generateWebVersion())

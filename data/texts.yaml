@@ -1,0 +1,79 @@
+fr:
+  projectTitle: Formats Planétaires
+  planetsName:
+    mercury: Mercure
+    venus: Vénus
+    earth: Terre
+    mars: Mars
+    jupiter: Jupiter
+    saturn: Saturne
+    uranus: Uranus
+    neptune: Neptune
+  homeName: Accueil
+  home:
+    intro: "Retranscrire la surface d'une planète en une série de formats de papier rectangulaires dont le rapport entre la largeur et la longueur est 1:√2 à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
+    content: |
+      Pour chaque planète du Système solaire est défini un format de référence — dit « 0 » préfixé de la première lettre de son nom en grec — de ratio 1:√2 arrondi au millimètre et dont la surface est égale à celle de cette planète. Sont ensuite récursivement calculés tous les formats de la série en divisant la précédente longueur par 2 et en récupérant la précédente largeur comme nouvelle longueur (L = longueur / 2 ; l = largeur) jusqu'à atteindre un format pouvant être apposé dans un format A0 suivi de dix de ses prochaines divisions.
+
+      Les formats de papier au ratio 1:√2 ont la particularité de conserver ce ratio à chaque division — pas exactement cependant car chaque division est à chaque fois arrondie au millimètre inférieur ce qui produit des pertes, négligeable dans le cas de la série A mais nous verrons qu'il en est autrement dans celui des formats planétaires.
+      Il est ainsi possible de contenir deux formats « 1 » en orientation paysage dans un format « 0 » en orientation portrait, quatre formats « 2 » portrait dans un format « 0 » portrait, etc.
+
+      Sur ce site, vous pouvez retrouver les dimensions de chacun des formats planétaires ainsi que ses divisions.
+      Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé au premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (Γ53, *insert other*).
+  planets:
+    title: "{name} => serie {symbol} ({symbolName})"
+    standard: "DAC|PlanetaryFormats({symbol}):2019"
+    download: Télécharger le catalogue (~= 1 mo)
+    content: |
+      La surface de la planète {name} est d'approximativement {surface} km². On peut représenter cette surface sous la forme d'un rectangle de ratio 1:√2 dont la taille est {wkm} × {hkm} km.
+      Transposé en millimètre et arrondi à l'entier inférieur, nous pouvons définir le premier format nommé {symbol}0 — d'après le premier caractère de {greekGod} en grec : {ancientGreekName}.
+
+      Ce format a une largeur de {w0} mm et une hauteur de {h0} mm.
+
+      De cette deuxième approximation au millimètre inférieur résulte une perte de {error} m² par rapport à la surface initiale et ne fera qu'augmenter à mesure des divisions.
+
+      Cette page présente les différentes divisions du format {symbol} de 0 à {a10equiNumber}, les dix derniers formats étant apposables sur la serie A[0-10].
+
+      La version papier est apposable sur A4 et peut-être massicotée grace aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, avec ses sous divisions, imprimés à échelle 1.
+
+
+
+
+
+en:
+  projectTitle: Planetary Formats
+  planetsName:
+    mercury: Mercury
+    venus: Venus
+    earth: Earth
+    mars: Mars
+    jupiter: Jupiter
+    saturn: Saturn
+    uranus: Uranus
+    neptune: Neptune
+  homeName: Home
+  home:
+    intro: "Translate the surface of a planet into a series of rectangular paper sizes with a width to length ratio of 1:√2 similar to the A series ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216): A0, A1, etc.)"
+    content: |
+      For each planet in the Solar System, a reference format is defined - called "0" prefixed with the first letter of its Greek name - with a ratio of 1:√2 rounded to the nearest millimetre and whose surface area is equal to that of this planet. All formats in the series are then recursively calculated by dividing the previous height by 2 and recovering the previous width as the height (L = height / 2; l = width) until a format that can be applied in an A0 format is reached, followed by ten of its next divisions.
+
+      Paper sizes with a ratio of 1:√2 have the particularity of keeping this ratio for each division - not exactly however because each division is rounded down to the nearest millimeter, which produces losses, negligible in the case of Series A, but we will see that it is different in the case of planetary formats.
+      It is thus possible to contain two formats "1" in landscape orientation in one format "0" in portrait orientation, four formats "2" portrait in one format "0" portrait, etc.
+
+      On this site, you can find the dimensions of each of the planetary formats as well as its divisions.
+      A printable paper version in catalogue form is also available for download. On each of its pages, it presents the next division, its dimensions and some other information. The catalogue is printed in the first planetary format that can be affixed to an A4, so all formats are displayed at scale 1 from it (Γ53, *insert other*).
+  planets:
+    title: "{name} => serie {symbol} ({symbolName})"
+    standard: "DAC|PlanetaryFormats({symbol}):2019"
+    download: Download the catalogue (~= 1 mo)
+    content: |
+      The surface of the planet {name} is approximately {surface} km². This area can be represented as a rectangle with a ratio of 1:√2 and a size of {wkm} × {hkm} km.
+      Transposed in millimetres and rounded down, we can define the first format named {symbol}0 — based on the first character of {greekGod} in greek: {ancientGreekName}.
+
+      This format has a width of {w0} mm and a height of {h0} mm.
+
+      DThis second approximation to the lower millimetre results in a loss of {error} m² compared to the initial surface area and will only increase as the divisions increase.
+
+      This page presents the different divisions of the {symbol} format from 0 to {a10equiNumber}, the last ten formats being affixable to the A[0-10] serie.
+
+       The paper version can be affixed to A4 and can be trimmed using the cutting lines to correspond to the format {symbol}{a4equiNumber} which will then be printed at 1 scale with its sub-divisions.

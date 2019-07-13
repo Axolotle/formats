@@ -46,21 +46,22 @@ body {
 main {
     margin: 2rem;
     margin-top: 0;
-    display: flex;
-    justify-content: space-between;
-}
-main#home {
-    justify-content: flex-start;
-    margin: 0;
 }
 header {
-    display: flex;
     padding: 2rem;
-    justify-content: space-between;
-    height: 6rem;
     background-color: black;
+    display: flex;
+    align-items: center;
 }
 
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav {
+    width: calc(50% + 1.6rem);
+}
 nav li {
     display: inline-block;
 }
@@ -75,9 +76,7 @@ nav a:hover {
 }
 
 h1 {
-    height: 2rem;
     line-height: 2rem;
-    margin-bottom: 2rem;
     font-size: 2rem;
 }
 h2 {
@@ -88,14 +87,19 @@ h2 {
 p {
     margin: 1rem 0;
 }
+a {
+    color: white;
+}
 
-
+main > p {
+    max-width: 50rem;
+}
 
 /* HOME */
 #planets {
     display: flex;
-    margin-left: 2rem;
-    margin-top: 4rem;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
 }
 #planets > div {
     background-color: white;
@@ -113,21 +117,22 @@ p {
         width: calc(100vw - 6rem);
         height: calc((100vw - 6rem) * 0.50388);
         align-items: flex-start;
+        margin-top: 10rem;
     }
     #planets > div {
         border-right: 1mm solid black;
     }
-
-    #planets div:nth-last-child(-n + 4) p {
+    #planets p {
+        margin: 0;
         position: relative;
-        top: calc(-50% - 2rem);
+        align-self: flex-start;
+        top: -2rem;
     }
+
     #planets div:nth-child(-n + 4) p {
-        position: absolute;
         transform: rotate(-90deg);
-        margin-bottom: 8vw;
-        align-self: flex-end;
-        width: 3rem;
+        width: 1rem;
+        left: -0.15rem;
     }
 
     #mercury {
@@ -221,7 +226,7 @@ p {
     }
 }
 
-
+/* planets */
 
 .side {
     width: 25%;
@@ -241,9 +246,17 @@ li.selected {
     display: block;
     margin-bottom: 1rem;
 }
+.download {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.25rem 1rem;
+}
+.download:hover {
+    background-color: white;
+    color: black;
+}
 
 #svg {
-    /* display: flex; */
     padding: 0 4rem;
     position: sticky;
     top: 6rem;
