@@ -25,7 +25,7 @@ class Catalog():
         self.surface = planet['surface']
         self.size = planet['size_km']
         # width and height of the document (A4 like) in mm
-        [self.w, self.h] = planet['a4like']
+        [self.w, self.h] = planet['serieAequi']['4']['size']
         # center x and y of the document
         self.c = [self.w / 2, self.h / 2]
         # margins x and y of the document
@@ -37,7 +37,7 @@ class Catalog():
         # surface in km² of the format[0]
         self.format0Surface = self.formats[0][0] * self.formats[0][1] * 10**-12
         # number of folding to operate to get a format that can be filled in a A4
-        self.times = self.formats.index(planet['a4like']) + 1
+        self.times = planet['serieAequi']['4']['number']
         # radius of the planet scaled to planet's A4-like
         # [0] = equatorial, [1] = polar
         ratio = self.h / km2mm(planet['size_km'][1])
