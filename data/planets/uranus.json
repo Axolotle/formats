@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Οὐρανός",
   "radius": [25559, 24973],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html",
   "meanVolumetricRadius": 25362,
   "surfaceWikipedia": 8115600000,
   "surface": 8083954117.074621,

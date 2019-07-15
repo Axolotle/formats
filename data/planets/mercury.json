@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Ἑρμῆς",
   "radius": [2439.7, 2439.7],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html",
   "meanVolumetricRadius": 2439.7,
   "surfaceWikipedia": 74800000,
   "surface": 74796748.05404268,

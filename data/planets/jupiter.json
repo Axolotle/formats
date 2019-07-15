@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Ζεύς",
   "radius": [71492, 66854],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html",
   "meanVolumetricRadius": 69911,
   "surfaceWikipedia": 61400000000,
   "surface": 61468931220.621735,

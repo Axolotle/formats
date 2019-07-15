@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Γαῖα",
   "radius": [6378.137, 6356.752],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
   "meanVolumetricRadius": 6371,
   "surfaceWikipedia": 510072000,
   "surface": 510065604.94420606,

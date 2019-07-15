@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Κρόνος",
   "radius": [60268, 54364],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html",
   "meanVolumetricRadius": 58232,
   "surfaceWikipedia": 42700000000,
   "surface": 42693977386.376686,

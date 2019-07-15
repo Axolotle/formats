@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Άρης",
   "radius": [3396.2, 3376.2],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html",
   "meanVolumetricRadius": 3389.5,
   "surfaceWikipedia": 144798500,
   "surface": 144374008.20673034,

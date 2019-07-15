@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Ἀφροδίτη",
   "radius": [6051.8, 6051.8],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
   "meanVolumetricRadius": 6051.8,
   "surfaceWikipedia": 460230000,
   "surface": 460234316.6791032,

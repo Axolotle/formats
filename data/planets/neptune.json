@@ -11,6 +11,7 @@
   },
   "ancientGreekName": "Ποσειδῶν",
   "radius": [24764, 24341],
+  "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html",
   "meanVolumetricRadius": 24622,
   "surfaceWikipedia": 7618300000,
   "surface": 7618793138.629264,
