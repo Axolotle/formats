@@ -11,30 +11,67 @@ fr:
     neptune: Neptune
   homeName: Accueil
   home:
-    intro: "Retranscrire la surface d'une planète en une série de formats de papier rectangulaires dont le rapport entre la largeur et la longueur est 1:√2 à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
+    intro: "Retranscrire la *surface d'une planète* en une série de formats de papier rectangulaires dont le rapport entre la *largeur* et la *longueur* est *1:√2* à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
     content: |
-      Pour chaque planète du Système solaire est défini un format de référence — dit « 0 » préfixé de la première lettre de son nom en grec — de ratio 1:√2 arrondi au millimètre et dont la surface est égale à celle de cette planète. Sont ensuite récursivement calculés tous les formats de la série en divisant la précédente longueur par 2 et en récupérant la précédente largeur comme nouvelle longueur (L = longueur / 2 ; l = largeur) jusqu'à atteindre un format pouvant être apposé dans un format A0 suivi de dix de ses prochaines divisions.
+      Nommage de la série :
+      Planète === divinité romaine <== divinité grecque >-> *première lettre* du nom en grec ancien
 
-      Les formats de papier au ratio 1:√2 ont la particularité de conserver ce ratio à chaque division — pas exactement cependant car chaque division est à chaque fois arrondie au millimètre inférieur ce qui produit des pertes, négligeable dans le cas de la série A mais nous verrons qu'il en est autrement dans celui des formats planétaires.
-      Il est ainsi possible de contenir deux formats « 1 » en orientation paysage dans un format « 0 » en orientation portrait, quatre formats « 2 » portrait dans un format « 0 » portrait, etc.
+      Pour chaque planète du Système solaire est défini un format de référence — dit *0* préfixé de sa lettre grecque — de ratio *1:√2* arrondi au millimètre et dont la surface est égale à celle de cette planète.
+      Sont ensuite récursivement calculés tous les formats de la série en divisant la précédente longueur par 2 et en récupérant la précédente largeur comme nouvelle longueur (L = longueur / 2 ; l = largeur) jusqu'à atteindre un format pouvant être apposé dans un format A0 suivi de onze de ses prochaines divisions.
 
-      Sur ce site, vous pouvez retrouver les dimensions de chacun des formats planétaires ainsi que ses divisions.
-      Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé au premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (Γ53, *insert other*).
+      Les formats de papier 1:√2 ont la particularité de conserver ce ratio à chaque division — pas exactement cependant car le résultat de chaque division est arrondie au millimètre inférieur —, il est ainsi possible de contenir deux formats *1* en orientation paysage dans un format *0* en orientation portrait, quatre formats *2* (portrait) dans un format *0* (portrait), etc.
+      Les approximations induites par les arrondies produisent des pertes négligeables dans le cas de la série A mais il en est tout autrement dans celui de formats gigantesques comme les formats planétaires.
+
+      Sur ce site, vous trouver les dimensions de chacun des formats planétaires ainsi que ses divisions.
+      Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé dans le premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (Γ53, *insert other*).
   planets:
     title: "{name} => serie {symbol} ({symbolName})"
     standard: "DAC|PlanetaryFormats({symbol}):2019"
     download: Télécharger le catalogue (~= 1 mo)
     content: |
-      La surface de la planète {name} est d'approximativement {surface} km². On peut représenter cette surface sous la forme d'un rectangle de ratio 1:√2 dont la taille est {wkm} × {hkm} km.
-      Transposé en millimètre et arrondi à l'entier inférieur, nous pouvons définir le premier format nommé {symbol}0 — d'après le premier caractère de {greekGod} en grec : {ancientGreekName}.
+      Téléchargement : [catalogue]({name}-{symbolName}Catalogue.pdf) || [fiche rapide]({name}-{symbolName}Sheet.pdf)
 
-      Ce format a une largeur de {w0} mm et une hauteur de {h0} mm.
+      {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 
-      De cette deuxième approximation au millimètre inférieur résulte une perte de {error} m² par rapport à la surface initiale et ne fera qu'augmenter à mesure des divisions.
+      Cette page présente les différentes divisions du format *{symbolName}* (*{symbol}*) de *0* à *{a10equiNumber}* dont les onze dernières sont apposables sur la serie A[0-10].
 
-      Cette page présente les différentes divisions du format {symbol} de 0 à {a10equiNumber}, les dix derniers formats étant apposables sur la serie A[0-10].
+      Le catalogue papier est apposable sur A4 et peut-être massicoté grâce aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, ainsi que ses sous divisions, imprimés à échelle 1.
 
-      La version papier est apposable sur A4 et peut-être massicotée grace aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, avec ses sous divisions, imprimés à échelle 1.
+      ### {name}
+
+      aire calculée : *{surface}* km²  
+      rectangle (ratio 1:√2) :  
+      *{wkm}* × *{hkm}* km
+
+      ### Format {symbol}0 :
+
+      arrondi au millimètre :
+
+      - largeur : *{w0}* mm
+      - longueur : *{h0}* mm
+      - surface perdue : *{error}* km²
+
+      ### Calcul
+
+      Surface d'un ellipsoïde oblate (applati)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>
+      <code>
+      a (rayon équatorial) = *{re}* km<sup>[source]({radiusSource})</sup>
+      b (rayon polaire) = *{rp}* km<sup>[source]({radiusSource})</sup>
+
+      e (excentricité) = √(1 - b² / a²)
+      surface = 2π × a² × (1 + (b / a)² × atanh(e) / e)
+              = *{surface}* km²
+      </code>
+
+      Côtés d'un rectangle d'aire égale à celle de la planète et de ratio 1:√2
+      <code>
+      longueur = √(surface × √2)
+               = *{hkm}* km
+               = *{h0}* mm
+      largeur  = √(surface × √½)
+               = *{wkm}* km
+               = *{w0}* mm
+      </code>
 
 
 

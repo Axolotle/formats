@@ -32,7 +32,7 @@ class WebPage():
         with tag('html', lang=self.lang):
             doc.asis(self.head())
             with tag('body'):
-                with tag('header', klass='flex'):
+                with tag('header'):
                     line('h1', title)
                     doc.asis(self.menu())
                 doc.asis(self.main(*args))
@@ -119,29 +119,26 @@ class PlanetPage(WebPage):
     def main(self, texts, planet, svg):
         doc, tag, text, line = Doc().ttl()
         with tag('main', klass='flex'):
-            with tag('div', klass='side'):
-                line('h2', texts['standard'].format(symbol=planet['symbol']))
-                doc.asis(mainText(planet, texts['content'], lang))
-                line('a',
-                    texts['download'],
-                    klass='download',
-                    href='{}-{}Catalogue.pdf'.format(planet['name']['en'].lower(), planet['symbolName']),
-                )
-            with tag('div'):
-                with tag('div', id='svg'):
+            with tag('div', id='svg-surcontainer'):
+                with tag('div', id='svg-container'):
                     with tag('div', klass='height'):
                         line('span', '{} mm'.format(planet['formats_mm'][0][1]))
                     doc.asis(svg)
                     with tag('div', klass='width'):
                         line('span', '{} mm'.format(planet['formats_mm'][0][0]))
-            with tag('div', klass='side'):
-                doc.asis(formatList(planet))
+            with tag('div', id='data'):
+                with tag('div', id='list-container'):
+                    doc.asis(formatList(planet))
+                with tag('div', id='text'):
+                    line('h2', texts['standard'].format(symbol=planet['symbol']))
+                    doc.asis(mainText(planet, texts['content'], lang))
+
         return doc.getvalue()
 
 def formatList(planet):
     doc, tag, text, line = Doc().ttl()
+    line('h3', 'Liste de formats :')
     with tag('ul', id='formats'):
-        line('span', 'FORMATS:')
         extra = ''
         a = 0
         line('li', '{}{} -> {} × {} mm'.format(
@@ -168,11 +165,15 @@ def mainText(planet, content, lang):
         wkm=planet['size_km'][0],
         hkm=planet['size_km'][1],
         symbol=planet['symbol'],
+        symbolName=planet['symbolName'],
         w0=planet['formats_mm'][0][0],
         h0=planet['formats_mm'][0][1],
         error='#',
         a10equiNumber=planet['serieAequi']['10']['number'],
         a4equiNumber=planet['serieAequi']['4']['number'],
+        re=planet['radius'][0],
+        rp=planet['radius'][1],
+        radiusSource=planet['radiusSource'],
     )
     return markdown(content)
 
