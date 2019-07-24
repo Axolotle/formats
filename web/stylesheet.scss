@@ -1,0 +1,441 @@
+:root {
+    font-family: 'Fira Code', monospace;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.4rem;
+    color: white;
+}
+
+/* based on http://meyerweb.com/eric/tools/css/reset/ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1rem;
+	font: inherit;
+	vertical-align: baseline;
+	box-sizing: border-box;
+}
+li {
+    list-style: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+
+html {
+    background-color: black;
+}
+body {
+
+}
+main {
+    margin: 2rem;
+    margin-top: 0;
+}
+header {
+    padding: 2rem;
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    width: 100%;
+    
+    & > ul:first-of-type {
+        margin-right: auto;
+        position: relative;
+        top: -0.75rem;
+    }
+    
+    li {
+        display: inline;
+        ul {
+            display: inline;
+            
+            
+            @media (max-width: 850px) {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                background-color: red;
+            }
+        }
+    }
+    
+    a {
+        color: white;
+        padding: 0.25rem 0.5rem;
+        
+        &:hover {
+            color: black;
+            background-color: white;
+            text-decoration: none;
+        }
+    }
+    
+    #menu-formats {
+        display: none;
+        
+        @media (max-width: 850px) {
+            display: block;
+        }
+    }
+}
+
+h1 {
+    line-height: 2rem;
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-left: 4rem;
+    .home & {
+        margin-left: 0;
+    }
+    @media (max-width: 850px) {
+        flex-shrink: 1;
+    }
+}
+h2 {
+    margin-bottom: 1rem;
+    text-decoration: underline;
+    color: #00fb7f;
+}
+h3 {
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+p {
+    margin: 1rem 0;
+}
+a {
+    color: white;
+}
+em {
+    color: #00fb7f;
+}
+sup {
+    font-size: 0.7rem;
+    font-weight: 300;
+    position: relative;
+    top: -0.5rem;
+    padding-left: 0.2rem;
+}
+
+code {
+    font-weight: 300;
+    white-space: pre-wrap;
+    color: #b9b9b9;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/* HOME */
+.home {
+    main > p {
+        max-width: 50rem
+    }
+}
+
+#planets {
+    display: flex;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+    
+    @media (orientation: landscape) {
+        width: calc(100vw - 6rem);
+        height: calc((100vw - 6rem) * 0.50388);
+        align-items: flex-start;
+        margin-top: 10rem;
+    }
+    
+    @media (orientation: portrait) {
+        flex-direction: column;
+        width: calc(100vw - 4rem);
+        height: calc((100vw - 4rem) * 3.97023);
+        max-width: 600px;
+        max-height: calc(600px * 3.97023);
+        align-items: flex-start;
+    }
+    
+    & > div {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        @media (orientation: landscape) {
+            border-right: 1mm solid black;
+            
+            &:nth-child(-n + 4) p {
+                transform: rotate(-90deg);
+                width: 1rem;
+                left: -0.15rem;
+            }
+        }
+        
+        @media (orientation: portrait) {
+            border-bottom: 1px solid black;
+            
+            &:nth-child(-n + 4) p {
+                color: white;
+                align-self: center;
+                position: absolute;
+                margin-left: 10rem;
+            }
+        }
+    }
+    
+    p {
+        @media (orientation: landscape) {
+            margin: 0;
+            position: relative;
+            align-self: flex-start;
+            top: -2rem;
+        }
+        
+        @media (orientation: portrait) {
+            align-self: flex-start;
+            color: black;
+        }
+    }
+    
+    a {
+        color: black;
+        position: absolute;
+    }
+}
+
+// Planets size
+@media (orientation: landscape) {
+    #mercury {
+        width: 1.157%;
+        height: 3.318%;
+    }
+    #venus {
+        width: 3.083%;
+        height: 8.653%;
+    }
+    #earth {
+        width: 3.246%;
+        height: 9.110%;
+    }
+    #mars {
+        width: 1.727%;
+        height: 4.848%;
+    }
+    #jupiter {
+        width: 35.629%;
+        height: 100%;
+    }
+    #saturn {
+        width: 29.694%;
+        height: 83.341%;
+    }
+    #uranus {
+        width: 12.921%;
+        height: 36.265%;
+    }
+    #neptune {
+        width: 12.544%;
+        height: 35.206%;
+    }
+}
+
+@media (orientation: portrait) {
+    #mercury {
+        width: 3.248%;
+        height: 1.182%;
+    }
+    #venus {
+        width: 8.653%;
+        height: 3.082%;
+    }
+    #earth {
+        width: 9.109%;
+        height: 3.245%;
+    }
+    #mars {
+        width: 4.846%;
+        height: 1.726%;
+    }
+    #jupiter {
+        width: 100%;
+        height: 35.620%;
+    }
+    #saturn {
+        width: 83.340%;
+        height: 29.686%;
+    }
+    #uranus {
+        width: 36.264%;
+        height: 12.918%;
+    }
+    #neptune {
+        width: 35.206%;
+        height: 12.540%;
+    }
+}
+
+/* data */
+
+#svg-surcontainer {
+}
+#data {
+    width: 100%;
+    display: flex;
+}
+
+#list-container {
+    width: 50%;
+    
+    h3 {
+        margin-bottom: 2rem;
+    }
+}
+#text {
+    width: 50%;
+    
+    h3 {
+        margin-top: 4rem;
+    }
+}
+@media (max-width: 1400px) {
+    #data {
+        flex-direction: column;
+    }
+    #list-container {
+        width: 100%;
+    }
+    #text {
+        order: -1;
+        width: 100%;
+        max-width: 40rem;
+    }
+}
+@media (max-width: 850px) {
+    main {
+        flex-direction: column;
+    }
+}
+
+li {
+    display: block;
+    cursor: pointer;
+    margin-bottom: 0.25rem;
+    
+    &.selected::before {
+        content: '';
+        background-color: #00fb7f;
+        padding-left: 1rem;
+        margin-right: 0.5rem;
+    }
+}
+
+
+.download {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.25rem 1rem;
+    
+    &:hover {
+        background-color: white;
+        color: black;
+    }
+}
+
+
+#svg-container {
+    padding: 0 4rem;
+    position: sticky;
+    top: 6rem;
+    
+    span {
+        display: block;
+        height: 3rem;
+        text-align: center;
+    }
+    
+    .height {
+        position: absolute;
+        transform: rotate(-90deg);
+        margin-top: calc(100vh - 15rem);
+        transform-origin: bottom left;
+        
+        span {
+            /* background-color: yellow; */
+            line-height: 3rem;
+            width: calc(100vh - 12rem);
+        }
+    }
+    .width span {
+        line-height: 2.3rem;
+        width: calc((100vh - 12rem) * 0.7071067811865476);
+    }
+}
+
+
+
+
+svg {
+    height: calc(100vh - 12rem);
+    width: calc((100vh - 12rem) * 0.7071067811865476);
+    cursor: pointer;
+    
+    * {
+        pointer-events: none;
+    }
+    
+    rect {
+        fill: white;
+    }
+    path {
+        fill: none;
+        stroke: black;
+        stroke-width: 1;
+    }
+    text {
+        font-family: 'Fira Code';
+        font-weight: 300;
+        
+        &.center {
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+        &.right {
+            text-anchor: end;
+        }
+    }
+
+    .filledstroked {
+        fill: white;
+        stroke: black;
+        stroke-width: 1;
+    }
+}
+
+
+
+@font-face {
+    font-family: 'Fira Code';
+}

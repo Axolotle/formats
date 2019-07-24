@@ -31,7 +31,7 @@ class WebPage():
         doc.asis('<!DOCTYPE html>')
         with tag('html', lang=self.lang):
             doc.asis(self.head())
-            with tag('body'):
+            with tag('body', klass='home' if self.isHome else ''):
                 with tag('header'):
                     line('h1', title)
                     doc.asis(self.menu())
@@ -70,14 +70,17 @@ class WebPage():
                 with tag('li'):
                     line('a', self.homeName,
                         href='{}index.html'.format('' if self.isHome else '../'))
-                for planet in planets:
-                    with tag('li'):
-                        line('a', planet[0],
-                            href='{}{}.html'.format(
-                                'planets/' if self.isHome else '', planet[1],
-                            ),
-                            title=self.planetsName[planet[1]],
-                        )
+                with tag('li'):
+                    line('a', 'formats', id='menu-formats')  
+                    with tag('ul', klass='formats-menu'): 
+                        for planet in planets:
+                            with tag('li'):
+                                line('a', planet[0],
+                                    href='{}{}.html'.format(
+                                        'planets/' if self.isHome else '', planet[1],
+                                    ),
+                                    title=self.planetsName[planet[1]],
+                                )
         return doc.getvalue()
 
 

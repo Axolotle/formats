@@ -23,7 +23,7 @@ fr:
       Les approximations induites par les arrondies produisent des pertes négligeables dans le cas de la série A mais il en est tout autrement dans celui de formats gigantesques comme les formats planétaires.
 
       Sur ce site, vous trouver les dimensions de chacun des formats planétaires ainsi que ses divisions.
-      Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé dans le premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (Γ53, *insert other*).
+      Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé dans le premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (*Ε51*, *Α53*, *Γ53*, *α52*, *Ζ60*, *Κ60*, *Ο57* et *Π57*).
   planets:
     title: "{name} => serie {symbol} ({symbolName})"
     standard: "DAC|PlanetaryFormats({symbol}):2019"
