@@ -38,6 +38,18 @@ class WebPage():
                 doc.asis(self.main(*args))
                 if not self.isHome:
                     line('script', '', type='text/javascript', src='../../script.js')
+                line('script', '''
+                    document.querySelector('#menu-formats a').onclick = function () {
+                        if (this.parentElement.classList.contains('open')) {
+                            this.parentElement.classList.remove('open');
+                            this.setAttribute('aria-expanded', false);
+                        } else {
+                            this.parentElement.classList.add('open');
+                            this.setAttribute('aria-expanded', true);
+                        }
+                    }
+                ''', type='text/javascript')
+
 
         with open('web/{}/{}'.format(self.lang, self.fileName), 'w') as output:
             output.write(indent(doc.getvalue()))
@@ -56,23 +68,22 @@ class WebPage():
 
     def menu(self):
         doc, tag, text, line = Doc().ttl()
-        with tag('nav', klass='flex'):
-            with tag('ul', klass='lang'):
+        with tag('nav', klass='flex', aria_label='Main navigation'):
+            with tag('ul'):
                 for lang in langs:
-                    with tag('li'):
-                        if lang is not self.lang:
+                    if lang is not self.lang:
+                        with tag('li', klass='lang'):
                             line('a', lang, href='../{}{}/{}'.format(
                                 '' if self.isHome else '../',
                                 lang,
                                 self.fileName,
                             ))
-            with tag('ul'):
                 with tag('li'):
                     line('a', self.homeName,
                         href='{}index.html'.format('' if self.isHome else '../'))
-                with tag('li'):
-                    line('a', 'formats', id='menu-formats')  
-                    with tag('ul', klass='formats-menu'): 
+                with tag('li', id='menu-formats'):
+                    line('a', 'Formats',  ('aria-haspopup', 'true'), ('aria-expanded', 'false'), href='#')
+                    with tag('ul', klass='formats-menu'):
                         for planet in planets:
                             with tag('li'):
                                 line('a', planet[0],

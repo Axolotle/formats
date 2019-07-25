@@ -1,10 +1,9 @@
 :root {
-    font-family: 'Fira Code', monospace;
-    font-size: 1em;
-    font-weight: 400;
-    line-height: 1.4rem;
-    color: white;
-}
+  font-family: 'Fira Code', monospace;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.4rem;
+  color: white; }
 
 /* based on http://meyerweb.com/eric/tools/css/reset/ */
 html, body, div, span, applet, object, iframe,
@@ -20,360 +19,379 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 main, menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 1rem;
-	font: inherit;
-	vertical-align: baseline;
-	box-sizing: border-box;
-}
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box; }
+
 li {
-    list-style: none;
-}
+  list-style: none; }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, main, menu, nav, section {
-	display: block;
-}
+  display: block; }
 
 html {
-    background-color: black;
-}
-body {
+  background-color: black; }
 
-}
-main {
-    margin: 2rem;
-    margin-top: 0;
-}
+body {
+  width: calc(100vw - 6.5rem);
+  margin: auto;
+  padding-bottom: 6rem; }
+  @media (max-width: 550px) {
+    body {
+      width: calc(100vw - 3.5rem); } }
+
 header {
-    padding: 2rem;
-    background-color: black;
-    display: flex;
-    align-items: center;
-}
+  background-color: black;
+  display: flex;
+  align-items: center;
+  min-height: 6rem; }
+  @media (max-width: 660px) {
+    header {
+      padding: 2rem 0;
+      align-content: space-between; } }
 
 nav {
-    width: 100%;
-}
-nav ul:first-of-type {
-    margin-right: auto;
-    position: relative;
-    top: -0.75rem;
-}
-nav li {
-    display: inline;
-}
-nav a {
+  width: 100%; }
+  nav > ul {
+    display: flex;
+    height: 100%;
+    width: 100%; }
+  nav a {
     color: white;
-    padding: 0.25rem 0.5rem;
-}
-nav a:hover {
-    color: black;
-    background-color: white;
-    text-decoration: none;
-}
+    padding: 0.25rem 0.5rem; }
+    nav a:hover {
+      color: black;
+      background-color: white;
+      text-decoration: none; }
+  @media (max-width: 660px), (orientation: portrait) and (max-width: 660px) {
+    nav {
+      width: auto;
+      margin-left: auto; }
+      nav > ul {
+        flex-direction: column; }
+      nav .lang {
+        margin-bottom: 1rem;
+        align-self: flex-end; } }
+  @media (max-width: 900px) {
+    nav #menu-formats ul {
+      position: absolute;
+      display: none; }
+    nav #menu-formats:hover ul, nav #menu-formats.open ul {
+      display: block;
+      z-index: 1;
+      background-color: black;
+      margin-top: 0.20rem; }
+      nav #menu-formats:hover ul li, nav #menu-formats.open ul li {
+        margin-bottom: 0.25rem; }
+        nav #menu-formats:hover ul li a, nav #menu-formats.open ul li a {
+          display: block;
+          width: 5.2rem;
+          text-align: center; } }
+  @media (min-width: 660px) {
+    nav .lang {
+      position: relative;
+      top: -1rem;
+      margin-right: auto; } }
+  @media (min-width: 900px) {
+    nav #menu-formats ul {
+      display: flex; }
+    nav #menu-formats > a {
+      display: none; } }
 
 h1 {
-    line-height: 2rem;
-    font-size: 2rem;
-    flex-shrink: 0;
-    margin-left: 4rem;
-}
+  line-height: 2rem;
+  font-size: 2rem;
+  flex-shrink: 0; }
+  @media (max-width: 850px) {
+    h1 {
+      flex-shrink: 1; } }
+
 h2 {
-    margin-bottom: 1rem;
-    text-decoration: underline;
-    color: #00fb7f;
-}
+  margin-bottom: 1rem;
+  text-decoration: underline;
+  color: #00fb7f; }
+
 h3 {
-    font-weight: 300;
-    font-size: 1.5rem;
-}
+  font-weight: 300;
+  font-size: 1.5rem; }
 
 p {
-    margin: 1rem 0;
-}
+  margin: 1rem 0; }
+
 a {
-    color: white;
-}
+  color: white; }
+
 em {
-    color: #00fb7f;
-}
+  color: #00fb7f; }
+
 sup {
-    font-size: 0.7rem;
-    font-weight: 300;
-    position: relative;
-    top: -0.5rem;
-    padding-left: 0.2rem;
-}
+  font-size: 0.7rem;
+  font-weight: 300;
+  position: relative;
+  top: -0.5rem;
+  padding-left: 0.2rem; }
 
 code {
-    font-weight: 300;
-    white-space: pre-wrap;
-    color: #b9b9b9;
-}
+  font-weight: 300;
+  white-space: pre-wrap;
+  color: #b9b9b9; }
 
 .flex {
-    display: flex;
-    justify-content: space-between;
-}
-
-
+  display: flex;
+  justify-content: space-between; }
 
 /* HOME */
+.home main > p {
+  max-width: 50rem; }
+
 #planets {
-    display: flex;
-    margin-top: 6rem;
-    margin-bottom: 3rem;
-}
-#planets > div {
+  display: flex;
+  margin-top: 6rem;
+  margin-bottom: 3rem; }
+  @media (orientation: landscape) {
+    #planets {
+      width: calc(100vw - 6.5rem);
+      height: calc((100vw - 6.5rem) * 0.50388);
+      align-items: flex-start;
+      margin-top: 10rem; } }
+  @media (orientation: landscape) and (max-width: 550px) {
+    #planets {
+      width: calc(100vw - 3.5rem);
+      height: calc((100vw - 3.5rem) * 0.50388); } }
+
+  @media (orientation: portrait) {
+    #planets {
+      flex-direction: column;
+      width: calc(100vw - 6.5rem);
+      height: calc((100vw - 6.5rem) * 3.97023);
+      max-width: 700px;
+      max-height: calc(700px * 3.97023);
+      align-items: flex-start; } }
+  @media (orientation: portrait) and (max-width: 550px) {
+    #planets {
+      width: calc(100vw - 3.5rem);
+      height: calc((100vw - 3.5rem) * 3.97023); } }
+
+  #planets > div {
     background-color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-#planets a {
+    justify-content: center; }
+    @media (orientation: landscape) {
+      #planets > div {
+        border-right: 1px solid black; }
+        #planets > div:nth-child(-n + 4) p {
+          transform: rotate(-90deg);
+          width: 1rem; } }
+    @media (orientation: portrait) {
+      #planets > div {
+        border-bottom: 1px solid black; }
+        #planets > div:nth-child(-n + 4) p {
+          color: white;
+          align-self: center;
+          position: absolute;
+          margin-left: 10rem; } }
+  @media (orientation: landscape) {
+    #planets p {
+      margin: 0;
+      position: relative;
+      align-self: flex-start;
+      top: -2.5rem; } }
+  @media (orientation: portrait) {
+    #planets p {
+      align-self: flex-start;
+      color: black; } }
+  #planets a {
     color: black;
-    position: absolute;
-}
+    position: absolute; }
 
 @media (orientation: landscape) {
-    #planets {
-        width: calc(100vw - 6rem);
-        height: calc((100vw - 6rem) * 0.50388);
-        align-items: flex-start;
-        margin-top: 10rem;
-    }
-    #planets > div {
-        border-right: 1mm solid black;
-    }
-    #planets p {
-        margin: 0;
-        position: relative;
-        align-self: flex-start;
-        top: -2rem;
-    }
+  #mercury {
+    width: 1.157%;
+    height: 3.318%; }
 
-    #planets div:nth-child(-n + 4) p {
-        transform: rotate(-90deg);
-        width: 1rem;
-        left: -0.15rem;
-    }
+  #venus {
+    width: 3.083%;
+    height: 8.653%; }
 
-    #mercury {
-        width: 1.157%;
-        height: 3.318%;
-    }
-    #venus {
-        width: 3.083%;
-        height: 8.653%;
-    }
-    #earth {
-        width: 3.246%;
-        height: 9.110%;
-    }
-    #mars {
-        width: 1.727%;
-        height: 4.848%;
-    }
-    #jupiter {
-        width: 35.629%;
-        height: 100%;
-    }
-    #saturn {
-        width: 29.694%;
-        height: 83.341%;
-    }
-    #uranus {
-        width: 12.921%;
-        height: 36.265%;
-    }
-    #neptune {
-        width: 12.544%;
-        height: 35.206%;
-    }
-}
+  #earth {
+    width: 3.246%;
+    height: 9.110%; }
 
+  #mars {
+    width: 1.727%;
+    height: 4.848%; }
+
+  #jupiter {
+    width: 35.629%;
+    height: 100%; }
+
+  #saturn {
+    width: 29.694%;
+    height: 83.341%; }
+
+  #uranus {
+    width: 12.921%;
+    height: 36.265%; }
+
+  #neptune {
+    width: 12.544%;
+    height: 35.206%; } }
 @media (orientation: portrait) {
-    #planets {
-        flex-direction: column;
-        width: calc(100vw - 4rem);
-        height: calc((100vw - 4rem) * 3.97023);
-        max-width: 600px;
-        max-height: calc(600px * 3.97023);
-        align-items: flex-start;
-    }
-    #planets > div {
-        border-bottom: 1px solid black;
-    }
-    #planets p {
-        align-self: flex-start;
-        color: black;
-    }
-    #planets div:nth-child(-n + 4) p {
-        color: white;
-        align-self: center;
-        position: absolute;
-        margin-left: 10rem;
-    }
+  #mercury {
+    width: 3.248%;
+    height: 1.182%; }
 
-    #mercury {
-        width: 3.248%;
-        height: 1.182%;
-    }
-    #venus {
-        width: 8.653%;
-        height: 3.082%;
-    }
-    #earth {
-        width: 9.109%;
-        height: 3.245%;
-    }
-    #mars {
-        width: 4.846%;
-        height: 1.726%;
-    }
-    #jupiter {
-        width: 100%;
-        height: 35.620%;
-    }
-    #saturn {
-        width: 83.340%;
-        height: 29.686%;
-    }
-    #uranus {
-        width: 36.264%;
-        height: 12.918%;
-    }
-    #neptune {
-        width: 35.206%;
-        height: 12.540%;
-    }
-}
+  #venus {
+    width: 8.653%;
+    height: 3.082%; }
 
-/* data */
+  #earth {
+    width: 9.109%;
+    height: 3.245%; }
 
-#svg-surcontainer {
-}
-#data {
+  #mars {
+    width: 4.846%;
+    height: 1.726%; }
+
+  #jupiter {
     width: 100%;
-    display: flex;
-}
+    height: 35.620%; }
 
-#list-container {
-    width: 50%;
-}
-#text {
-    width: 50%;
-}
-@media (max-width: 1400px) {
+  #saturn {
+    width: 83.340%;
+    height: 29.686%; }
+
+  #uranus {
+    width: 36.264%;
+    height: 12.918%; }
+
+  #neptune {
+    width: 35.206%;
+    height: 12.540%; } }
+@media (orientation: portrait) {
+  main {
+    flex-direction: column; } }
+#data {
+  width: 100%;
+  display: flex; }
+  #data #list-container h3 {
+    margin-bottom: 2rem; }
+  @media (orientation: landscape) and (min-width: 1280px) {
+    #data #list-container {
+      margin-right: 3.25rem;
+      min-width: 25rem; } }
+  #data #text h3 {
+    margin-top: 4rem; }
+  @media (max-width: 1280px) {
     #data {
-        flex-direction: column;
-    }
-    #list-container {
-        width: 100%;
-    }
-    #text {
+      flex-direction: column; }
+      #data #text {
         order: -1;
-        width: 100%;
-        max-width: 40rem;
-    }
-}
+        margin-bottom: 3rem; } }
 
-#text h3 {
-    margin-top: 4rem;
-}
-#list-container h3 {
-    margin-bottom: 2rem;
-}
-
-li {
-    display: block;
-    cursor: pointer;
-    margin-bottom: 0.25rem;
-}
-li.selected::before {
+#list-container li {
+  display: block;
+  cursor: pointer;
+  margin-bottom: 0.25rem; }
+  #list-container li.selected::before {
     content: '';
     background-color: #00fb7f;
     padding-left: 1rem;
-    margin-right: 0.5rem;
-}
+    margin-right: 0.5rem; }
 
 .download {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 0.25rem 1rem;
-}
-.download:hover {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.25rem 1rem; }
+  .download:hover {
     background-color: white;
-    color: black;
-}
-
-
+    color: black; }
 
 #svg-container {
-    padding: 0 4rem;
-    position: sticky;
-    top: 6rem;
-}
-#svg-container span {
+  position: sticky;
+  top: 6rem; }
+  #svg-container span {
     display: block;
     height: 3rem;
-    text-align: center;
-}
-.height {
+    text-align: center; }
+  #svg-container .height {
     position: absolute;
     transform: rotate(-90deg);
-    margin-top: calc(100vh - 15rem);
-    transform-origin: bottom left;
-}
-.height span {
-    /* background-color: yellow; */
-    line-height: 3rem;
-    width: calc(100vh - 12rem);
-}
-.width span {
-    line-height: 2.3rem;
-    width: calc((100vh - 12rem) * 0.7071067811865476);
-}
-
-
+    transform-origin: bottom left; }
+    #svg-container .height span {
+      line-height: 3rem; }
+  #svg-container .width span {
+    line-height: 2.3rem; }
+  @media (orientation: landscape) {
+    #svg-container .width span {
+      width: calc((100vh - 12rem) * 0.7071067812); }
+    #svg-container .height {
+      margin-top: calc(100vh - 12rem - 3rem); }
+      #svg-container .height span {
+        width: calc(100vh - 12rem); } }
+  @media (orientation: portrait) {
+    #svg-container .width span {
+      width: calc(100vw - 6.5rem); }
+    #svg-container .height {
+      margin-top: calc((100vw - 6.5rem) * 1.4142135624 - 3rem); }
+      #svg-container .height span {
+        width: calc((100vw - 6.5rem) * 1.4142135624); } }
+@media (orientation: portrait) and (max-width: 550px) {
+  #svg-container .width span {
+    width: calc(100vw - 3.5rem); }
+  #svg-container .height {
+    margin-top: calc((100vw - 3.5rem) * 1.4142135624 - 3rem);
+    left: 0.65rem; }
+    #svg-container .height span {
+      width: calc((100vw - 3.5rem) * 1.4142135624); }
+  #svg-container .width {
+    margin-top: -0.65rem; } }
 
 svg {
-    height: calc(100vh - 12rem);
-    width: calc((100vh - 12rem) * 0.7071067811865476);
-    cursor: pointer;
-}
-svg * {
-    pointer-events: none;
-}
-rect {
-    fill: white;
-}
-path {
+  cursor: pointer; }
+  @media (orientation: landscape) {
+    svg {
+      height: calc(100vh - 12rem);
+      width: calc((100vh - 12rem) * 0.7071067812);
+      margin-right: 3.25rem; } }
+  @media (orientation: portrait) {
+    svg {
+      width: calc(100vw - 6.5rem);
+      height: calc((100vw - 6.5rem) * 1.4142135624); } }
+  @media (orientation: portrait) and (max-width: 550px) {
+    svg {
+      width: calc(100vw - 3.5rem);
+      height: calc((100vw - 3.5rem) * 1.4142135624); } }
+
+  svg * {
+    pointer-events: none; }
+  svg rect {
+    fill: white; }
+  svg path {
     fill: none;
     stroke: black;
-    stroke-width: 1;
-}
-text {
+    stroke-width: 1; }
+  svg text {
     font-family: 'Fira Code';
-    font-weight: 300;
-}
-text.center {
-    text-anchor: middle;
-    dominant-baseline: central;
-}
-text.right {
-    text-anchor: end;
-}
-
-.filledstroked {
+    font-weight: 300; }
+    svg text.center {
+      text-anchor: middle;
+      dominant-baseline: central; }
+    svg text.right {
+      text-anchor: end; }
+  svg .filledstroked {
     fill: white;
     stroke: black;
-    stroke-width: 1;
-}
+    stroke-width: 1; }
 
 @font-face {
-    font-family: 'Fira Code';
-}
+  font-family: 'Fira Code'; }
+
+/*# sourceMappingURL=stylesheet.css.map */
