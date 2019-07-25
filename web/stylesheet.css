@@ -388,8 +388,7 @@ svg {
       text-anchor: end; }
   svg .filledstroked {
     fill: white;
-    stroke: black;
-    stroke-width: 1; }
+    stroke: black; }
 
 @font-face {
   font-family: 'Fira Code'; }
