@@ -152,21 +152,23 @@ class PlanetPage(WebPage):
 def formatList(planet):
     doc, tag, text, line = Doc().ttl()
     line('h3', 'Liste de formats :')
-    with tag('ul', id='formats'):
+    with tag('ul', ('data-symbol', planet['symbol']), ('data-max', len(planet['formats_mm'])-1), id='formats'):
         extra = ''
         a = 0
-        line('li', '{}{} -> {} × {} mm'.format(
-            planet['symbol'], '0 ', *planet['formats_mm'][0]
-        ), klass='selected')
-        for i, size in enumerate(planet['formats_mm'][1:]):
-            i += 1
-            if i < 10: i = str(i) + ' '
-            if size[0] <= 841:
-                extra = ' (A{}-compatible)'.format(a)
-                a += 1
-            line('li', '{}{} -> {} × {} mm{}'.format(
-                planet['symbol'], i, *size, extra
-            ))
+
+        for i, size in enumerate(planet['formats_mm']):
+            with tag('li'):
+                if i < 10: i = str(i) + ' '
+                if size[0] <= 841:
+                    extra = ' (A{}-compatible)'.format(a)
+                    a += 1
+                line('button',
+                    '{}{} -> {} × {} mm{}'.format(planet['symbol'], i, *size, extra),
+                    ('data-number', i),
+                    ('data-width', size[0]),
+                    ('data-height', size[1]),
+                    klass='selected' if i == '0 ' else ''
+                )
     return doc.getvalue()
 
 def mainText(planet, content, lang):
