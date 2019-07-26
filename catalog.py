@@ -22,7 +22,7 @@ class Catalog():
     def __init__(self, planet):
         self.symbol = planet['symbol']
         self.name = planet['name']
-        self.surface = planet['surface']
+        self.area = planet['area']
         self.size = planet['size_km']
         # width and height of the document (A4 like) in mm
         [self.w, self.h] = planet['serieAequi']['4']['size']
@@ -34,8 +34,8 @@ class Catalog():
         self.dist = 7
         # list of every formats in mm
         self.formats = planet['formats_mm']
-        # surface in km² of the format[0]
-        self.format0Surface = self.formats[0][0] * self.formats[0][1] * 10**-12
+        # area in km² of the format[0]
+        self.format0area = self.formats[0][0] * self.formats[0][1] * 10**-12
         # number of folding to operate to get a format that can be filled in a A4
         self.times = planet['serieAequi']['4']['number']
         # radius of the planet scaled to planet's A4-like
@@ -206,7 +206,7 @@ class Catalog():
             class_='center'
         ))
         page.add(Text(
-            '{}0 ±=== {} SURFACE'.format(self.symbol, self.name.upper()),
+            '{}0 ±=== {} AREA'.format(self.symbol, self.name.upper()),
             insert=(self.c[0], self.h - self.m[1] - (self.c[1] - self.radius[1] - self.m[1]) / 2),
             class_='center'
         ))
@@ -249,7 +249,7 @@ class Catalog():
         )
         spans = [
             TSpan(self.nameDesc),
-            TSpan('{} km² = {} × {} km'.format(self.surface, *self.size), x=[0], y=[self.leading]),
+            TSpan('{} km² = {} × {} km'.format(self.area, *self.size), x=[0], y=[self.leading]),
         ]
         for span in spans:
             textBot.add(span)
@@ -342,12 +342,12 @@ class Catalog():
                 self.w - self.m[0], self.h - self.m[1] - 3 * self.leading
             )
         )
-        surfaceLost = self.format0Surface - (width * height * distribution[number]['total'] * 10**-12)
+        areaLost = self.format0area - (width * height * distribution[number]['total'] * 10**-12)
         spans = [
             TSpan('{0}({1}) -> {1}{2}'.format(self.name.upper(), self.symbol, number)),
             TSpan('{} × {} mm'.format(width, height), x=[0], y=[self.leading]),
             TSpan('{} per {}0'.format(distribution[number]['total'], self.symbol), x=[0], y=[self.leading * 2]),
-            TSpan('{} km² lost due to previous rounding'.format(round(surfaceLost, 4)), x=[0], y=[self.leading * 3])
+            TSpan('{} km² lost due to previous rounding'.format(round(areaLost, 4)), x=[0], y=[self.leading * 3])
         ]
         for span in spans:
             text.add(span)

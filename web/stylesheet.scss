@@ -427,10 +427,11 @@ code {
     position: sticky;
     top: 6rem;
 
-    span {
+    .height span, .width span, .area-lost p {
         display: block;
         height: 3rem;
         text-align: center;
+        margin: 0;
     }
 
     .height {
@@ -442,12 +443,15 @@ code {
             line-height: 3rem;
         }
     }
-    .width span {
+    .width span, .area-lost p {
         line-height: 2.3rem;
+    }
+    .area-lost {
+        margin-top: -1rem;
     }
 
     @media (orientation: landscape) {
-        .width span {
+        .width span, .area-lost p {
             width: calc((100vh - #{$margin-vert}) * #{$sqrt1_2});
         }
         .height {
@@ -458,7 +462,7 @@ code {
         }
     }
     @media (orientation: portrait) {
-        .width span {
+        .width span, .area-lost p {
             width: calc(100vw - #{$margin});
         }
         .height {
@@ -468,14 +472,13 @@ code {
             }
         }
         @media (max-width: 550px) {
-            .width span {
+            .width span, .area-lost p {
                 width: calc(100vw - #{$small-margin});
             }
             .height {
                 margin-top: calc((100vw - #{$small-margin}) * #{$sqrt2} - 3rem);
                 left: 0.65rem;
                 span {
-                    // background-color: red;
                     width: calc((100vw - #{$small-margin}) * #{$sqrt2});
                 }
             }

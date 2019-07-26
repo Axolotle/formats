@@ -120,4 +120,5 @@ function reset() {
     formats[char].classList.add('selected');
     document.querySelector('.width span').textContent = formats[char].dataset.width + ' mm';
     document.querySelector('.height span').textContent = formats[char].dataset.height + ' mm';
+    document.querySelector('.area-lost span').textContent = formats[char].dataset.lost;
 }

@@ -11,67 +11,82 @@ fr:
     neptune: Neptune
   homeName: Accueil
   home:
-    intro: "Retranscrire la *surface d'une planète* en une série de formats de papier rectangulaires dont le rapport entre la *largeur* et la *longueur* est *1:√2* à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
+    intro: "Retranscrire la *superficie d'une planète* en une série de formats de papier rectangulaires dont le rapport entre la *largeur* et la *longueur* est *1:√2* à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
     content: |
-      Nommage de la série :
+      Nommage de la série :  
       Planète === divinité romaine <== divinité grecque >-> *première lettre* du nom en grec ancien
 
-      Pour chaque planète du Système solaire est défini un format de référence — dit *0* préfixé de sa lettre grecque — de ratio *1:√2* arrondi au millimètre et dont la surface est égale à celle de cette planète.
+      Pour chaque planète du Système solaire est défini un format de référence — dit *0* préfixé de sa lettre grecque — de ratio *1:√2* arrondi au millimètre et dont l'aire est égale à celle de cette planète.  
       Sont ensuite récursivement calculés tous les formats de la série en divisant la précédente longueur par 2 et en récupérant la précédente largeur comme nouvelle longueur (L = longueur / 2 ; l = largeur) jusqu'à atteindre un format pouvant être apposé dans un format A0 suivi de onze de ses prochaines divisions.
 
-      Les formats de papier 1:√2 ont la particularité de conserver ce ratio à chaque division — pas exactement cependant car le résultat de chaque division est arrondie au millimètre inférieur —, il est ainsi possible de contenir deux formats *1* en orientation paysage dans un format *0* en orientation portrait, quatre formats *2* (portrait) dans un format *0* (portrait), etc.
-      Les approximations induites par les arrondies produisent des pertes négligeables dans le cas de la série A mais il en est tout autrement dans celui de formats gigantesques comme les formats planétaires.
+      Les formats de papier 1:√2 ont la particularité de conserver ce ratio à chaque division — pas exactement cependant car le résultat de chaque division est arrondie au millimètre inférieur —, il est ainsi possible de contenir deux formats *1* en orientation paysage dans un format *0* en orientation portrait, quatre formats *2* (portrait) dans un format *0* (portrait), etc.  
+      Les approximations induites par les arrondies produisent des pertes négligeables dans le cas de la série A mais il en est tout autrement en ce qui concerne les formats planétaires.
 
-      Sur ce site, vous trouver les dimensions de chacun des formats planétaires ainsi que ses divisions.
+      Sur ce site, vous trouver les dimensions de chacun des formats planétaires ainsi que ses divisions.  
       Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé dans le premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (*Ε51*, *Α53*, *Γ53*, *α52*, *Ζ60*, *Κ60*, *Ο57* et *Π57*).
   planets:
-    title: "{name} => serie {symbol} ({symbolName})"
+    title: "{name} => série {symbol} ({symbolName})"
     standard: "DAC|PlanetaryFormats({symbol}):2019"
-    download: Télécharger le catalogue (~= 1 mo)
-    content: |
-      Téléchargement : [catalogue]({name}-{symbolName}Catalogue.pdf) || [fiche rapide]({name}-{symbolName}Sheet.pdf)
+    areaLost: " km² de perte"
+    content:
+      text: |
+        Téléchargement : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [fiche rapide]({name}-{symbolName}Sheet.pdf)
+        <br><br><br>
+        {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 
-      {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
+        Cette page présente les différentes divisions du format *{symbolName}* (*{symbol}*) de *0* à *{a10equiNumber}* dont les onze dernières sont apposables sur la serie A0–10.
 
-      Cette page présente les différentes divisions du format *{symbolName}* (*{symbol}*) de *0* à *{a10equiNumber}* dont les onze dernières sont apposables sur la serie A[0-10].
+        Le catalogue papier est apposable sur A4 et peut-être massicoté grâce aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, ainsi que ses sous divisions, imprimés à échelle 1.
 
-      Le catalogue papier est apposable sur A4 et peut-être massicoté grâce aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, ainsi que ses sous divisions, imprimés à échelle 1.
+        ### {name}
 
-      ### {name}
+        aire calculée : *{area}* km²  
+        rectangle (ratio 1:√2) :  
+        *{wkm}* × *{hkm}* km
 
-      aire calculée : *{surface}* km²  
-      rectangle (ratio 1:√2) :  
-      *{wkm}* × *{hkm}* km
+        ### Format {symbol}0 :
 
-      ### Format {symbol}0 :
+        arrondi au millimètre :
 
-      arrondi au millimètre :
+        largeur : *{w0}* mm  
+        longueur : *{h0}* mm  
+        superficie manquante : *{error}* m²
 
-      - largeur : *{w0}* mm
-      - longueur : *{h0}* mm
-      - surface perdue : *{error}* km²
+      calculusEllipse: |
+        ### Calcul
 
-      ### Calcul
+        Aire d'un ellipsoïde oblate (applati)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>  
+        <code>
+        a (rayon équatorial) = *{re}* km<sup>[source]({radiusSource})</sup>
+        b (rayon polaire) = *{rp}* km<sup>[source]({radiusSource})</sup>
 
-      Surface d'un ellipsoïde oblate (applati)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>
-      <code>
-      a (rayon équatorial) = *{re}* km<sup>[source]({radiusSource})</sup>
-      b (rayon polaire) = *{rp}* km<sup>[source]({radiusSource})</sup>
+        e (excentricité) = √(1 - b² / a²)
+        aire = 2π × a² × (1 + (b / a)² × atanh(e) / e)
+             = *{area}* km²
+        </code>
 
-      e (excentricité) = √(1 - b² / a²)
-      surface = 2π × a² × (1 + (b / a)² × atanh(e) / e)
-              = *{surface}* km²
-      </code>
+      calculusSphere: |
+        ### Calcul
 
-      Côtés d'un rectangle d'aire égale à celle de la planète et de ratio 1:√2
-      <code>
-      longueur = √(surface × √2)
-               = *{hkm}* km
-               = *{h0}* mm
-      largeur  = √(surface × √½)
-               = *{wkm}* km
-               = *{w0}* mm
-      </code>
+        Aire d'une sphère<sup>[source](https://fr.wikipedia.org/wiki/Sph%C3%A8re#Formules)</sup>  
+        <code>
+        rayon = *{re}* km<sup>[source]({radiusSource})</sup>
+        aire = 4π × rayon²
+             = *{area}* km²
+        </code>
+
+      calculusRectangle: |
+        Côtés d'un rectangle d'aire égale à celle de la planète et de ratio 1:√2  
+        <code>
+        longueur = √(aire × √2)
+                 = *{hkm}* km
+                 = *{h0}* mm
+        largeur  = √(aire × √½)
+                 = *{wkm}* km
+                 = *{w0}* mm
+        </code>
+
+
 
 
 
@@ -90,27 +105,77 @@ en:
     neptune: Neptune
   homeName: Home
   home:
-    intro: "Translate the surface of a planet into a series of rectangular paper sizes with a width to length ratio of 1:√2 similar to the A series ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216): A0, A1, etc.)"
+    intro: "Translate the *area of a planet* into a series of rectangular paper formats whose ratio between *width* and *length* is *1:√2* as in series A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216): A0, A1, etc.)"
     content: |
-      For each planet in the Solar System, a reference format is defined - called "0" prefixed with the first letter of its Greek name - with a ratio of 1:√2 rounded to the nearest millimetre and whose surface area is equal to that of this planet. All formats in the series are then recursively calculated by dividing the previous height by 2 and recovering the previous width as the height (L = height / 2; l = width) until a format that can be applied in an A0 format is reached, followed by ten of its next divisions.
+      Name of the series:  
+      planet === roman divinity <== greek divinity >-> *first letter* of the name in ancient Greek
 
-      Paper sizes with a ratio of 1:√2 have the particularity of keeping this ratio for each division - not exactly however because each division is rounded down to the nearest millimeter, which produces losses, negligible in the case of Series A, but we will see that it is different in the case of planetary formats.
-      It is thus possible to contain two formats "1" in landscape orientation in one format "0" in portrait orientation, four formats "2" portrait in one format "0" portrait, etc.
+      For each planet in the Solar System, a reference format is defined—known as *0* prefixed by its Greek letter—with a ratio *1:√2* rounded to the nearest millimetre and whose area is equal to that of this planet.  
+      All formats in the series are then recursively calculated by dividing the previous length by 2 and recovering the previous width as the new length (L = length / 2; l = width) until a format that can be affixed to an A0 format is reached followed by eleven of the next divisions.
 
-      On this site, you can find the dimensions of each of the planetary formats as well as its divisions.
-      A printable paper version in catalogue form is also available for download. On each of its pages, it presents the next division, its dimensions and some other information. The catalogue is printed in the first planetary format that can be affixed to an A4, so all formats are displayed at scale 1 from it (Γ53, *insert other*).
+      Paper sizes with a ratio of 1:√2 have the particularity of keeping this ratio for each division—not exactly, however, because the result of each division is rounded down to the nearest millimeter—so it is possible to contain two *1* formats in landscape orientation in one *0* format in portrait orientation, four *2* formats (portrait) in one *0* format (portrait), etc.  
+      The approximations induced by rounding produce negligible losses in the case of Series A, but the situation is quite different for planetary formats.
+
+      On this site, you will find the dimensions of each of the planetary formats as well as its divisions.  
+      A printable catalogue is also available for download. On each of its pages, it presents the next division, its dimensions and some other information. The catalogue is printed in the first planetary format that can be affixed to an A4, so all formats are at scale 1 from it (*Ε51*, *Α53*, *Κ60*, *Γ53*, *α52*, *Ζ60*, *Κ60*, *Ο57* and *Π57*).
   planets:
-    title: "{name} => serie {symbol} ({symbolName})"
+    title: "{name} => series {symbol} ({symbolName})"
     standard: "DAC|PlanetaryFormats({symbol}):2019"
-    download: Download the catalogue (~= 1 mo)
-    content: |
-      The surface of the planet {name} is approximately {surface} km². This area can be represented as a rectangle with a ratio of 1:√2 and a size of {wkm} × {hkm} km.
-      Transposed in millimetres and rounded down, we can define the first format named {symbol}0 — based on the first character of {greekGod} in greek: {ancientGreekName}.
+    areaLost: " km² loss"
+    content:
+      text: |
+        Download : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [crib sheet]({name}-{symbolName}Sheet.pdf)
+        <br><br><br>
+        {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 
-      This format has a width of {w0} mm and a height of {h0} mm.
+        This page presents the different divisions of the format *{symbolName}* (*{symbol}*) from *0* to *{a10equiNumber}* whose last eleven are affixable on the series A0-10.
 
-      DThis second approximation to the lower millimetre results in a loss of {error} m² compared to the initial surface area and will only increase as the divisions increase.
+        The paper catalogue can be affixed to A4 and can be trimmed using the cutting lines to correspond to the format {symbol}{a4equiNumber} which will then be printed at 1 scale, as well as its sub-divisions.
 
-      This page presents the different divisions of the {symbol} format from 0 to {a10equiNumber}, the last ten formats being affixable to the A[0-10] serie.
+        ### {name}
 
-       The paper version can be affixed to A4 and can be trimmed using the cutting lines to correspond to the format {symbol}{a4equiNumber} which will then be printed at 1 scale with its sub-divisions.
+        calculated area: *{area}* km²  
+        rectangle (ratio 1:√2):  
+        *{wkm}* × *{hkm}* km
+
+        ### Format {symbol}0:
+
+        rounded to the nearest millimetre:
+
+        width: *{w0}* mm  
+        lenght: *{h0}* mm  
+        missing area: *{error}* m²  
+
+      calculusEllipse: |
+        ### Calcul
+
+        Area of an oblate ellipsoid (flattened)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>  
+        <code>
+        a (equatorial radius) = *{re}* km<sup>[source]({radiusSource})</sup>
+        b (polar radius) = *{rp}* km<sup>[source]({radiusSource})</sup>
+
+        e (eccentricity) = √(1 - b² / a²)
+        area = 2π × a² × (1 + (b / a)² × atanh(e) / e)
+             = *{area}* km²
+        </code>
+
+      calculusSphere: |
+        ### Calcul
+
+        Area of a sphere<sup>[source](https://fr.wikipedia.org/wiki/Sph%C3%A8re#Formules)</sup>  
+        <code>
+        radius = *{re}* km<sup>[source]({radiusSource})</sup>
+        area = 4π × radius²
+             = *{area}* km²
+        </code>
+
+      calculusRectangle: |
+        Sides of a rectangle with an area equal to that of the planet and a ratio of 1:√2  
+        <code>
+        longueur = √(aera × √2)
+                 = *{hkm}* km
+                 = *{h0}* mm
+        largeur  = √(aera × √½)
+                 = *{wkm}* km
+                 = *{w0}* mm
+        </code>

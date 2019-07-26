@@ -14,7 +14,7 @@
         "radius": [2439.7, 2439.7],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/mercuryfact.html",
         "meanVolumetricRadius": 2439.7,
-        "surfaceWikipedia": 74800000
+        "areaWikipedia": 74800000
     },
     {
         "name": {
@@ -31,7 +31,7 @@
         "radius": [6051.8, 6051.8],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
         "meanVolumetricRadius": 6051.8,
-        "surfaceWikipedia": 460230000
+        "areaWikipedia": 460230000
     },
     {
         "name": {
@@ -48,7 +48,7 @@
         "radius": [6378.137, 6356.752],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
         "meanVolumetricRadius": 6371,
-        "surfaceWikipedia": 510072000
+        "areaWikipedia": 510072000
     },
     {
         "name": {
@@ -65,7 +65,7 @@
         "radius": [3396.2, 3376.2],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html",
         "meanVolumetricRadius": 3389.5,
-        "surfaceWikipedia": 144798500
+        "areaWikipedia": 144798500
     },
     {
         "name": {
@@ -82,7 +82,7 @@
         "radius": [71492, 66854],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html",
         "meanVolumetricRadius": 69911,
-        "surfaceWikipedia": 61400000000
+        "areaWikipedia": 61400000000
     },
     {
         "name": {
@@ -99,7 +99,7 @@
         "radius": [60268, 54364],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html",
         "meanVolumetricRadius": 58232,
-        "surfaceWikipedia": 42700000000
+        "areaWikipedia": 42700000000
     },
     {
         "name": {
@@ -116,7 +116,7 @@
         "radius": [25559, 24973],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/uranusfact.html",
         "meanVolumetricRadius": 25362,
-        "surfaceWikipedia": 8115600000
+        "areaWikipedia": 8115600000
     },
     {
         "name": {
@@ -133,6 +133,6 @@
         "radius": [24764, 24341],
         "radiusSource": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/neptunefact.html",
         "meanVolumetricRadius": 24622,
-        "surfaceWikipedia": 7618300000
+        "areaWikipedia": 7618300000
     }
 ]

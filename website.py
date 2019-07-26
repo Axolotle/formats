@@ -140,6 +140,10 @@ class PlanetPage(WebPage):
                     doc.asis(svg)
                     with tag('div', klass='width'):
                         line('span', '{} mm'.format(planet['formats_mm'][0][0]))
+                    with tag('div', klass='area-lost'):
+                        with tag('p'):
+                            line('span', round(planet['areaLost'][0], 4))
+                            doc.asis(texts['areaLost'])
             with tag('div', id='data'):
                 with tag('div', id='list-container'):
                     doc.asis(formatList(planet))
@@ -155,43 +159,52 @@ def formatList(planet):
     with tag('ul', ('data-symbol', planet['symbol']), ('data-max', len(planet['formats_mm'])-1), id='formats'):
         extra = ''
         a = 0
-
         for i, size in enumerate(planet['formats_mm']):
             with tag('li'):
-                if i < 10: i = str(i) + ' '
                 if size[0] <= 841:
                     extra = ' (A{}-compatible)'.format(a)
                     a += 1
                 line('button',
-                    '{}{} -> {} × {} mm{}'.format(planet['symbol'], i, *size, extra),
+                    '{}{} -> {} × {} mm{}'.format(planet['symbol'], str(i) + ' ' if i < 10 else i , *size, extra),
                     ('data-number', i),
                     ('data-width', size[0]),
                     ('data-height', size[1]),
-                    klass='selected' if i == '0 ' else ''
+                    ('data-lost', round(planet['areaLost'][i], 4)),
+                    klass='selected' if i == 0 else ''
                 )
     return doc.getvalue()
 
 def mainText(planet, content, lang):
-    doc, tag, text, line = Doc().ttl()
-    content = content.format(
+    main = content['text'].format(
         name=planet['name'][lang],
         greekGod=planet['greekGod'][lang],
         ancientGreekName=planet['ancientGreekName'],
-        surface=planet['surface'],
+        area=planet['area'],
         wkm=planet['size_km'][0],
         hkm=planet['size_km'][1],
         symbol=planet['symbol'],
         symbolName=planet['symbolName'],
         w0=planet['formats_mm'][0][0],
         h0=planet['formats_mm'][0][1],
-        error='#',
+        error=planet['areaLost'][0] * 10**6,
         a10equiNumber=planet['serieAequi']['10']['number'],
         a4equiNumber=planet['serieAequi']['4']['number'],
+    )
+    calculus = content['calculusEllipse'] if planet['radius'][0] != planet['radius'][1] else content['calculusSphere']
+    calculus = calculus.format(
         re=planet['radius'][0],
         rp=planet['radius'][1],
         radiusSource=planet['radiusSource'],
+        area=planet['area'],
     )
-    return markdown(content)
+    rectangle = content['calculusRectangle'].format(
+        area=planet['area'],
+        wkm=planet['size_km'][0],
+        hkm=planet['size_km'][1],
+        w0=planet['formats_mm'][0][0],
+        h0=planet['formats_mm'][0][1],
+    )
+    return markdown('\n'.join([main, calculus, rectangle]))
 
 if __name__ == '__main__':
     texts = getYaml('data/texts.yaml')

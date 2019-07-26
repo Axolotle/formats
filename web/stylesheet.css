@@ -322,34 +322,37 @@ code {
 #svg-container {
   position: sticky;
   top: 6rem; }
-  #svg-container span {
+  #svg-container .height span, #svg-container .width span, #svg-container .area-lost p {
     display: block;
     height: 3rem;
-    text-align: center; }
+    text-align: center;
+    margin: 0; }
   #svg-container .height {
     position: absolute;
     transform: rotate(-90deg);
     transform-origin: bottom left; }
     #svg-container .height span {
       line-height: 3rem; }
-  #svg-container .width span {
+  #svg-container .width span, #svg-container .area-lost p {
     line-height: 2.3rem; }
+  #svg-container .area-lost {
+    margin-top: -1rem; }
   @media (orientation: landscape) {
-    #svg-container .width span {
+    #svg-container .width span, #svg-container .area-lost p {
       width: calc((100vh - 12rem) * 0.7071067812); }
     #svg-container .height {
       margin-top: calc(100vh - 12rem - 3rem); }
       #svg-container .height span {
         width: calc(100vh - 12rem); } }
   @media (orientation: portrait) {
-    #svg-container .width span {
+    #svg-container .width span, #svg-container .area-lost p {
       width: calc(100vw - 6.5rem); }
     #svg-container .height {
       margin-top: calc((100vw - 6.5rem) * 1.4142135624 - 3rem); }
       #svg-container .height span {
         width: calc((100vw - 6.5rem) * 1.4142135624); } }
 @media (orientation: portrait) and (max-width: 550px) {
-  #svg-container .width span {
+  #svg-container .width span, #svg-container .area-lost p {
     width: calc(100vw - 3.5rem); }
   #svg-container .height {
     margin-top: calc((100vw - 3.5rem) * 1.4142135624 - 3rem);
