@@ -18,8 +18,8 @@ def defineFormats(distribution):
         # turn kilometers into millimeter and round to the nearest integrer
         # Planet's paper format '0' area ~= planet area (rounded to the nearest
         # millimeter) so height / width is now ~= √2
-        height = round(height * 1000000)
-        width = round(width * 1000000)
+        height = floor(height * 1000000)
+        width = floor(width * 1000000)
 
         planet['formats_mm'] = [[width, height]]
         serieAequi = {}
