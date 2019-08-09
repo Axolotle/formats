@@ -7,7 +7,8 @@ from formulae import areaOfOblateEllipsoid, rectSize
 
 def defineFormats(distribution):
     planets = {}
-    for planet in getJson('data/planetsInput.json'):
+    planetsData = getJson('data/planetsInput.json')
+    for planet in planetsData:
         # 'area' is in km²
         area = areaOfOblateEllipsoid(*planet['radius'])
         symbol = planet['symbol']
@@ -15,8 +16,8 @@ def defineFormats(distribution):
         planet['area'] = area
         planet['size_km'] = [width, height]
 
-        # turn kilometers into millimeter and round to the nearest integrer
-        # Planet's paper format '0' area ~= planet area (rounded to the nearest
+        # turn kilometers into millimeter and round to the lowest integrer
+        # Planet's paper format '0' area ~= planet area (rounded to the lowest
         # millimeter) so height / width is now ~= √2
         height = floor(height * 1000000)
         width = floor(width * 1000000)

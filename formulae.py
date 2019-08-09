@@ -26,8 +26,11 @@ def radiusOfSphere(area):
     # r = √[A / (4 * π)]
     return sqrt(area / (4 * pi))
 
-def rectSize(area):
+def sqrt2Rect(area):
     # Define rectangle's size so height * width == area
     # and height / width == √2 ~= 1.4142135623730951
     height = sqrt(area * sqrt2)
     return [area / height, height]
+
+def km2mm(value):
+    return value * 10**6

@@ -144,7 +144,7 @@ en:
 
         width: *{w0}* mm  
         lenght: *{h0}* mm  
-        missing area: *{error}* m²  
+        missing area: *{error}* m²
 
       calculusEllipse: |
         ### Calcul
@@ -172,10 +172,10 @@ en:
       calculusRectangle: |
         Sides of a rectangle with an area equal to that of the planet and a ratio of 1:√2  
         <code>
-        longueur = √(aera × √2)
+        longueur = √(area × √2)
                  = *{hkm}* km
                  = *{h0}* mm
-        largeur  = √(aera × √½)
+        largeur  = √(area × √½)
                  = *{wkm}* km
                  = *{w0}* mm
         </code>

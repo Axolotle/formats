@@ -29,9 +29,6 @@ def dumpJson(filename, data):
     with open(filename, 'w') as f:
         dump(data, f, ensure_ascii=False, indent=2, separators=(',', ': '))
 
-def km2mm(value):
-    return value * 10**6
-
 def stringifyNumber(value, lang='fr'):
     num = str(value)
     if '.' in num:
