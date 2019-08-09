@@ -1,0 +1,29 @@
+line, ellipse, path {
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+}
+
+text {
+    font-family: 'Fira Code';
+    font-weight: 300;
+    font-size: MAINFONTSIZE;
+}
+
+.center text, text.center {
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+text.right {
+    text-anchor: end;
+}
+
+.filledstroked {
+    fill: white;
+    stroke: black;
+    stroke-width: 1;
+}
+
+.cutLines {
+    stroke-width: 0.05;
+}

@@ -1,0 +1,22 @@
+{% extends "base.svg.jinja2" %}
+
+{% block main %}
+<g class="center">
+    <text x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
+    <text x="{{ width.pos[0] }}" y="{{ width.pos[1] }}">{{ width.text }}</text>
+    <text x="{{ height.pos[0] }}" y="{{ height.pos[1] }}">{{ height.text }}</text>
+</g>
+
+<flowRoot>
+    <flowRegion>
+        <rect x="{{ textBlock.pos[0] }}" y="{{ textBlock.pos[1] }}" width="{{ textBlock.size[0] }}" height="{{ textBlock.size[1] }}"/>
+    </flowRegion>
+{%- for p in textBlock.paragraphs %}
+    {% if p == '' %}
+    <flowPara/>
+    {% else %}
+    <flowPara>{{ p }}</flowPara>
+    {% endif %}
+{%- endfor %}
+</flowRoot>
+{% endblock %}

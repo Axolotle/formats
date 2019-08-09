@@ -1,0 +1,14 @@
+{% extends "base.svg.jinja2" %}
+
+{% block main %}
+<g class="lines">
+{%- for line in lines %}
+    <path d="{{ line.d }}" style="stroke-width:{{ line.stroke }}"/>
+{%- endfor %}
+</g>
+<g class="center">
+{%- for name in names %}
+    <text x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
+{%- endfor %}
+</g>
+{% endblock %}
