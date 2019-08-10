@@ -1,0 +1,9 @@
+fr:
+  pages:
+    recto:
+      textBlock: |
+        {symbol}{number} === {symbolName} {numberName} 
+        {width} × height mm
+
+        {numberDistrib} par {symbol}0
+        ~={lost} km² perdus suite aux arrondies

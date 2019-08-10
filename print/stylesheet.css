@@ -4,10 +4,11 @@ line, ellipse, path {
     stroke-width: 1;
 }
 
-text {
+text, flowRoot {
     font-family: 'Fira Code';
     font-weight: 300;
     font-size: MAINFONTSIZE;
+    line-height: 1.25em;
 }
 
 .center text, text.center {
@@ -21,7 +22,7 @@ text.right {
 .filledstroked {
     fill: white;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.265;
 }
 
 .cutLines {

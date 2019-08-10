@@ -2,9 +2,9 @@
 
 {% block main %}
 <g class="center">
-    <text x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
-    <text x="{{ width.pos[0] }}" y="{{ width.pos[1] }}">{{ width.text }}</text>
-    <text x="{{ height.pos[0] }}" y="{{ height.pos[1] }}">{{ height.text }}</text>
+    <text class="filledstroked" x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
+    <text x="{{ w.pos[0] }}" y="{{ w.pos[1] }}">{{ w.content }}</text>
+    <text transform="rotate(90, {{ h.pos[0] }}, {{ h.pos[1] }})" x="{{ h.pos[0] }}" y="{{ h.pos[1] }}">{{ h.content }}</text>
 </g>
 
 <flowRoot>
@@ -12,11 +12,11 @@
         <rect x="{{ textBlock.pos[0] }}" y="{{ textBlock.pos[1] }}" width="{{ textBlock.size[0] }}" height="{{ textBlock.size[1] }}"/>
     </flowRegion>
 {%- for p in textBlock.paragraphs %}
-    {% if p == '' %}
+    {% if p == '' -%}
     <flowPara/>
-    {% else %}
+    {%- else -%}
     <flowPara>{{ p }}</flowPara>
-    {% endif %}
+    {%- endif %}
 {%- endfor %}
 </flowRoot>
 {% endblock %}

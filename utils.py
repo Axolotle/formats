@@ -34,7 +34,6 @@ def stringifyNumber(value, lang='fr'):
     if '.' in num:
         num = num.split('.')
         number = sep[lang].join(chunk_str(num[0][::-1], 3))[::-1]
-        print(number)
         dec = sep[lang].join(chunk_str(num[1], 3))
         return number + decSep[lang] + dec
     else:
