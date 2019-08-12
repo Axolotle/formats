@@ -1,4 +1,8 @@
 import jinja2
+from PyPDF2 import PdfFileMerger
+from tempfile import NamedTemporaryFile
+import subprocess
+from io import BytesIO
 
 from utils import getJson, getText, getYaml, stringifyNumber, numberToCharacter
 from formulae import sqrt1_2, km2mm
@@ -32,7 +36,7 @@ class Pages():
         self.wPos = [self.w / 2, self.m[1]]
         self.hPos = [self.w - self.m[0], self.h/2]
 
-    def generate(self, layout=[210, 297], number=None, range=None, side=None):
+    def generate(self, layout=[210, 297], number=None, arr=None, side=None):
         pages = []
         if layout is not None:
             tx = (layout[0] - self.w) / 2
@@ -51,16 +55,16 @@ class Pages():
                 ],
             }
         if number is not None:
-            range = [number]
-        elif range is None:
-            range = range(len(self.formats))
+            arr = [number]
+        elif arr is None:
+            arr = range(len(self.formats))
 
         if side is not None:
             sideFunc = self.recto if side == 'recto' else self.verso
-            for n in range:
+            for n in arr:
                 pages.append(sideFunc(layout, n))
         else:
-            for n in range:
+            for n in arr:
                 pages.append(self.recto(layout, n))
                 pages.append(self.verso(layout, n))
         return pages
@@ -68,7 +72,7 @@ class Pages():
     def recto(self, layout, index):
         wNotation = stringifyNumber(self.formats[index][0])
         hNotation = stringifyNumber(self.formats[index][1])
-        return self.templates[0].stream(
+        return self.templates[0].render(
             l=layout,
             css=self.css,
             width= self.w,
@@ -103,7 +107,7 @@ class Pages():
         )
 
     def verso(self, layout, index):
-        return self.templates[1].stream(
+        return self.templates[1].render(
             l=layout,
             css=self.css,
             width= self.w,
@@ -146,12 +150,35 @@ class Pages():
         return texts
 
 
-
-
-
 def saveAsSVG(pages, folder='output/svg/'):
     for i, page in enumerate(pages):
-        page.dump(folder + 'p' + str(i) + '.svg')
+        with open(folder + 'p' + str(i) + '.svg', 'w') as output:
+            output.write(page)
+        # page.dump(folder + 'p' + str(i) + '.svg')
+
+
+def saveAsPDF(pages, name, folder='output/print/'):
+    pdf = PdfFileMerger()
+    for page in pages:
+        # Had to use a temp file so inkscape can open it.
+        # Had to use inkscape since other svg2pdf converters can't manage
+        # 'font-variant-ligature' nor 'dominant-baseline' css rules.
+        with NamedTemporaryFile() as temp:
+            temp.write(page.encode('utf-8'))
+            temp.flush()
+            process = subprocess.run(
+                ['inkscape', temp.name, '--export-pdf=-', '-z'],
+                input=temp.read(),
+                stdout=subprocess.PIPE
+            )
+            pdf.append(BytesIO(process.stdout))
+
+    with open('{}{}.pdf'.format(folder, name.lower()), 'wb') as target:
+        pdf.write(target)
+
+
+
+
 
 if __name__ == '__main__':
     n = 11
@@ -162,6 +189,6 @@ if __name__ == '__main__':
 
     planetData = getJson('data/planets/earth.json')
     catalog = Pages(templateEnv, css, planetData, 'en')
-    pages = catalog.generate(number=n)
-
-    saveAsSVG(pages)
+    pages = catalog.generate()
+    saveAsPDF(pages, planetData['name']['en'])
+    # saveAsSVG(pages)
