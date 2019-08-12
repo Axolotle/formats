@@ -1,4 +1,4 @@
-{% extends "base.svg.jinja2" %}
+{% extends 'baseA4.svg.jinja2' if l is defined else 'base.svg.jinja2' %}
 
 {% block main %}
 <g transform="scale(-1,1) translate(-{{ width }})">

@@ -32,19 +32,44 @@ class Pages():
         self.wPos = [self.w / 2, self.m[1]]
         self.hPos = [self.w - self.m[0], self.h/2]
 
-    def generate(self, number=None, range=None, side=None):
+    def generate(self, layout=[210, 297], number=None, range=None, side=None):
         pages = []
+        if layout is not None:
+            tx = (layout[0] - self.w) / 2
+            ty = (layout[1] -  self.h) / 2
+            marg = 2
+            x = tx - marg
+            y = ty - marg
+            layout = {
+                'tx': tx,
+                'ty': ty,
+                'cutLines': [
+                    'M0,{ty} h{x} m2,-2 v-{y}'.format(ty=ty, x=x, y=y),
+                    'M210,{ty} h-{x} m-2,-2 v-{y}'.format(ty=ty, x=x, y=y),
+                    'M{tx},297 v-{y} m-2,-2 h-{x}'.format(tx=tx, x=x, y=y),
+                    'M{ttx},297 v-{y} m2,-2 h{x}'.format(ttx=tx + self.w, x=x, y=y),
+                ],
+            }
         if number is not None:
-            return [self.recto(number), self.verso(number)]
-        else:
-            for i, format in enumerate(self.formats):
-                # pages.append(self.recto(i))
-                pages.append(self.verso(i))
+            range = [number]
+        elif range is None:
+            range = range(len(self.formats))
 
-    def recto(self, index):
+        if side is not None:
+            sideFunc = self.recto if side == 'recto' else self.verso
+            for n in range:
+                pages.append(sideFunc(layout, n))
+        else:
+            for n in range:
+                pages.append(self.recto(layout, n))
+                pages.append(self.verso(layout, n))
+        return pages
+
+    def recto(self, layout, index):
         wNotation = stringifyNumber(self.formats[index][0])
         hNotation = stringifyNumber(self.formats[index][1])
         return self.templates[0].stream(
+            l=layout,
             css=self.css,
             width= self.w,
             height= self.h,
@@ -77,8 +102,9 @@ class Pages():
             },
         )
 
-    def verso(self, index):
+    def verso(self, layout, index):
         return self.templates[1].stream(
+            l=layout,
             css=self.css,
             width= self.w,
             height= self.h,
@@ -94,10 +120,10 @@ class Pages():
             line = {}
             if n % 2 != 0:
                 h /= 2
-                line['d'] = 'M{},{} h{}'.format(width - w, h, w)
+                line['d'] = 'M{},{} h{}'.format(width - w if n != 1 else width - w - 2, h, w + 2 )
             else:
                 w /= 2
-                line['d'] = 'M{},{} v{}'.format(width - w, 0, h)
+                line['d'] = 'M{},{} v{}'.format(width - w, -2, h + 2)
             line['stroke'] = round(thickness, 3)
             lines.append(line)
             thickness *= sqrt1_2
@@ -123,11 +149,12 @@ class Pages():
 
 
 
-
-
+def saveAsSVG(pages, folder='output/svg/'):
+    for i, page in enumerate(pages):
+        page.dump(folder + 'p' + str(i) + '.svg')
 
 if __name__ == '__main__':
-    n = 31
+    n = 11
 
     templateLoader = jinja2.FileSystemLoader(searchpath='print/templates/')
     templateEnv = jinja2.Environment(loader=templateLoader)
@@ -137,8 +164,4 @@ if __name__ == '__main__':
     catalog = Pages(templateEnv, css, planetData, 'en')
     pages = catalog.generate(number=n)
 
-    for z in range(99):
-        print(numberToCharacter(z, 'en'))
-
-    for i, page in enumerate(pages):
-        page.dump('output/test/p' + str(i) + '.svg')
+    saveAsSVG(pages)

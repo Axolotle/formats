@@ -52,10 +52,10 @@ def numberToCharacter(number, lang='fr'):
         return trad[numberStr[0] + '0'] + link + trad[numberStr[1]]
     if numberStr[0] in ['7', '9']:
         if number == 71:
-            link = '-et-'
+            link = ' et '
         return trad[str(number - 10)[0] + '0'] + link + trad['1' + numberStr[1]]
     if numberStr[1] == '1' and number != 81:
-        link = '-et-'
+        link = ' et '
     return trad[numberStr[0] + '0'] + link + trad[numberStr[1]]
 
 numToChar = getYaml('data/textsPrint.yaml')['digits']

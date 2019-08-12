@@ -25,6 +25,6 @@ text.right {
     stroke-width: 0.265;
 }
 
-.cutLines {
+.cutLines path {
     stroke-width: 0.05;
 }

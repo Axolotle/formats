@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+{# <?xml-stylesheet type="text/css" href="../stylesheet.css" ?> #}
+<svg
+  baseProfile="full"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:ev="http://www.w3.org/2001/xml-events"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 210 297"
+  height="297mm"
+  width="210mm">
+    <defs>
+        <style type="text/css">
+            <![CDATA[{{ css }}]]>
+        </style>
+    </defs>
+    <g class="cutLines">
+    {% for path in l.cutLines %}
+        <path d="{{path}}"/>
+    {% endfor %}
+    </g>
+    <g transform="translate({{ l.tx }}, {{ l.ty }})">
+{% block main %}
+{% endblock %}
+    </g>
+</svg>
