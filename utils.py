@@ -41,3 +41,21 @@ def stringifyNumber(value, lang='fr'):
 
 def chunk_str(str, chunk_size):
    return [str[i:i+chunk_size] for i in range(0, len(str), chunk_size)]
+
+def numberToCharacter(number, lang='fr'):
+    trad = numToChar[lang]
+    numberStr = str(number)
+    link = '-'
+    if number <= 20 or (len(numberStr) == 2 and numberStr[1] == '0'):
+        return trad[numberStr]
+    if lang == 'en':
+        return trad[numberStr[0] + '0'] + link + trad[numberStr[1]]
+    if numberStr[0] in ['7', '9']:
+        if number == 71:
+            link = '-et-'
+        return trad[str(number - 10)[0] + '0'] + link + trad['1' + numberStr[1]]
+    if numberStr[1] == '1' and number != 81:
+        link = '-et-'
+    return trad[numberStr[0] + '0'] + link + trad[numberStr[1]]
+
+numToChar = getYaml('data/textsPrint.yaml')['digits']

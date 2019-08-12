@@ -1,11 +1,13 @@
 import jinja2
 
-from utils import getJson, getText, getYaml, stringifyNumber
+from utils import getJson, getText, getYaml, stringifyNumber, numberToCharacter
 from formulae import sqrt1_2, km2mm
 
 
 class Pages():
     def __init__(self, templates, css, planetData, lang):
+        self.lang = lang
+
         self.symbol = planetData['symbol']
         self.symbolName = planetData['symbolName']
         self.w = planetData['serieAequi']['4']['size'][0]
@@ -26,7 +28,7 @@ class Pages():
             templates.get_template('format-verso.svg.jinja2'),
         ]
         self.texts = getYaml('data/textsPrint.yaml')[lang]['pages']
-        
+
         self.wPos = [self.w / 2, self.m[1]]
         self.hPos = [self.w - self.m[0], self.h/2]
 
@@ -49,7 +51,7 @@ class Pages():
             name={
                 'pos': [self.w / 2, self.h / 2],
                 'fontSize': self.fontSizes[0],
-                'content': self.symbol + '0'
+                'content': self.symbol + str(index)
             },
             w={
                 'pos': self.wPos,
@@ -66,11 +68,11 @@ class Pages():
                     symbol=self.symbol,
                     symbolName=self.symbolName,
                     number=index,
-                    numberName='',
+                    numberName=numberToCharacter(index, self.lang),
                     width=wNotation,
                     height=hNotation,
-                    numberDistrib=self.distrib[index]['total'],
-                    lost=stringifyNumber(self.lost[index])
+                    numberDistrib=stringifyNumber(self.distrib[index]['total'], self.lang),
+                    lost=stringifyNumber(self.lost[index], self.lang)
                 ).splitlines(),
             },
         )
@@ -125,15 +127,18 @@ class Pages():
 
 
 if __name__ == '__main__':
-    number = 0
+    n = 31
 
     templateLoader = jinja2.FileSystemLoader(searchpath='print/templates/')
     templateEnv = jinja2.Environment(loader=templateLoader)
     css = getText('print/stylesheet.css')
 
     planetData = getJson('data/planets/earth.json')
-    catalog = Pages(templateEnv, css, planetData, 'fr')
-    pages = catalog.generate(number=number)
+    catalog = Pages(templateEnv, css, planetData, 'en')
+    pages = catalog.generate(number=n)
+
+    for z in range(99):
+        print(numberToCharacter(z, 'en'))
 
     for i, page in enumerate(pages):
         page.dump('output/test/p' + str(i) + '.svg')
