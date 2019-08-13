@@ -72,6 +72,7 @@ class Pages():
     def recto(self, layout, index):
         wNotation = stringifyNumber(self.formats[index][0])
         hNotation = stringifyNumber(self.formats[index][1])
+        remaining = len(self.formats) - index
         return self.templates[0].render(
             l=layout,
             css=self.css,
@@ -79,7 +80,7 @@ class Pages():
             height= self.h,
             name={
                 'pos': [self.w / 2, self.h / 2],
-                'fontSize': self.fontSizes[0],
+                'fontSize': self.fontSizes[0 if remaining > 6 else 7 - remaining],
                 'content': self.symbol + str(index)
             },
             w={
@@ -90,9 +91,18 @@ class Pages():
                 'pos': self.hPos,
                 'content': hNotation + ' mm'
             },
+            title={
+                'pos': [self.w / 2, self.h - self.m[1] / 2],
+                'content': self.texts['recto']['title'].format(
+                    symbol=self.symbol,
+                    symbolName=self.symbolName,
+                    number=index,
+                    numberName=numberToCharacter(index, self.lang),
+                ),
+            },
             textBlock={
-                'pos': [self.m[0], self.h - self.m[1] - 5 * self.fontSizes[8] * 1.25],
-                'size': [self.w - self.m[0] * 2, 5 * self.fontSizes[8] * 1.25],
+                'pos': [self.m[0], self.h - self.m[1] - 3 * self.fontSizes[8] * 1.25],
+                'size': [self.w - self.m[0] * 2, 2 * self.fontSizes[8] * 1.25],
                 'paragraphs': self.texts['recto']['textBlock'].format(
                     symbol=self.symbol,
                     symbolName=self.symbolName,
@@ -100,43 +110,81 @@ class Pages():
                     numberName=numberToCharacter(index, self.lang),
                     width=wNotation,
                     height=hNotation,
-                    numberDistrib=stringifyNumber(self.distrib[index]['total'], self.lang),
-                    lost=stringifyNumber(self.lost[index], self.lang)
                 ).splitlines(),
             },
+            rect=None if remaining > 6 else {
+                'width': self.formats[index][0],
+                'height': self.formats[index][1],
+                'pos': [
+                    (self.w - self.formats[index][0]) / 2,
+                    (self.h - self.formats[index][1]) / 2,
+                ]
+            }
         )
 
     def verso(self, layout, index):
+        remaining = len(self.formats) - index
+
+        if (remaining <= 6):
+            w = self.formats[index][0]
+            h = self.formats[index][1]
+            tx = (self.w - w) / 2
+            ty = (self.h - h) / 2
+            fs = 7 - remaining
+        else:
+            remaining = remaining if remaining < 17 else 17
+            w = self.w
+            h = self.h
+            tx = 0
+            ty = 0
+            fs = 0
+
         return self.templates[1].render(
             l=layout,
             css=self.css,
             width= self.w,
             height= self.h,
-            lines=self.homothetyLines(self.w, self.h),
-            names=self.homothetyTexts(index, self.w, self.h)
+            reverseTranslate=-self.w,
+            translate='{} {}'.format(tx, ty),
+            textBlock={
+                'pos': [self.m[0], self.h - self.m[1] - 3 * self.fontSizes[8] * 1.25],
+                'size': [self.w - self.m[0] * 2, 3 * self.fontSizes[8] * 1.25],
+                'paragraphs': self.texts['verso']['textBlock'].format(
+                    symbol=self.symbol,
+                    numberDistrib=stringifyNumber(self.distrib[index]['total'], self.lang),
+                    lost=stringifyNumber(self.lost[index], self.lang)
+                ).splitlines(),
+            },
+            lines=self.homothetyLines(w, h, remaining),
+            names=self.homothetyTexts(index, w, h, remaining, fs)
         )
 
-    def homothetyLines(self, width, height):
+    def homothetyLines(self, width, height, amount):
         lines = []
         w, h = width, height
         thickness = 1
-        for n in range(1, 21):
+        for n in range(1, amount):
             line = {}
             if n % 2 != 0:
                 h /= 2
-                line['d'] = 'M{},{} h{}'.format(width - w if n != 1 else width - w - 2, h, w + 2 )
+                offset = 2 if amount >= 7 else 0
+                if n == 1:
+                    line['d'] = 'M{},{} h{}'.format(width - w - offset, h, w + 2 * offset)
+                else:
+                    line['d'] = 'M{},{} h{}'.format(width - w, h, w + offset)
             else:
                 w /= 2
-                line['d'] = 'M{},{} v{}'.format(width - w, -2, h + 2)
+                offset = 2 if amount >= 7 else 0
+                line['d'] = 'M{},{} v{}'.format(width - w, -offset, h + offset)
             line['stroke'] = round(thickness, 3)
             lines.append(line)
             thickness *= sqrt1_2
         return lines
 
-    def homothetyTexts(self, number, width, height):
+    def homothetyTexts(self, number, width, height, amount, fs):
         w, h = width, height
         texts = []
-        for i in range(1, 21):
+        for i in range(1, amount):
             text = {}
             if i % 2 != 0:
                 h /= 2
@@ -145,7 +193,7 @@ class Pages():
                 w /= 2
                 text['pos'] = [width - w * 1.5, h / 2]
             text['content'] = self.symbol + str(i + number)
-            text['fontSize'] = self.fontSizes[i]
+            text['fontSize'] = self.fontSizes[fs + i]
             texts.append(text)
         return texts
 
@@ -181,14 +229,14 @@ def saveAsPDF(pages, name, folder='output/print/'):
 
 
 if __name__ == '__main__':
-    n = 11
+    n = 56
 
     templateLoader = jinja2.FileSystemLoader(searchpath='print/templates/')
     templateEnv = jinja2.Environment(loader=templateLoader)
     css = getText('print/stylesheet.css')
 
     planetData = getJson('data/planets/earth.json')
-    catalog = Pages(templateEnv, css, planetData, 'en')
-    pages = catalog.generate()
+    catalog = Pages(templateEnv, css, planetData, 'fr')
+    pages = catalog.generate(number=n)
     saveAsPDF(pages, planetData['name']['en'])
     # saveAsSVG(pages)

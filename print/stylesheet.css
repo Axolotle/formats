@@ -1,9 +1,15 @@
-line, ellipse, path {
+line, ellipse, path, rect {
     fill: none;
     stroke: black;
-    stroke-width: 1;
+    stroke-width: 0.265;
 }
 
+rect {
+    fill: white;
+    stroke: black;
+    paint-order: markers stroke fill;
+    stroke-width: 0.53;
+}
 text, flowRoot {
     font-family: 'Fira Code';
     font-weight: 300;
@@ -20,7 +26,7 @@ text.right {
 }
 
 .filledstroked {
-    fill: white;
+    fill: none;
     stroke: black;
     stroke-width: 0.265;
 }

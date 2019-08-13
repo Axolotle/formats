@@ -1,10 +1,16 @@
-{% extends 'baseA4.svg.jinja2' if l is defined else 'base.svg.jinja2' %}
+{% extends 'baseA4.svg.jinja2' if l is not none else 'base.svg.jinja2' %}
 
 {% block main %}
+
+{% if rect is not none %}
+<rect width="{{ rect.width }}" height="{{ rect.height }}" x="{{ rect.pos[0] }}" y="{{ rect.pos[1] }}" />
+{% endif %}
+
 <g class="center">
     <text class="filledstroked" x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
     <text x="{{ w.pos[0] }}" y="{{ w.pos[1] }}">{{ w.content }}</text>
     <text transform="rotate(90, {{ h.pos[0] }}, {{ h.pos[1] }})" x="{{ h.pos[0] }}" y="{{ h.pos[1] }}">{{ h.content }}</text>
+    <text x="{{ title.pos[0] }}" y="{{ title.pos[1] }}">{{ title.content }}</text>
 </g>
 
 <flowRoot>
@@ -19,4 +25,5 @@
     {%- endif %}
 {%- endfor %}
 </flowRoot>
+
 {% endblock %}

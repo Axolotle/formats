@@ -1,19 +1,23 @@
 fr:
   pages:
     recto:
+      title: "{symbol}{number} === {symbolName} {numberName}"
       textBlock: |
-        {symbol}{number} === {symbolName} {numberName}
         {width} × {height} mm
+    verso:
+      textBlock: |
 
         {numberDistrib} par {symbol}0
         ~={lost} km² perdus suite aux arrondies
 en:
   pages:
     recto:
+      title: "{symbol}{number} === {symbolName} {numberName}"
       textBlock: |
-        {symbol}{number} === {symbolName} {numberName}
         {width} × {height} mm
-
+    verso:
+      textBlock: |
+      
         {numberDistrib} per {symbol}0
         ~={lost} km² lost due to rounding
 digits:
