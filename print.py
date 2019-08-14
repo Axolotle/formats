@@ -7,6 +7,9 @@ from io import BytesIO
 from utils import getJson, getText, getYaml, stringifyNumber, numberToCharacter
 from formulae import sqrt1_2, km2mm
 
+class Common():
+    def __init__(self):
+        pass
 
 class Pages():
     def __init__(self, templates, css, planetData, lang):
@@ -198,11 +201,102 @@ class Pages():
         return texts
 
 
+
+class Intercalar():
+    def __init__(self, templates, css, planetData, lang):
+        self.lang = lang
+
+        self.symbol = planetData['symbol']
+        self.symbolName = planetData['symbolName']
+        self.w = planetData['serieAequi']['4']['size'][0]
+        self.h = planetData['serieAequi']['4']['size'][1]
+        # margins x and y of the document
+        self.m = [self.w / 16, self.h / 16]
+        self.formats = planetData['formats_mm']
+        self.distrib = getJson('data/formatsDistribution.json')
+        self.lost = [round(lost, 3) for lost in planetData['areaLost']]
+
+        ratio = self.h / km2mm(planetData['size_km'][1])
+        radius = ratio * km2mm(planetData['radius'][1])
+        self.fontSizes = [round(radius * sqrt1_2**n, 3) for n in range(21)]
+
+        self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
+        self.templates = [
+            templates.get_template('intercalar-recto.svg.jinja2'),
+            # templates.get_template('format-verso.svg.jinja2'),
+        ]
+        self.texts = getYaml('data/textsPrint.yaml')[lang]['intercalar']
+
+        self.wPos = [self.w / 2, self.m[1]]
+        self.hPos = [self.w - self.m[0], self.h/2]
+
+
+        self.c = [self.w / 2, self.h / 2]
+        self.planetName = planetData['name'][lang]
+        self.realRadius = planetData['radius']
+        self.radius = [ratio * km2mm(rad) for rad in planetData['radius']]
+        self.extra = [10, 35.188]
+
+    def generate(self):
+        return [
+            self.recto(),
+            # self.verso()
+        ]
+
+    def recto(self):
+        return self.templates[0].render(
+            css=self.css,
+            width= self.w,
+            height= self.h,
+            ellipse={
+            'pos': self.c,
+            'rad': self.radius
+            },
+            rad='M{},{} v{} h{}'.format(
+                self.c[0],
+                self.c[1] -
+                self.radius[1],
+                self.radius[1], self.radius[0]
+            ),
+            name={
+                'pos': self.c,
+                'content': self.symbol,
+                'fontSize': self.fontSizes[0],
+            },
+            w=self.wPos,
+            h=self.hPos,
+            area={
+                'pos': [self.c[0], self.c[1] + self.radius[1] + ((self.c[1] - self.radius[1] - self.m[1]) / 2)],
+                'content': self.texts['recto']['area'].format(
+                    symbol=self.symbol,
+                    planetName=self.planetName,
+                )
+            },
+            range={
+                'pos': [self.c[0], self.h - self.m[1]],
+                'content': '{0}0 -> {0}{1}'.format(self.symbol, len(self.formats) - 1),
+            },
+            radius=[
+                {
+                    'pos': [self.c[0] + self.radius[0] / 2, self.c[1] - self.m[0] / 2],
+                    'content': stringifyNumber(self.realRadius[0]),
+                },
+                {
+                    'pos': [self.c[0] + self.m[0] / 2, self.c[1] - self.radius[1] / 2],
+                    'content': stringifyNumber(self.realRadius[1]),
+                }
+            ]
+        )
+
+    def verso(self):
+        pass
+
+
+
 def saveAsSVG(pages, folder='output/svg/'):
     for i, page in enumerate(pages):
         with open(folder + 'p' + str(i) + '.svg', 'w') as output:
             output.write(page)
-        # page.dump(folder + 'p' + str(i) + '.svg')
 
 
 def saveAsPDF(pages, name, folder='output/print/'):
@@ -235,8 +329,11 @@ if __name__ == '__main__':
     templateEnv = jinja2.Environment(loader=templateLoader)
     css = getText('print/stylesheet.css')
 
-    planetData = getJson('data/planets/earth.json')
-    catalog = Pages(templateEnv, css, planetData, 'fr')
-    pages = catalog.generate(number=n)
-    saveAsPDF(pages, planetData['name']['en'])
+    planetData = getJson('data/planets/jupiter.json')
+    # catalog = Pages(templateEnv, css, planetData, 'fr')
+    # pages = catalog.generate(number=n)
+    # saveAsPDF(pages, planetData['name']['en'])
     # saveAsSVG(pages)
+    intercalar = Intercalar(templateEnv, css, planetData, 'fr')
+    pages = intercalar.generate()
+    saveAsSVG(pages, folder='output/print/intercalar/')

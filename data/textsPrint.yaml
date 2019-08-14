@@ -9,6 +9,9 @@ fr:
 
         {numberDistrib} par {symbol}0
         ~={lost} km² perdus suite aux arrondies
+  intercalar:
+    recto:
+      area: "{symbol}0 == aire de {planetName} ± 1 mm"
 en:
   pages:
     recto:
@@ -17,9 +20,12 @@ en:
         {width} × {height} mm
     verso:
       textBlock: |
-      
+
         {numberDistrib} per {symbol}0
         ~={lost} km² lost due to rounding
+  intercalar:
+    recto:
+      area: "{symbol}0 == area of {planetName} ± 1 mm"
 digits:
   fr:
     '0': zéro
