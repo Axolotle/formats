@@ -1,0 +1,30 @@
+line, ellipse, path, rect {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.265;
+}
+
+text, flowRoot {
+    font-family: 'Fira Code';
+    font-weight: 300;
+    font-size: MAINFONTSIZE;
+    line-height: 1.25em;
+}
+
+.center text, text.center {
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+.end {
+    text-anchor: end;
+}
+
+.filledstroked {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.265;
+}
+
+.cutLines path {
+    stroke-width: 0.05;
+}

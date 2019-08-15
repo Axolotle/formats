@@ -12,6 +12,22 @@ fr:
   intercalar:
     recto:
       area: "{symbol}0 == aire de {planetName} ± 1 mm"
+    verso:
+      textBlock: |
+      
+      
+      
+        rayon équatorial : {rx} km
+        rayon polaire : {ry} km
+
+        aire calculée : {area} km²
+
+        rectangle d'aire égale à {planetName} et de ratio 1:√2 :
+        largeur : {width} km 
+        hauteur : {height} km
+
+
+        Cette série est imprimée au format α{a4equiNumber} ({a4equiW} × {a4equiH} mm), le premier format pouvant être apposé sur un format A4.  
 en:
   pages:
     recto:
@@ -26,6 +42,21 @@ en:
   intercalar:
     recto:
       area: "{symbol}0 == area of {planetName} ± 1 mm"
+    verso:
+      textBlock: |
+      
+      
+      
+        equatorial radius : {rx} km
+        polar radius : {ry} km
+
+        calculated area : {area} km²
+        rectangle with an area equal to {planetName} and a ratio of 1:√2 :
+        width : {width} km 
+        height : {height} km
+
+
+        This series is printed in the format α{a4equiNumber} ({a4equiW} × {a4equiH} mm), the first format that can be affixed on an A4 format.
 digits:
   fr:
     '0': zéro

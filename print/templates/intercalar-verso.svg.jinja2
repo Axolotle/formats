@@ -1,0 +1,28 @@
+{% extends 'base.svg.jinja2' %}
+
+{% block main %}
+<g {% if preview is not none %}class="preview"{% endif %}>
+    {% if preview is not none %}
+        <rect x="0" y="0" width="{{ width }}" height="{{ height }}"/>
+    {% endif %}
+    <g class="center">
+        <text x="{{ w.pos[0] }}" y="{{ w.pos[1] }}">{{ w.content }} km</text>
+        <text transform="rotate(-90, {{ h.pos[0] }}, {{ h.pos[1] }})" x="{{ h.pos[0] }}" y="{{ h.pos[1] }}">{{ h.content }} km</text>
+        <text x="{{ names.pos[0] }}" y="{{ names.pos[1] }}">{{ names.content }}</text>
+    </g>
+    <flowRoot>
+        <flowRegion>
+            <rect x="{{ textBlock.pos[0] }}" y="{{ textBlock.pos[1] }}" width="{{ textBlock.size[0] }}" height="{{ textBlock.size[1] }}"/>
+        </flowRegion>
+    {% for paragraph in textBlock.paragraphs %}
+    {%- for p in paragraph.lines %}
+        {% if p == '' -%}
+        <flowPara/>
+        {%- else -%}
+        <flowPara {% if paragraph.klass is defined %}class="{{ paragraph.klass }}"{% endif %}{% if paragraph.fontSize is defined %} style="font-size:{{ paragraph.fontSize }};line-height:1.25em"{% endif %}>{{ p }}</flowPara>
+        {%- endif %}
+    {%- endfor %}
+    {% endfor %}
+    </flowRoot>
+</g>
+{% endblock %}

@@ -1,31 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<svg
-  baseProfile="full"
-  version="1.1"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:ev="http://www.w3.org/2001/xml-events"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 {{ width }} {{ height }}"
-  height="{{ height }}mm"
-  width="{{ width }}mm">
-    <defs>
-    <style type="text/css">
-    <![CDATA[{{ css }}]]>
-    </style>
-    </defs>
+{% extends 'base.svg.jinja2' %}
+
 {% block main %}
-    <g {% if preview is not none %}class="preview"{% endif %}>
-        <ellipse cx="{{ ellipse.pos[0] }}" cy="{{ ellipse.pos[1] }}" rx="{{ ellipse.rad[0] }}" ry="{{ ellipse.rad[1] }}"/>
-        <path d="{{ rad }}"
-        <g class="center">
-          <text class="filledstroked" x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
-          <text x="{{ w[0] }}" y="{{ w[1] }}">1</text>
-          <text transform="rotate(90, {{ h[0] }}, {{ h[1] }})" x="{{ h[0] }}" y="{{ h[1] }}">√2</text>
-          <text x="{{ area.pos[0] }}" y="{{ area.pos[1] }}">{{ area.content }}</text>
-          <text x="{{ range.pos[0] }}" y="{{ range.pos[1] }}">{{ range.content }}</text>
-          <text x="{{ radius[0].pos[0] }}" y="{{ radius[0].pos[1] }}">{{ radius[0].content }} km</text>
-          <text transform="rotate(-90, {{ radius[1].pos[0] }}, {{ radius[1].pos[1] }})" x="{{ radius[1].pos[0] }}" y="{{ radius[1].pos[1] }}">{{ radius[1].content }} km</text>
-        </g>
+<g {% if preview is not none %}class="preview"{% endif %}>
+    <ellipse cx="{{ ellipse.pos[0] }}" cy="{{ ellipse.pos[1] }}" rx="{{ ellipse.rad[0] }}" ry="{{ ellipse.rad[1] }}"/>
+    <path d="{{ rad }}"
+    <g class="center">
+      <text class="filledstroked" x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
+      <text x="{{ w[0] }}" y="{{ w[1] }}">1</text>
+      <text transform="rotate(90, {{ h[0] }}, {{ h[1] }})" x="{{ h[0] }}" y="{{ h[1] }}">√2</text>
+      <text x="{{ area.pos[0] }}" y="{{ area.pos[1] }}">{{ area.content }}</text>
+      <text x="{{ range.pos[0] }}" y="{{ range.pos[1] }}">{{ range.content }}</text>
+      <text x="{{ radius[0].pos[0] }}" y="{{ radius[0].pos[1] }}">{{ radius[0].content }} km</text>
+      <text transform="rotate(-90, {{ radius[1].pos[0] }}, {{ radius[1].pos[1] }})" x="{{ radius[1].pos[0] }}" y="{{ radius[1].pos[1] }}">{{ radius[1].content }} km</text>
     </g>
+</g>
 {% endblock %}
-</svg>

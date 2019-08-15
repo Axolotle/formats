@@ -223,7 +223,7 @@ class Intercalar():
         self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
         self.templates = [
             templates.get_template('intercalar-recto.svg.jinja2'),
-            # templates.get_template('format-verso.svg.jinja2'),
+            templates.get_template('intercalar-verso.svg.jinja2'),
         ]
         self.texts = getYaml('data/textsPrint.yaml')[lang]['intercalar']
 
@@ -234,20 +234,28 @@ class Intercalar():
         self.c = [self.w / 2, self.h / 2]
         self.planetName = planetData['name'][lang]
         self.realRadius = planetData['radius']
+        self.area = planetData['area']
         self.radius = [ratio * km2mm(rad) for rad in planetData['radius']]
-        self.extra = [10, 35.188]
+        self.sizeKm = [stringifyNumber(side) for side in planetData['size_km']]
+        self.names = '{} <== {} === {} >- {}'.format(
+            self.planetName,
+            planetData['greekGod'][lang],
+            planetData['ancientGreekName'],
+            self.symbol
+        )
+        self.n = planetData['serieAequi']['4']['number']
 
     def generate(self):
         return [
             self.recto(),
-            # self.verso()
+            self.verso()
         ]
 
     def recto(self):
         return self.templates[0].render(
             css=self.css,
-            width= self.w,
-            height= self.h,
+            width=self.w,
+            height=self.h,
             ellipse={
             'pos': self.c,
             'rad': self.radius
@@ -289,7 +297,53 @@ class Intercalar():
         )
 
     def verso(self):
-        pass
+        return self.templates[1].render(
+            css=self.css,
+            width=self.w,
+            height=self.h,
+            w={
+                'pos': self.wPos,
+                'content': self.sizeKm[0],
+            },
+            h={
+                'pos': [self.m[0], self.c[1]],
+                'content': self.sizeKm[1],
+            },
+            names={
+                'pos': [self.c[0], self.h - self.m[1]],
+                'content': self.names,
+            },
+            textBlock={
+                'pos': [self.m[0] * 2, self.m[1] * 3],
+                'size': [self.w - self.m[0] * 4, self.h - self.m[1] * 5],
+                'paragraphs': [
+                    {
+                        'lines': ['{} ({})'.format(self.symbol, self.symbolName),
+                                  '0-{}'.format(len(self.formats) - 1)],
+                        'klass': 'end',
+                        'fontSize': self.fontSizes[6]
+                    },
+                    {
+                        'lines': [self.planetName.upper()],
+                        'fontSize': self.fontSizes[2]
+                    },
+                    {
+                        'lines': self.texts['verso']['textBlock'].format(
+                            rx=stringifyNumber(self.realRadius[0]),
+                            ry=stringifyNumber(self.realRadius[1]),
+                            area=stringifyNumber(self.area),
+                            planetName=self.planetName,
+                            width=self.sizeKm[0],
+                            height=self.sizeKm[1],
+                            a4equiNumber=self.n,
+                            a4equiW=self.w,
+                            a4equiH=self.h,
+                        ).splitlines()
+                    }
+                ]
+            }
+            
+        )
 
 
 
@@ -334,6 +388,7 @@ if __name__ == '__main__':
     # pages = catalog.generate(number=n)
     # saveAsPDF(pages, planetData['name']['en'])
     # saveAsSVG(pages)
+    css = getText('print/stylesheet-intercalar.css')
     intercalar = Intercalar(templateEnv, css, planetData, 'fr')
     pages = intercalar.generate()
     saveAsSVG(pages, folder='output/print/intercalar/')
