@@ -12,7 +12,7 @@ class Common():
         pass
 
 class Pages():
-    def __init__(self, templates, css, planetData, lang):
+    def __init__(self, planetData, lang):
         self.lang = lang
 
         self.symbol = planetData['symbol']
@@ -29,58 +29,60 @@ class Pages():
         radius = ratio * km2mm(planetData['radius'][1])
         self.fontSizes = [round(radius * sqrt1_2**n, 3) for n in range(21)]
 
-        self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
-        self.templates = [
-            templates.get_template('format-recto.svg.jinja2'),
-            templates.get_template('format-verso.svg.jinja2'),
-        ]
         self.texts = getYaml('data/textsPrint.yaml')[lang]['pages']
 
         self.wPos = [self.w / 2, self.m[1]]
         self.hPos = [self.w - self.m[0], self.h/2]
 
-    def generate(self, layout=[210, 297], number=None, arr=None, side=None):
+    def generate(self, templates, css, layout=[210, 297], number=None):
         pages = []
         if layout is not None:
             tx = (layout[0] - self.w) / 2
-            ty = (layout[1] -  self.h) / 2
-            marg = 2
-            x = tx - marg
-            y = ty - marg
-            layout = {
-                'tx': tx,
-                'ty': ty,
-                'cutLines': [
-                    'M0,{ty} h{x} m2,-2 v-{y}'.format(ty=ty, x=x, y=y),
-                    'M210,{ty} h-{x} m-2,-2 v-{y}'.format(ty=ty, x=x, y=y),
-                    'M{tx},297 v-{y} m-2,-2 h-{x}'.format(tx=tx, x=x, y=y),
-                    'M{ttx},297 v-{y} m2,-2 h{x}'.format(ttx=tx + self.w, x=x, y=y),
-                ],
+            ty = (layout[1] - self.h) / 2
+            self.layout = {
+                'viewBox': '-{} -{} {} {}'.format(tx, ty, tx + tx + self.w, self.h + ty + ty),
+                'width': tx + tx + self.w,
+                'height': ty + ty + self.h,
             }
-        if number is not None:
-            arr = [number]
-        elif arr is None:
-            arr = range(len(self.formats))
-
-        if side is not None:
-            sideFunc = self.recto if side == 'recto' else self.verso
-            for n in arr:
-                pages.append(sideFunc(layout, n))
+            self.templates = [
+                templates.get_template('format-recto.svg.jinja2'),
+                templates.get_template('format-verso.svg.jinja2'),
+            ]
         else:
-            for n in arr:
-                pages.append(self.recto(layout, n))
-                pages.append(self.verso(layout, n))
+            self.layout = {
+                'viewBox': '0 0 {} {}'.format(self.w, self.h),
+                'width': self.w,
+                'height': self.h,
+            }
+            self.templates = [
+                templates.get_template('partials/format-recto.svg.jinja2'),
+                templates.get_template('partials/format-verso.svg.jinja2'),
+                templates.get_template('base.svg.jinja2'),
+            ]
+        self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
+        
+        arr = range(len(self.formats)) if number is None else [number]            
+        for n in arr:
+            if layout is None:
+                pages.append(self.templates[2].render(
+                    l=self.layout,
+                    css=self.css,
+                    content=self.recto(n) + self.verso(n)
+                ))
+            else:
+                pages.append(self.recto(n))
+                pages.append(self.verso(n))
         return pages
 
-    def recto(self, layout, index):
+    def recto(self, index):
         wNotation = stringifyNumber(self.formats[index][0])
         hNotation = stringifyNumber(self.formats[index][1])
         remaining = len(self.formats) - index
         return self.templates[0].render(
-            l=layout,
+            l=self.layout,
             css=self.css,
-            width= self.w,
-            height= self.h,
+            width=self.w,
+            height=self.h,
             name={
                 'pos': [self.w / 2, self.h / 2],
                 'fontSize': self.fontSizes[0 if remaining > 6 else 7 - remaining],
@@ -125,7 +127,7 @@ class Pages():
             }
         )
 
-    def verso(self, layout, index):
+    def verso(self, index):
         remaining = len(self.formats) - index
 
         if (remaining <= 6):
@@ -143,7 +145,7 @@ class Pages():
             fs = 0
 
         return self.templates[1].render(
-            l=layout,
+            l=self.layout,
             css=self.css,
             width= self.w,
             height= self.h,
@@ -384,11 +386,11 @@ if __name__ == '__main__':
     css = getText('print/stylesheet.css')
 
     planetData = getJson('data/planets/jupiter.json')
-    # catalog = Pages(templateEnv, css, planetData, 'fr')
-    # pages = catalog.generate(number=n)
+    catalog = Pages(planetData, 'fr')
+    pages = catalog.generate(templateEnv, css, number=n)
     # saveAsPDF(pages, planetData['name']['en'])
-    # saveAsSVG(pages)
-    css = getText('print/stylesheet-intercalar.css')
-    intercalar = Intercalar(templateEnv, css, planetData, 'fr')
-    pages = intercalar.generate()
-    saveAsSVG(pages, folder='output/print/intercalar/')
+    saveAsSVG(pages)
+    # css = getText('print/stylesheet-intercalar.css')
+    # intercalar = Intercalar(templateEnv, css, planetData, 'fr')
+    # pages = intercalar.generate()
+    # saveAsSVG(pages, folder='output/print/intercalar/')

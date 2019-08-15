@@ -6,14 +6,15 @@
   xmlns="http://www.w3.org/2000/svg" 
   xmlns:ev="http://www.w3.org/2001/xml-events" 
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 {{ width }} {{ height }}"
-  height="{{ height }}mm"
-  width="{{ width }}mm">
+  viewBox="{{ l.viewBox }}"
+  height="{{ l.height }}mm"
+  width="{{ l.width }}mm">
   <defs>
     <style type="text/css">
     <![CDATA[{{ css }}]]>    
     </style>
   </defs>
 {% block main %}
+    {{ content }}
 {% endblock %}
 </svg>

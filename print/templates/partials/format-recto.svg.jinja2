@@ -1,0 +1,27 @@
+{% block main %}
+
+{% if rect is not none %}
+<rect width="{{ rect.width }}" height="{{ rect.height }}" x="{{ rect.pos[0] }}" y="{{ rect.pos[1] }}" />
+{% endif %}
+
+<g class="center">
+    <text class="filledstroked" x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" style="font-size:{{ name.fontSize }}">{{ name.content }}</text>
+    <text x="{{ w.pos[0] }}" y="{{ w.pos[1] }}">{{ w.content }}</text>
+    <text transform="rotate(90, {{ h.pos[0] }}, {{ h.pos[1] }})" x="{{ h.pos[0] }}" y="{{ h.pos[1] }}">{{ h.content }}</text>
+    <text x="{{ title.pos[0] }}" y="{{ title.pos[1] }}">{{ title.content }}</text>
+</g>
+
+<flowRoot>
+    <flowRegion>
+        <rect x="{{ textBlock.pos[0] }}" y="{{ textBlock.pos[1] }}" width="{{ textBlock.size[0] }}" height="{{ textBlock.size[1] }}"/>
+    </flowRegion>
+{%- for p in textBlock.paragraphs %}
+    {% if p == '' -%}
+    <flowPara/>
+    {%- else -%}
+    <flowPara>{{ p }}</flowPara>
+    {%- endif %}
+{%- endfor %}
+</flowRoot>
+
+{% endblock %}
