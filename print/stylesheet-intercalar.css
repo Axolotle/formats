@@ -1,11 +1,16 @@
-line, ellipse, path, rect {
+line, ellipse, path {
     fill: none;
-    stroke: black;
+    stroke: MAINCOLOR;
     stroke-width: 0.265;
+}
+rect {
+    fill: SUBCOLOR;
+    stroke: none;
 }
 
 text, flowRoot {
     font-family: 'Fira Code';
+    fill: MAINCOLOR;
     font-weight: 300;
     font-size: MAINFONTSIZE;
     line-height: 1.25em;
@@ -21,7 +26,7 @@ text, flowRoot {
 
 .filledstroked {
     fill: none;
-    stroke: black;
+    stroke: MAINCOLOR;
     stroke-width: 0.265;
 }
 

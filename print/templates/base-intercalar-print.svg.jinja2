@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+{# <?xml-stylesheet type="text/css" href="../stylesheet.css" ?> #}
+<svg
+  baseProfile="full"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:ev="http://www.w3.org/2001/xml-events"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="{{ l.viewBox }}"
+  width="{{ l.width }}mm"
+  height="{{ l.height }}mm">
+    <defs>
+        <style type="text/css">
+            <![CDATA[{{ css }}]]>
+        </style>
+    </defs>
+    
+    <g transform="translate({{ int.translate }}, 0)">
+        <rect x="{{ int.rect.pos[0] }}" y="{{ int.rect.pos[1] }}" width="{{ int.rect.size[0] }}" height="{{ int.rect.size[1] }}"/>
+        <text class="center" transform="rotate(90, {{ int.text.pos[0] }}, {{ int.text.pos[1] }})" x="{{ int.text.pos[0] }}" y="{{ int.text.pos[1] }}">{{ int.text.content }}</text>
+        <g class="cutLines">
+            <path d="M-2,0 h-10 M0,-2 v-10"/>
+            <path d="M{{ width + 2 }},0 h10 M{{ width }},-2 v-10"/>
+            <path d="M-2,{{ height }} h-10 M0,{{ height + 2 }} v10"/>
+            <path d="M{{ width + 2 }},{{ height }} h10 M{{ width }},{{ height + 2 }} v10"/>
+        </g>
+{% block main %}
+{% endblock %}
+    </g>
+</svg>

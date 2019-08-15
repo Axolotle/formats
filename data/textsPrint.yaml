@@ -1,5 +1,6 @@
-fr:
-  pages:
+
+pages:
+  fr:
     recto:
       title: "{symbol}{number} === {symbolName} {numberName}"
       textBlock: |
@@ -9,7 +10,18 @@ fr:
 
         {numberDistrib} par {symbol}0
         ~={lost} km² perdus suite aux arrondies
-  intercalar:
+  en:
+    recto:
+      title: "{symbol}{number} === {symbolName} {numberName}"
+      textBlock: |
+        {width} × {height} mm
+    verso:
+      textBlock: |
+
+        {numberDistrib} per {symbol}0
+        ~={lost} km² lost due to rounding
+intercalar:
+  fr:
     recto:
       area: "{symbol}0 == aire de {planetName} ± 1 mm"
     verso:
@@ -28,18 +40,7 @@ fr:
 
 
         Cette série est imprimée au format α{a4equiNumber} ({a4equiW} × {a4equiH} mm), le premier format pouvant être apposé sur un format A4.  
-en:
-  pages:
-    recto:
-      title: "{symbol}{number} === {symbolName} {numberName}"
-      textBlock: |
-        {width} × {height} mm
-    verso:
-      textBlock: |
-
-        {numberDistrib} per {symbol}0
-        ~={lost} km² lost due to rounding
-  intercalar:
+  en:
     recto:
       area: "{symbol}0 == area of {planetName} ± 1 mm"
     verso:
