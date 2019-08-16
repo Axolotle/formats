@@ -3,7 +3,7 @@
     <nav class="flex" aria_label="Main navigation">
         <ul>
             <li class="lang">
-                <a href="{{ 'en/' if lang == 'fr' else '../' }}index.html">{{ 'en' if page.lang == 'fr' else 'fr' }}</a>
+                <a href="{{ page.root }}{{ 'en/' if page.lang == 'fr' else '' }}index.html">{{ 'en' if page.lang == 'fr' else 'fr' }}</a>
             </li>
             <li>
                 <a href="{{ '../' if page.name != 'index' }}index.html">{{ page.home }}</a>
@@ -11,12 +11,12 @@
             <li id="menu-formats">
                 <a aria-haspopup="true" aria-expanded="false" href="#">Formats</a>
                 <ul class="formats-menu">
-                {% for planet in page.planets %}
+                {%- for planet in page.planets -%}
                     {% set extraUrl = 'planets/' if page.name == 'index' else '' %}
                     <li>
                         <a href="{{ extraUrl ~ planet.name['en']|lower }}.html" title="{{ planet.name[page.lang] }}">{{ planet.symbol }}</a>
                     </li>
-                {% endfor %}
+                {%- endfor %}
                 </ul>
             </li>
         </ul>

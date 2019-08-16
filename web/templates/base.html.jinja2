@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.globalTitle }} - {{ page.title }}</title>
-    <link rel="stylesheet" href="{% if page.lang != 'fr' %}../{% endif %}stylesheet.css" />
+    <link rel="stylesheet" href="{{ page.root }}stylesheet.css" />
 </head>
 <body class="home">
     {% with title = page.globalTitle %}

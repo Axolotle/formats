@@ -1,0 +1,40 @@
+{% extends "base.html.jinja2" %}
+
+{% block main %}
+<main class="flex">
+    <div id="svg-surcontainer">
+        <div id="svg-container">
+            <div class="height">
+                <span>{{ page.formats[0].height }} mm</span>
+            </div>
+            {{ page.svg }}
+            <div class="width">
+                <span>{{ page.formats[0].width }} mm</span>
+            </div>
+            <div class="area-lost">
+                <p><span>{{ page.formats[0].areaLost }}</span>{{ page.areaLost }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="data">
+        <div id="list-container">
+            <h3>{{ page.formatsList }}</h3>
+            <ul data-symbol="{{ page.symbol }}" data-max="{{ page.formats|length }}" id="formats">
+            {%- for format in page.formats %}
+                <li><a data-number="{{ loop.index0 }}" data-width="{{ format.width }}" data-height="{{ format.height }}" data-lost="{{ format.areaLost }}" {% if loop.index0 == 0 %}class="selected"{% endif %}>{{ format.content }}</a></li>
+            {%- endfor %}
+            </ul>
+        </div>
+    
+        <div id="text">
+            <h2>{{ page.standard }}</h2>
+            {{ page.content }}
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="../../script.js"></script>
+{% endblock %}

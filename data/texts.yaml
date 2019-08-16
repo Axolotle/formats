@@ -61,63 +61,63 @@ fr:
     title: "{name} => série {symbol} ({symbolName})"
     standard: "DAC|PlanetaryFormats({symbol}):2019"
     areaLost: " km² de perte"
-    content:
-      text: |
-        Téléchargement : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [fiche rapide]({name}-{symbolName}Sheet.pdf)
-        <br><br><br>
-        {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
+    formatList: "Liste des formats :"
+    content: |
+      Téléchargement : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [fiche rapide]({name}-{symbolName}Sheet.pdf)
+      <br><br><br>
+      {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 
-        Cette page présente les différentes divisions du format *{symbolName}* (*{symbol}*) de *0* à *{a10equiNumber}* dont les onze dernières sont apposables sur la serie A0–10.
+      Cette page présente les différentes divisions du format *{symbolName}* (*{symbol}*) de *0* à *{a10equiNumber}* dont les onze dernières sont apposables sur la serie A0–10.
 
-        Le catalogue papier est apposable sur A4 et peut-être massicoté grâce aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, ainsi que ses sous divisions, imprimés à échelle 1.
+      Le catalogue papier est apposable sur A4 et peut-être massicoté grâce aux traits de coupe afin de correspondre au format {symbol}{a4equiNumber} qui sera dès lors, ainsi que ses sous divisions, imprimés à échelle 1.
 
-        ### {name}
+      ### {name}
 
-        aire calculée : *{area}* km²  
-        rectangle (ratio 1:√2) :  
-        *{wkm}* × *{hkm}* km
+      aire calculée : *{area}* km²  
+      rectangle (ratio 1:√2) :  
+      *{wkm}* × *{hkm}* km
 
-        ### Format {symbol}0 :
+      ### Format {symbol}0 :
 
-        arrondi au millimètre :
+      arrondi au millimètre :
 
-        largeur : *{w0}* mm  
-        longueur : *{h0}* mm  
-        superficie manquante : *{error}* m²
+      largeur : *{w0}* mm  
+      longueur : *{h0}* mm  
+      superficie manquante : *{error}* m²
 
-      calculusEllipse: |
-        ### Calcul
+    calculusEllipse: |
+      ### Calcul
 
-        Aire d'un ellipsoïde oblate (applati)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>  
-        <code>
-        a (rayon équatorial) = *{re}* km<sup>[source]({radiusSource})</sup>
-        b (rayon polaire) = *{rp}* km<sup>[source]({radiusSource})</sup>
+      Aire d'un ellipsoïde oblate (applati)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>  
+      <code>
+      a (rayon équatorial) = *{re}* km<sup>[source]({radiusSource})</sup>
+      b (rayon polaire) = *{rp}* km<sup>[source]({radiusSource})</sup>
 
-        e (excentricité) = √(1 - b² / a²)
-        aire = 2π × a² × (1 + (b / a)² × atanh(e) / e)
-             = *{area}* km²
-        </code>
+      e (excentricité) = √(1 - b² / a²)
+      aire = 2π × a² × (1 + (b / a)² × atanh(e) / e)
+           = *{area}* km²
+      </code>
 
-      calculusSphere: |
-        ### Calcul
+    calculusSphere: |
+      ### Calcul
 
-        Aire d'une sphère<sup>[source](https://fr.wikipedia.org/wiki/Sph%C3%A8re#Formules)</sup>  
-        <code>
-        rayon = *{re}* km<sup>[source]({radiusSource})</sup>
-        aire = 4π × rayon²
-             = *{area}* km²
-        </code>
+      Aire d'une sphère<sup>[source](https://fr.wikipedia.org/wiki/Sph%C3%A8re#Formules)</sup>  
+      <code>
+      rayon = *{re}* km<sup>[source]({radiusSource})</sup>
+      aire = 4π × rayon²
+           = *{area}* km²
+      </code>
 
-      calculusRectangle: |
-        Côtés d'un rectangle d'aire égale à celle de la planète et de ratio 1:√2  
-        <code>
-        longueur = √(aire × √2)
-                 = *{hkm}* km
-                 = *{h0}* mm
-        largeur  = √(aire × √½)
-                 = *{wkm}* km
-                 = *{w0}* mm
-        </code>
+    calculusRectangle: |
+      Côtés d'un rectangle d'aire égale à celle de la planète et de ratio 1:√2  
+      <code>
+      longueur = √(aire × √2)
+               = *{hkm}* km
+               = *{h0}* mm
+      largeur  = √(aire × √½)
+               = *{wkm}* km
+               = *{w0}* mm
+      </code>
 
 
 
@@ -146,60 +146,60 @@ en:
     title: "{name} => series {symbol} ({symbolName})"
     standard: "DAC|PlanetaryFormats({symbol}):2019"
     areaLost: " km² loss"
-    content:
-      text: |
-        Download : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [crib sheet]({name}-{symbolName}Sheet.pdf)
-        <br><br><br>
-        {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
+    formatList: "Formats list:"
+    content: |
+      Download : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [crib sheet]({name}-{symbolName}Sheet.pdf)
+      <br><br><br>
+      {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 
-        This page presents the different divisions of the format *{symbolName}* (*{symbol}*) from *0* to *{a10equiNumber}* whose last eleven are affixable on the series A0-10.
+      This page presents the different divisions of the format *{symbolName}* (*{symbol}*) from *0* to *{a10equiNumber}* whose last eleven are affixable on the series A0-10.
 
-        The paper catalogue can be affixed to A4 and can be trimmed using the cutting lines to correspond to the format {symbol}{a4equiNumber} which will then be printed at 1 scale, as well as its sub-divisions.
+      The paper catalogue can be affixed to A4 and can be trimmed using the cutting lines to correspond to the format {symbol}{a4equiNumber} which will then be printed at 1 scale, as well as its sub-divisions.
 
-        ### {name}
+      ### {name}
 
-        calculated area: *{area}* km²  
-        rectangle (ratio 1:√2):  
-        *{wkm}* × *{hkm}* km
+      calculated area: *{area}* km²  
+      rectangle (ratio 1:√2):  
+      *{wkm}* × *{hkm}* km
 
-        ### Format {symbol}0:
+      ### Format {symbol}0:
 
-        rounded to the nearest millimetre:
+      rounded to the nearest millimetre:
 
-        width: *{w0}* mm  
-        lenght: *{h0}* mm  
-        missing area: *{error}* m²
+      width: *{w0}* mm  
+      lenght: *{h0}* mm  
+      missing area: *{error}* m²
 
-      calculusEllipse: |
-        ### Calcul
+    calculusEllipse: |
+      ### Calcul
 
-        Area of an oblate ellipsoid (flattened)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>  
-        <code>
-        a (equatorial radius) = *{re}* km<sup>[source]({radiusSource})</sup>
-        b (polar radius) = *{rp}* km<sup>[source]({radiusSource})</sup>
+      Area of an oblate ellipsoid (flattened)<sup>[source](http://www.numericana.com/answer/geometry.htm#oblate)</sup>  
+      <code>
+      a (equatorial radius) = *{re}* km<sup>[source]({radiusSource})</sup>
+      b (polar radius) = *{rp}* km<sup>[source]({radiusSource})</sup>
 
-        e (eccentricity) = √(1 - b² / a²)
-        area = 2π × a² × (1 + (b / a)² × atanh(e) / e)
-             = *{area}* km²
-        </code>
+      e (eccentricity) = √(1 - b² / a²)
+      area = 2π × a² × (1 + (b / a)² × atanh(e) / e)
+           = *{area}* km²
+      </code>
 
-      calculusSphere: |
-        ### Calcul
+    calculusSphere: |
+      ### Calcul
 
-        Area of a sphere<sup>[source](https://fr.wikipedia.org/wiki/Sph%C3%A8re#Formules)</sup>  
-        <code>
-        radius = *{re}* km<sup>[source]({radiusSource})</sup>
-        area = 4π × radius²
-             = *{area}* km²
-        </code>
+      Area of a sphere<sup>[source](https://fr.wikipedia.org/wiki/Sph%C3%A8re#Formules)</sup>  
+      <code>
+      radius = *{re}* km<sup>[source]({radiusSource})</sup>
+      area = 4π × radius²
+           = *{area}* km²
+      </code>
 
-      calculusRectangle: |
-        Sides of a rectangle with an area equal to that of the planet and a ratio of 1:√2  
-        <code>
-        height = √(area × √2)
-               = *{hkm}* km
-               = *{h0}* mm
-        width = √(area × √½)
-              = *{wkm}* km
-              = *{w0}* mm
-        </code>
+    calculusRectangle: |
+      Sides of a rectangle with an area equal to that of the planet and a ratio of 1:√2  
+      <code>
+      height = √(area × √2)
+             = *{hkm}* km
+             = *{h0}* mm
+      width = √(area × √½)
+            = *{wkm}* km
+            = *{w0}* mm
+      </code>

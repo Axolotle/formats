@@ -9,7 +9,7 @@ var svg = document.getElementsByTagName('svg')[0];
 var img = document.getElementById('main');
 var data = document.getElementById('formats').dataset;
 var texts = Array.from(document.getElementById('texts').children).reverse();
-var formats = Array.from(document.querySelectorAll('#formats button'));
+var formats = Array.from(document.querySelectorAll('#formats a'));
 var baseFontSize = parseFloat(texts[0].getAttribute('font-size'));
 var maxChar = parseInt(data.max);
 

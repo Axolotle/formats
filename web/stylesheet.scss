@@ -390,12 +390,11 @@ code {
 }
 
 #list-container {
-    li button {
+    li a {
         border: none;
         background-color: transparent;
         color: white;
         font-size: 1rem;
-        font-family: 'Fira Mono';
         display: block;
         cursor: pointer;
         padding: 0.25rem 0;
