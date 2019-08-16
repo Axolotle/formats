@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang }}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.globalTitle }} - {{ page.title }}</title>
+    <link rel="stylesheet" href="{% if page.lang != 'fr' %}../{% endif %}stylesheet.css" />
+</head>
+<body class="home">
+    {% with title = page.globalTitle %}
+    {% include 'partials/header.html.jinja2' %}
+    {% endwith %}
+    {% block main %}
+    {% endblock %}
+    {% block script %}
+    {% endblock %}
+    <script type="text/javascript">
+        document.querySelector('#menu-formats a').onclick = function () {
+            if (this.parentElement.classList.contains('open')) {
+                this.parentElement.classList.remove('open');
+                this.setAttribute('aria-expanded', false);
+            } else {
+                this.parentElement.classList.add('open');
+                this.setAttribute('aria-expanded', true);
+            }
+        }
+    </script>
+</body>
+</html>

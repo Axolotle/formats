@@ -1,0 +1,16 @@
+{% extends "base.html.jinja2" %}
+
+{% block main %}
+<main>
+    {{ page.intro }}
+    <div id="planets">
+    {% for planet in page.planets %}
+        <div id="{{ planet.name['en']|lower }}">
+            <p>{{ planet.name[page.lang] }}</p>
+            <a href="planets/{{ planet.name['en']|lower }}.html">{{ planet.symbol }}</a>
+        </div>
+    {% endfor %}
+    </div>
+    {{ page.content }}
+</main>
+{% endblock %}

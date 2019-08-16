@@ -1,16 +1,49 @@
-fr:
-  projectTitle: Formats Planétaires
-  planetsName:
-    mercury: Mercure
-    venus: Vénus
-    earth: Terre
-    mars: Mars
-    jupiter: Jupiter
-    saturn: Saturne
-    uranus: Uranus
-    neptune: Neptune
-  homeName: Accueil
+planets:
+  -
+    symbol: Ε
+    name:
+      fr: Mercure
+      en: Mercury
+  -
+    symbol: Α
+    name:
+      fr: Vénus
+      en: Venus
+  -
+    symbol: Γ
+    name:
+      fr: Terre
+      en: Earth
+  -
+    symbol: α
+    name:
+      fr: Mars
+      en: Mars
+  -
+    symbol: Ζ
+    name:
+      fr: Jupiter
+      en: Jupiter
+  -
+    symbol: Κ
+    name:
+      fr: Saturne
+      en: Saturn
+  -
+    symbol: Ο
+    name:
+      fr: Uranus
+      en: Uranus
+  -
+    symbol: Π
+    name:
+      fr: Neptune
+      en: Neptune
+
+fr: 
+  globalTitle: Formats Planétaires
   home:
+    title: Accueil
     intro: "Retranscrire la *superficie d'une planète* en une série de formats de papier rectangulaires dont le rapport entre la *largeur* et la *longueur* est *1:√2* à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
     content: |
       Nommage de la série :  
@@ -93,18 +126,9 @@ fr:
 
 
 en:
-  projectTitle: Planetary Formats
-  planetsName:
-    mercury: Mercury
-    venus: Venus
-    earth: Earth
-    mars: Mars
-    jupiter: Jupiter
-    saturn: Saturn
-    uranus: Uranus
-    neptune: Neptune
-  homeName: Home
+  globalTitle: Planetary Formats
   home:
+    title: Home
     intro: "Translate the *area of a planet* into a series of rectangular paper formats whose ratio between *width* and *length* is *1:√2* as in series A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216): A0, A1, etc.)"
     content: |
       Name of the series:  
@@ -172,10 +196,10 @@ en:
       calculusRectangle: |
         Sides of a rectangle with an area equal to that of the planet and a ratio of 1:√2  
         <code>
-        longueur = √(area × √2)
-                 = *{hkm}* km
-                 = *{h0}* mm
-        largeur  = √(area × √½)
-                 = *{wkm}* km
-                 = *{w0}* mm
+        height = √(area × √2)
+               = *{hkm}* km
+               = *{h0}* mm
+        width = √(area × √½)
+              = *{wkm}* km
+              = *{w0}* mm
         </code>
