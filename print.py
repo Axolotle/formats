@@ -219,6 +219,16 @@ class Intercalar(Common):
         self.radius = [self.ratio * km2mm(rad) for rad in planetData['radius']]
         self.sizeKm = planetData['size_km']
         self.n = planetData['serieAequi']['4']['number']
+        self.rectPosY = {
+            'Mercury': 108.25,
+            'Venus': 169.437,
+            'Earth': 246.813,
+            'Mars': 71.063,
+            'Jupiter': 207.625,
+            'Saturn': 43.875,
+            'Uranus': 0,
+            'Neptune': 31.187,
+        }[self.planetName['en']]
 
     def generate(self, templates, css, lang, layout=[210, 297]):
         self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
@@ -231,8 +241,8 @@ class Intercalar(Common):
             ty = (layout[1] - self.h) / 2
             self.layout = {
                 'viewBox': '-{} -{} {} {}'.format(tx, ty, tx + tx + self.w, ty + ty + self.h),
-                'width': tx + tx + self.w,
-                'height': ty + ty + self.h,
+                'width': layout[0],
+                'height': layout[1],
                 'print': True,
             }
             self.css = self.css.replace('MAINCOLOR', 'black').replace('SUBCOLOR', 'white')
@@ -256,11 +266,11 @@ class Intercalar(Common):
             height=self.h,
             int={
                 'rect': {
-                    'pos': [self.w, 0],
-                    'size': [10, 35]
+                    'pos': [self.w, self.rectPosY],
+                    'size': [10, 35.187]
                 },
                 'text': {
-                    'pos': [self.w + 5, 17.5],
+                    'pos': [self.w + 5, self.rectPosY + 35.187 / 2],
                     'content': self.planetName[lang].upper()
                 },
                 'translate': -5
@@ -314,11 +324,11 @@ class Intercalar(Common):
             height=self.h,
             int={
                 'rect': {
-                    'pos': [-10, 0],
-                    'size': [10, 35]
+                    'pos': [-10, self.rectPosY],
+                    'size': [10, 35.187]
                 },
                 'text': {
-                    'pos': [-5, 17.5],
+                    'pos': [-5, self.rectPosY + 35.187 / 2],
                     'content': self.planetName[lang].upper()
                 },
                 'translate': 5
@@ -410,7 +420,7 @@ if __name__ == '__main__':
     templateEnv = jinja2.Environment(loader=templateLoader)
     css = getText('print/stylesheet.css')
 
-    planetData = getJson('data/planets/mars.json')
+    planetData = getJson('data/planets/earth.json')
     # catalog = Pages(planetData)
     # pages = catalog.generate(templateEnv, css, 'fr', layout=None)
     # saveAsPDF(pages, planetData['name']['en'])

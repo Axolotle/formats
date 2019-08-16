@@ -19,10 +19,15 @@
         <rect x="{{ int.rect.pos[0] }}" y="{{ int.rect.pos[1] }}" width="{{ int.rect.size[0] }}" height="{{ int.rect.size[1] }}"/>
         <text class="center" transform="rotate(90, {{ int.text.pos[0] }}, {{ int.text.pos[1] }})" x="{{ int.text.pos[0] }}" y="{{ int.text.pos[1] }}">{{ int.text.content }}</text>
         <g class="cutLines">
-            <path d="M-2,0 h-10 M0,-2 v-10"/>
-            <path d="M{{ width + 2 }},0 h10 M{{ width }},-2 v-10"/>
-            <path d="M-2,{{ height }} h-10 M0,{{ height + 2 }} v10"/>
-            <path d="M{{ width + 2 }},{{ height }} h10 M{{ width }},{{ height + 2 }} v10"/>
+            {% set left = int.rect.pos[0] == -10 %}
+            {% set startx = -10 if left else width + 10 %}
+            {% set l = -12 if left else -2 %}
+            {% set r = width + 2 if left else width + 12 %}
+        
+            <path d="M0,-2 v-10 m{{ width }},0 v10 M0,{{ height + 2 }} v10 m{{ width }},0 v-10"/>
+            <path d="M{{ startx }},-2 v-10 M{{ startx }},{{ height + 2 }} v10"/>
+            <path d="M{{ l }},{{ height }} h-10 m0,{{ -height }} h10 m0,{{ int.rect.pos[1]}} h-10 m0,{{ int.rect.size[1] }} h10"/>
+            <path d="M{{ r }},{{ height }} h10 m0,{{ -height }} h-10 m0,{{ int.rect.pos[1]}} h10 m0,{{ int.rect.size[1] }} h-10"/>
         </g>
 {% block main %}
 {% endblock %}
