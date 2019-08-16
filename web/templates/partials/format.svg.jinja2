@@ -1,0 +1,24 @@
+<svg 
+  baseProfile="full" 
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg" 
+  xmlns:ev="http://www.w3.org/2001/xml-events" 
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 {{ svg.width }} {{ svg.height }}"
+  height="{{ svg.height }}mm"
+  width="{{ svg.width }}mm">
+    <defs></defs>
+    <g id="main">
+        <rect height="{{ svg.height }}" width="{{ svg.width }}" x="0" y="0" />
+        <g>
+        {%- for line in svg.lines %}
+            <path d="{{ line.d }}" style="stroke-width:{{ line.strokeW }}"/>
+        {%- endfor %}
+        </g>
+        <g id="texts">
+        {%- for name in svg.names %}
+            <text {% if loop.last %}class='filledstroked' {% endif %}x="{{ name.pos[0] }}" y="{{ name.pos[1] }}" font-size="{{ name.fontSize }}px">{{ name.content }}</text>
+        {%- endfor %}
+        </g>
+  </g>
+</svg>

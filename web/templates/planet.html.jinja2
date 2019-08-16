@@ -7,7 +7,9 @@
             <div class="height">
                 <span>{{ page.formats[0].height }} mm</span>
             </div>
-            {{ page.svg }}
+            {% with svg = page.svg %}
+            {% include 'partials/format.svg.jinja2' %}
+            {% endwith %}
             <div class="width">
                 <span>{{ page.formats[0].width }} mm</span>
             </div>
@@ -36,5 +38,5 @@
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" src="../../script.js"></script>
+<script type="text/javascript" src="{{ page.root }}script.js"></script>
 {% endblock %}

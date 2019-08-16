@@ -526,16 +526,9 @@ svg {
     text {
         font-family: 'Fira Code';
         font-weight: 300;
-
-        &.center {
-            text-anchor: middle;
-            dominant-baseline: central;
-        }
-        &.right {
-            text-anchor: end;
-        }
+        text-anchor: middle;
+        dominant-baseline: central;
     }
-
     .filledstroked {
         fill: white;
         stroke: black;
