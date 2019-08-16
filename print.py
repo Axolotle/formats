@@ -36,7 +36,7 @@ class Pages(Common):
         self.distrib = getJson('data/formatsDistribution.json')
         self.lost = [round(lost, 3) for lost in planetData['areaLost']]
 
-    def generate(self, templates, css, lang, layout=[210, 297], number=None):
+    def generate(self, templates, css, lang, layout, number=None):
         pages = []
         if layout is not None:
             tx = (layout[0] - self.w) / 2
@@ -230,7 +230,7 @@ class Intercalar(Common):
             'Neptune': 31.187,
         }[self.planetName['en']]
 
-    def generate(self, templates, css, lang, layout=[210, 297]):
+    def generate(self, templates, css, lang, layout):
         self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
         self.templates = [
             templates.get_template('intercalar-recto.svg.jinja2'),
@@ -343,7 +343,7 @@ class Intercalar(Common):
             },
             names={
                 'pos': [self.c[0], self.h - self.m[1]],
-                'content': '{} <== {} === {} >- {}'.format(
+                'content': '{} &lt;== {} === {} >- {}'.format(
                     self.planetName[lang],
                     self.greekGod[lang],
                     self.ancientGreekName,
@@ -410,22 +410,59 @@ def saveAsPDF(pages, name, folder='output/print/'):
         pdf.write(target)
 
 
-
-
-
-if __name__ == '__main__':
-    n = 56
-
+def main(planet=None, lang=None, layout=None):
     templateLoader = jinja2.FileSystemLoader(searchpath='print/templates/')
     templateEnv = jinja2.Environment(loader=templateLoader)
-    css = getText('print/stylesheet.css')
+    planets = [
+        'mercury',
+        'venus',
+        'earth',
+        'mars',
+        'jupiter',
+        'saturn',
+        'uranus',
+        'neptune',
+    ]
+    
+    if planet is not None:
+        data = [getJson('data/planets/'+planet+'.json')]
+    else:
+        data = [getJson('data/planets/'+planet+'.json')
+                for planet in planets]
+                
+    if lang is None: lang = ['fr', 'en']
+    else: lang = [lang] 
+    
+    cssPages = getText('print/stylesheet.css')
+    cssInt = getText('print/stylesheet-intercalar.css')
+        
+    for planetData in data:
+        catalog = Pages(planetData)
+        intercalar = Intercalar(planetData)
+        for l in lang:
+            pages = catalog.generate(templateEnv, cssPages, l, layout)
+            intercalars = intercalar.generate(templateEnv, cssInt, l, layout)
+            print('Saving ' + planetData['name']['en'])
+            if layout is None:
+                pages = intercalars + pages
+                saveAsPDF(pages, planetData['name']['en'] + '-' + l, folder='output/print/preview/')
+            else:
+                saveAsPDF(pages, planetData['name']['en'] + '-' + l)
+                saveAsPDF(intercalars, planetData['name']['en'] + '-' + l, folder='output/print/intercalars/')
+            print('Done !')
 
-    planetData = getJson('data/planets/earth.json')
+if __name__ == '__main__':
+    main()
+    # planet='mercury'
+    # l='fr'
+    # layout=None
+    # templateLoader = jinja2.FileSystemLoader(searchpath='print/templates/')
+    # templateEnv = jinja2.Environment(loader=templateLoader)
+    # cssPages = getText('print/stylesheet.css')
+    # cssInt = getText('print/stylesheet-intercalar.css')
+    # planetData = getJson('data/planets/'+planet+'.json')
     # catalog = Pages(planetData)
-    # pages = catalog.generate(templateEnv, css, 'fr', layout=None)
-    # saveAsPDF(pages, planetData['name']['en'])
-    # saveAsSVG(pages)
-    css = getText('print/stylesheet-intercalar.css')
-    intercalar = Intercalar(planetData)
-    pages = intercalar.generate(templateEnv, css, 'fr')
-    saveAsSVG(pages, folder='output/print/intercalar/')
+    # pages = catalog.generate(templateEnv, cssPages, l, layout)
+    # intercalar = Intercalar(planetData)
+    # intercalars = intercalar.generate(templateEnv, cssInt, l, layout)
+    # saveAsPDF(intercalars, planetData['name']['en'] + '-' + l, folder='output/test/')
