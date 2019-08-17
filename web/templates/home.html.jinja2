@@ -1,6 +1,9 @@
 {% extends "base.html.jinja2" %}
 
 {% block main %}
+{% with title = page.globalTitle %}
+{% include 'partials/header.html.jinja2' %}
+{% endwith %}
 <main>
     {{ page.intro }}
     <div id="planets">

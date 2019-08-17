@@ -42,6 +42,7 @@ planets:
 
 fr: 
   globalTitle: Formats Planétaires
+  metaDesc: "Retranscrire la superficie d'une planète en une série de formats de papier rectangulaires dont le rapport entre la largeur et la longueur est 1:√2 à l'instar de la série A (norme ISO 216 : A0, A1, etc.)"
   home:
     title: Accueil
     intro: "Retranscrire la *superficie d'une planète* en une série de formats de papier rectangulaires dont le rapport entre la *largeur* et la *longueur* est *1:√2* à l'instar de la série A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216) : A0, A1, etc.)"
@@ -127,6 +128,7 @@ fr:
 
 en:
   globalTitle: Planetary Formats
+  metaDesc: "Translate the area of a planet into a series of rectangular paper formats whose ratio between width and length is 1:√2 as in series A (ISO 216 norm: A0, A1, etc.)"
   home:
     title: Home
     intro: "Translate the *area of a planet* into a series of rectangular paper formats whose ratio between *width* and *length* is *1:√2* as in series A ([ISO 216](https://fr.wikipedia.org/wiki/ISO_216): A0, A1, etc.)"

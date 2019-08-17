@@ -11,6 +11,7 @@ class HomePage():
         self.lang = lang
         self.root = '../' if lang != 'fr' else ''
         self.planets = planetsInfo
+        self.metaDesc = texts['metaDesc']
         self.name = 'index'
         self.globalTitle = texts['globalTitle']
         self.title = self.home = texts['home']['title']
@@ -30,6 +31,7 @@ class PlanetPage():
         self.root = '../../' if lang != 'fr' else '../'
         self.planets = planetsInfo
         self.symbol = data['symbol']
+        self.metaDesc = texts['metaDesc']
         self.name = data['name']['en']
         self.home = texts['home']['title']
         self.globalTitle = texts['globalTitle']
@@ -139,7 +141,6 @@ class PlanetPage():
         w, h = format[0] / 2, format[1] / 2
         cx, cy = w, h
         dir = -1
-        klass = 'center filledstroked'
         for i in range(0, 21):
             if i == 0:
                 pos = [w, h]

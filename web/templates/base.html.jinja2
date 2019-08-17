@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.globalTitle }} - {{ page.title }}</title>
+    <meta name="description" content="{{ page.metaDesc }}"/>
+    <meta name="keywords" content="paper format, paper size, format, paper, papier, A0, A1, A2, A3, A4, planetary format, formats planétaire, surface area, aire, planet, planète, ISO 216, norme" />
+    <meta name="author" content="Nicolas Chesnais" />
     <link rel="stylesheet" href="{{ page.root }}stylesheet.css" />
 </head>
 <body class="home">
-    {% with title = page.globalTitle %}
-    {% include 'partials/header.html.jinja2' %}
-    {% endwith %}
     {% block main %}
     {% endblock %}
     {% block script %}

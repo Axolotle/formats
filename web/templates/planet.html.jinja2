@@ -1,6 +1,9 @@
 {% extends "base.html.jinja2" %}
 
 {% block main %}
+{% with title = page.title %}
+{% include 'partials/header.html.jinja2' %}
+{% endwith %}
 <main class="flex">
     <div id="svg-surcontainer">
         <div id="svg-container">
