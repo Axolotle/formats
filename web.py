@@ -12,6 +12,10 @@ class HomePage():
         self.root = '../' if lang != 'fr' else ''
         self.planets = planetsInfo
         self.metaDesc = texts['metaDesc']
+        self.footer = {
+            'title': texts['footer']['title'],
+            'content': markdown(texts['footer']['content'])
+        }
         self.name = 'index'
         self.globalTitle = texts['globalTitle']
         self.title = self.home = texts['home']['title']
@@ -32,6 +36,10 @@ class PlanetPage():
         self.planets = planetsInfo
         self.symbol = data['symbol']
         self.metaDesc = texts['metaDesc']
+        self.footer = {
+            'title': texts['footer']['title'],
+            'content': markdown(texts['footer']['content'])
+        }
         self.name = data['name']['en']
         self.home = texts['home']['title']
         self.globalTitle = texts['globalTitle']

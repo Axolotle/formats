@@ -49,7 +49,7 @@ html {
 body {
     width: calc(100vw - #{$margin});
     margin: auto;
-    padding-bottom: 6rem;
+    padding-bottom: 2rem;
     @media (max-width: 550px) {
         width: calc(100vw - #{$small-margin})
     }
@@ -190,6 +190,17 @@ code {
     justify-content: space-between;
 }
 
+footer {
+    width: 100%;
+    margin-top: 5rem;
+    
+    div {
+        display: none
+    }
+    &.open div {
+        display: block;
+    }
+}
 
 
 /* HOME */

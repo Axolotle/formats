@@ -14,8 +14,15 @@
     {% endblock %}
     {% block script %}
     {% endblock %}
+    <footer>
+        <a aria-haspopup="true" aria-expanded="false" href="#footer">{{ page.footer.title }}</a>
+        <div id="footer">
+            {{ page.footer.content }}
+        </div>
+    </footer>
     <script type="text/javascript">
-        document.querySelector('#menu-formats a').onclick = function () {
+        
+        function toggle() {
             if (this.parentElement.classList.contains('open')) {
                 this.parentElement.classList.remove('open');
                 this.setAttribute('aria-expanded', false);
@@ -24,6 +31,8 @@
                 this.setAttribute('aria-expanded', true);
             }
         }
+        document.querySelector('#menu-formats a').onclick = toggle;
+        document.querySelector('footer a').onclick = toggle;
     </script>
 </body>
 </html>
