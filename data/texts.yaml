@@ -66,7 +66,7 @@ fr:
       Les formats de papier 1:√2 ont la particularité de conserver ce ratio à chaque division — pas exactement cependant car le résultat de chaque division est arrondie au millimètre inférieur —, il est ainsi possible de contenir deux formats *1* en orientation paysage dans un format *0* en orientation portrait, quatre formats *2* (portrait) dans un format *0* (portrait), etc.  
       Les approximations induites par les arrondies produisent des pertes négligeables dans le cas de la série A mais il en est tout autrement en ce qui concerne les formats planétaires.
 
-      Sur ce site, vous trouver les dimensions de chacun des formats planétaires ainsi que ses divisions.  
+      Sur ce site, vous trouverez les dimensions de chacun des formats planétaires ainsi que ses divisions.  
       Une version papier imprimable sous forme de catalogue est aussi téléchargeable. Celle-ci présente sur chacune de ses pages la prochaine division, ses dimensions et quelques autres informations. Le catalogue est imprimé dans le premier format planétaire apposable sur un A4, ainsi tous les formats sont à échelle 1 à partir de celui-ci (*Ε51*, *Α53*, *Γ53*, *α52*, *Ζ60*, *Κ60*, *Ο57* et *Π57*).
   planets:
     title: "{name} => série {symbol} ({symbolName})"

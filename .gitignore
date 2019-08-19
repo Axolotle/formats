@@ -1,0 +1,8 @@
+venv
+__pycache__
+.sass-cache
+
+output/print/*
+!output/print/.gitkeep
+output/web/*
+!output/web/.gitkeep

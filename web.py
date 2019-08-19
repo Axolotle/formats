@@ -1,10 +1,11 @@
+import os
 import jinja2
 from markdown import markdown
 
 from utils import getJson, getYaml, stringifyNumber
 from formulae import sqrt1_2, km2mm
-    
-        
+
+
 class HomePage():
     def __init__(self, templates, lang, texts, planetsInfo):
         self.template = templates.get_template('home.html.jinja2')
@@ -21,10 +22,12 @@ class HomePage():
         self.title = self.home = texts['home']['title']
         self.intro = markdown(texts['home']['intro'])
         self.content = markdown(texts['home']['content'])
-    
+
     def generate(self, folder='output/web/'):
         if self.lang != 'fr':
             folder += self.lang + '/'
+        if not os.path.exists(os.getcwd() + '/' + folder):
+            os.makedirs(os.getcwd() + '/' + folder)
         self.template.stream(page=self).dump(folder + self.name + '.html')
 
 
@@ -54,8 +57,8 @@ class PlanetPage():
         self.content = self.getMainContent(texts['planets'], data, lang)
         self.formats = [
             {
-                'width': stringifyNumber(format[0], lang), 
-                'height': stringifyNumber(format[1], lang), 
+                'width': stringifyNumber(format[0], lang),
+                'height': stringifyNumber(format[1], lang),
                 'areaLost': stringifyNumber(round(data['areaLost'][i], 3), lang),
                 'content': '{symbol}{i} -> {width} × {height} mm'.format(
                     symbol=self.symbol,
@@ -76,10 +79,12 @@ class PlanetPage():
             'lines': self.svgLines(format),
             'names': self.svgTexts(format, fontSizes),
         }
-    
+
     def generate(self, folder='output/web/'):
         if self.lang != 'fr':
             folder += self.lang + '/'
+        if not os.path.exists(os.getcwd() + '/' + folder + 'planets'):
+            os.makedirs(os.getcwd() + '/' + folder + 'planets')
         self.template.stream(page=self).dump('{}planets/{}.html'.format(folder, self.name.lower()))
 
     def getMainContent(self, texts, data, lang):
@@ -99,7 +104,7 @@ class PlanetPage():
             a4equiNumber=data['serieAequi']['4']['number'],
         )
         if data['radius'][0] != data['radius'][1]:
-            calculus = texts['calculusEllipse'] 
+            calculus = texts['calculusEllipse']
         else:
             calculus = texts['calculusSphere']
         calculus = calculus.format(
@@ -136,14 +141,14 @@ class PlanetPage():
                 dir *= -1
 
             lines.append({
-                'd': line, 
+                'd': line,
                 'strokeW': round(thickness, 3)
             })
             number += 1
             thickness *= sqrt1_2
-            
+
         return lines
-    
+
     def svgTexts(self, format, fontSizes):
         texts = []
         w, h = format[0] / 2, format[1] / 2
@@ -175,8 +180,8 @@ def main():
     templateEnv = jinja2.Environment(loader=templateLoader)
     texts = getYaml('data/texts.yaml')
     data =  [getJson('data/planets/'+planet+'.json')
-             for planet in [p['name']['en'].lower() for p in texts['planets']]] 
-    
+             for planet in [p['name']['en'].lower() for p in texts['planets']]]
+
     for lang in ['fr', 'en']:
         homePage = HomePage(templateEnv, lang, texts[lang], texts['planets'])
         homePage.generate()
@@ -184,11 +189,11 @@ def main():
                        for d in data]
         for pp in planetPages:
             pp.generate()
-            
+
     with open('web/script.js', 'r') as copy:
         with open('output/web/script.js', 'w') as paste:
             paste.write(copy.read())
-    
-    
+
+
 if __name__ == '__main__':
     main()

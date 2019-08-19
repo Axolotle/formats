@@ -8,7 +8,7 @@ A print and a web version are available.
 
 install [Inkscape](https://inkscape.org/)
 
-It is used as a vector renderer since i couldn't find a renderer that handle 'font-variant-ligature' nor 'dominant-baseline' css rules.
+It is used as a vector renderer since i couldn't find another that handle 'font-variant-ligature' nor 'dominant-baseline' css rules.
 
 install python dependencies:
 ```bash
@@ -18,8 +18,8 @@ pip install -r requirements.txt
 ```
 
 ## LICENSE
-Copyright (C) 2019 Nicolas Chesnais
-Licensed under the [GPLv3 license]('LICENSE.txt')
+Copyright (C) 2019 Nicolas Chesnais  
+Licensed under the [GPLv3 license](LICENSE.txt)
 
 ## CREDITS
 The font used is [Fira Code](https://github.com/tonsky/FiraCode/) by Nikita Prokopov, distributed under the [SIL Open Font License 1.1](https://github.com/tonsky/FiraCode/blob/master/LICENSE).

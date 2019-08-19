@@ -61,10 +61,10 @@ class Pages(Common):
                 templates.get_template('partials/format-verso.svg.jinja2'),
                 templates.get_template('base.svg.jinja2'),
             ]
-        
+
         self.css = css.replace('MAINFONTSIZE', str(self.fontSizes[8]))
-        
-        arr = range(len(self.formats)) if number is None else [number]            
+
+        arr = range(len(self.formats)) if number is None else [number]
         for n in arr:
             if layout is None:
                 pages.append(self.templates[2].render(
@@ -379,7 +379,7 @@ class Intercalar(Common):
                     }
                 ]
             }
-            
+
         )
 
 
@@ -423,19 +423,19 @@ def main(planet=None, lang=None, layout=None):
         'uranus',
         'neptune',
     ]
-    
+
     if planet is not None:
         data = [getJson('data/planets/'+planet+'.json')]
     else:
         data = [getJson('data/planets/'+planet+'.json')
                 for planet in planets]
-                
+
     if lang is None: lang = ['fr', 'en']
-    else: lang = [lang] 
-    
+    else: lang = [lang]
+
     cssPages = getText('print/stylesheet.css')
     cssInt = getText('print/stylesheet-intercalar.css')
-        
+
     for planetData in data:
         catalog = Pages(planetData)
         intercalar = Intercalar(planetData)
