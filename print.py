@@ -384,6 +384,107 @@ class Intercalar(Common):
 
 
 
+class CribSheet(Common):
+    def __init__(self, planetData):
+        super().__init__(planetData)
+        self.w = 128
+        self.h = 115 + self.m[1] * 2 + len(self.formats) * 1.25 * 3.5
+        self.texts = getYaml('data/textsPrint.yaml')['cribsheet']
+        self.planetName = planetData['name']
+        self.greekGod = planetData['greekGod']
+        self.ancientGreekName = planetData['ancientGreekName']
+        self.realRadius = planetData['radius']
+        self.area = planetData['area']
+        self.radius = [self.ratio * km2mm(rad) for rad in planetData['radius']]
+        self.sizeKm = planetData['size_km']
+        self.n = planetData['serieAequi']['4']['number']
+
+    def generate(self, templates, css, lang, layout):
+        self.css = css.replace('MAINFONTSIZE', str(3.5)).replace('MAINCOLOR', 'black').replace('SUBCOLOR', 'white')
+        self.templates = [
+            templates.get_template('cribsheet.svg.jinja2'),
+        ]
+        if layout is not None:
+            tx = (layout[0] - self.w - 10) / 2
+            ty = (layout[1] - self.h) / 2
+            self.layout = {
+                'viewBox': '-{} -{} {} {}'.format(tx, ty, tx + tx + self.w, ty + ty + self.h),
+                'width': layout[0],
+                'height': layout[1],
+                'print': True,
+            }
+        else:
+            self.layout = {
+                'viewBox': '0 0 {} {}'.format(self.w, self.h),
+                'width': self.w,
+                'height': self.h,
+            }
+        return [
+            self.recto(lang)
+        ]
+
+    def recto(self, lang):
+        sizeKm = [stringifyNumber(side, lang) for side in self.sizeKm]
+        formats = [
+            '{}{} │ {} × {} mm'.format(
+                self.symbol,
+                i if i > 9 else str(i) + ' ',
+                stringifyNumber(self.formats[i][0], lang),
+                stringifyNumber(self.formats[i][1], lang)
+            )
+            for i in range(len(self.formats))
+        ]
+        formats = formats[:len(formats) - 11] \
+                + ['', self.texts[lang]['affixable'], ''] \
+                + [format + ' (A{})'.format(i) for i, format in enumerate(formats[-11:])]
+        return self.templates[0].render(
+            l=self.layout,
+            css=self.css,
+            width=self.w,
+            height=self.h,
+            textBlock={
+                'pos': [self.m[0], self.m[1]],
+                'size': [self.w - self.m[0] * 2, self.h - self.m[1] * 2],
+                'paragraphs': [
+                    {
+                        'lines': ['{} ({})'.format(self.symbol, self.symbolName),
+                                  '0-{}'.format(len(self.formats) - 1)],
+                        'klass': 'end',
+                        'fontSize': 7
+                    },
+                    {
+                        'lines': [self.planetName[lang].upper()],
+                        'fontSize': 24.5
+                    },
+                    {
+                        'lines': ['{} &lt;== {} === {} >- {}'.format(
+                            self.planetName[lang],
+                            self.greekGod[lang],
+                            self.ancientGreekName,
+                            self.symbol
+                        )],
+                    },
+                    {
+                        'lines': self.texts[lang]['infos'].format(
+                            rx=stringifyNumber(self.realRadius[0], lang),
+                            ry=stringifyNumber(self.realRadius[1], lang),
+                            area=stringifyNumber(self.area, lang),
+                            planetName=self.planetName[lang],
+                            width=sizeKm[0],
+                            height=sizeKm[1],
+                            a4equiNumber=self.n,
+                            a4equiW=self.w,
+                            a4equiH=self.h,
+                        ).splitlines()
+                    },
+                    {
+                        'lines': formats
+                    }
+                ]
+            }
+        )
+
+
 def saveAsSVG(pages, folder='output/svg/'):
     for i, page in enumerate(pages):
         with open(folder + 'p' + str(i) + '.svg', 'w') as output:
@@ -439,30 +540,37 @@ def main(planet=None, lang=None, layout=None):
     for planetData in data:
         catalog = Pages(planetData)
         intercalar = Intercalar(planetData)
+        cribsheet = CribSheet(planetData)
         for l in lang:
             pages = catalog.generate(templateEnv, cssPages, l, layout)
             intercalars = intercalar.generate(templateEnv, cssInt, l, layout)
-            print('Saving ' + planetData['name']['en'])
+            cribsheetRender = cribsheet.generate(templateEnv, cssInt, l, None)
+            print('Saving ' + planetData['name']['en'] + '' + l)
             if layout is None:
                 pages = intercalars + pages
                 saveAsPDF(pages, planetData['name']['en'] + '-' + l, folder='output/print/preview/')
+                saveAsPDF(cribsheetRender, planetData['name']['en']+ '-cribsheet-' + l, folder='output/print/preview/')
             else:
                 saveAsPDF(pages, planetData['name']['en'] + '-' + l)
                 saveAsPDF(intercalars, planetData['name']['en'] + '-' + l, folder='output/print/intercalars/')
-            print('Done !')
+                saveAsPDF(cribsheetRender, planetData['name']['en']+ '-cribsheet-' + l)
+            print('Done !\n\n\n')
 
 if __name__ == '__main__':
-    main()
-    # planet='mercury'
-    # l='fr'
+    main(layout=[210, 297])
+    # planet='earth'
+    # l='en'
     # layout=None
     # templateLoader = jinja2.FileSystemLoader(searchpath='print/templates/')
     # templateEnv = jinja2.Environment(loader=templateLoader)
-    # cssPages = getText('print/stylesheet.css')
+    # # cssPages = getText('print/stylesheet.css')
     # cssInt = getText('print/stylesheet-intercalar.css')
     # planetData = getJson('data/planets/'+planet+'.json')
-    # catalog = Pages(planetData)
-    # pages = catalog.generate(templateEnv, cssPages, l, layout)
-    # intercalar = Intercalar(planetData)
-    # intercalars = intercalar.generate(templateEnv, cssInt, l, layout)
+    # # catalog = Pages(planetData)
+    # # pages = catalog.generate(templateEnv, cssPages, l, layout)
+    # # intercalar = Intercalar(planetData)
+    # # intercalars = intercalar.generate(templateEnv, cssInt, l, layout)
+    # cribsheet = CribSheet(planetData)
+    # cribsheet = cribsheet.generate(templateEnv, cssInt, l, layout)
+    # saveAsSVG(cribsheet, folder='output/svg/')
     # saveAsPDF(intercalars, planetData['name']['en'] + '-' + l, folder='output/test/')

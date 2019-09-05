@@ -58,6 +58,35 @@ intercalar:
 
 
         This series is printed in the format α{a4equiNumber} ({a4equiW} × {a4equiH} mm), the first format that can be affixed on an A4 format.
+cribsheet:
+  fr:
+    infos: |
+      
+      rayon équatorial : {rx} km
+      rayon polaire : {ry} km
+
+      aire calculée : {area} km²
+
+      rectangle d'aire == {planetName} (ratio 1:√2) :
+      largeur : {width} km
+      hauteur : {height} km
+       
+       
+    affixable: "Apposable sur serie A0–10 :"
+  en:
+    infos: |
+      
+      equatorial radius : {rx} km
+      polar radius : {ry} km
+
+      calculated area : {area} km²
+      
+      rectangle with area == {planetName} (ratio 1:√2) :
+      width : {width} km 
+      height : {height} km
+       
+       
+    affixable: "Affixable to series A0-10:"
 digits:
   fr:
     '0': zéro

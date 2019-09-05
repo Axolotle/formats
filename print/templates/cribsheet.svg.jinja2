@@ -1,0 +1,18 @@
+{% extends 'base-print.svg.jinja2' if l.print is defined else 'base.svg.jinja2' %}
+
+{% block main %}
+<flowRoot>
+    <flowRegion>
+        <rect x="{{ textBlock.pos[0] }}" y="{{ textBlock.pos[1] }}" width="{{ textBlock.size[0] }}" height="{{ textBlock.size[1] }}"/>
+    </flowRegion>
+{% for paragraph in textBlock.paragraphs %}
+{%- for p in paragraph.lines %}
+    {% if p == '' -%}
+    <flowPara/>
+    {%- else -%}
+    <flowPara {% if paragraph.klass is defined %}class="{{ paragraph.klass }}"{% endif %}{% if paragraph.fontSize is defined %} style="font-size:{{ paragraph.fontSize }};line-height:1.25em"{% endif %}>{{ p }}</flowPara>
+    {%- endif %}
+{%- endfor %}
+{% endfor %}
+</flowRoot>
+{% endblock %}
