@@ -90,6 +90,7 @@ class PlanetPage():
     def getMainContent(self, texts, data, lang):
         main = texts['content'].format(
             name=data['name'][lang],
+            nameEn=data['name']['en'].lower(),
             greekGod=data['greekGod'][lang],
             ancientGreekName=data['ancientGreekName'],
             area=data['area'],

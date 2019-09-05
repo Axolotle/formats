@@ -74,7 +74,7 @@ fr:
     areaLost: " km² de perte"
     formatList: "Liste des formats :"
     content: |
-      Téléchargement : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [fiche rapide]({name}-{symbolName}Sheet.pdf)
+      Téléchargement : [catalogue (~= 1 mo)]({nameEn}-fr.pdf) || [fiche rapide]({nameEn}-cribsheet-fr.pdf)
       <br><br><br>
       {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 
@@ -169,7 +169,7 @@ en:
     areaLost: " km² loss"
     formatList: "Formats list:"
     content: |
-      Download : [catalogue (~= 1 mo)]({name}-{symbolName}Catalogue.pdf) || [crib sheet]({name}-{symbolName}Sheet.pdf)
+      Download : [catalogue (~= 1 mo)]({nameEn}-en.pdf) || [cribsheet]({nameEn}-cribsheet-en.pdf)
       <br><br><br>
       {name} <== {greekGod} === {ancientGreekName} >- *{symbol}*
 

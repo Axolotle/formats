@@ -193,7 +193,7 @@ code {
 footer {
     width: 100%;
     margin-top: 5rem;
-    
+
     div {
         display: none
     }
@@ -391,7 +391,7 @@ footer {
     }
 
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1450px), (min-height: 1100px) and (max-width: 1700px) {
         flex-direction: column;
         #text {
             order: -1;
@@ -550,7 +550,7 @@ svg {
 
 @font-face {
 	font-family: 'Fira Code';
-	src: url('fonts/FiraCode/woff2/FiraCode-Light.woff2') format('woff2'), 
+	src: url('fonts/FiraCode/woff2/FiraCode-Light.woff2') format('woff2'),
 		 url('fonts/FiraCode/woff/FiraCode-Light.woff') format('woff'),
 		 url('fonts/FiraCode/eot/FiraCode-Light.eot') format('eot');
 	font-weight: 300;
@@ -559,7 +559,7 @@ svg {
 
 @font-face {
 	font-family: 'Fira Code';
-	src: url('fonts/FiraCode/woff2/FiraCode-Regular.woff2') format('woff2'), 
+	src: url('fonts/FiraCode/woff2/FiraCode-Regular.woff2') format('woff2'),
 		 url('fonts/FiraCode/woff/FiraCode-Regular.woff') format('woff'),
 		 url('fonts/FiraCode/eot/FiraCode-Regular.eot') format('eot');
 	font-weight: 400;
@@ -568,7 +568,7 @@ svg {
 
 @font-face {
 	font-family: 'Fira Code';
-	src: url('fonts/FiraCode/woff2/FiraCode-Medium.woff2') format('woff2'), 
+	src: url('fonts/FiraCode/woff2/FiraCode-Medium.woff2') format('woff2'),
 		 url('fonts/FiraCode/woff/FiraCode-Medium.woff') format('woff'),
 		 url('fonts/FiraCode/eot/FiraCode-Medium.eot') format('eot');
 	font-weight: 500;
@@ -577,7 +577,7 @@ svg {
 
 @font-face {
 	font-family: 'Fira Code';
-	src: url('fonts/FiraCode/woff2/FiraCode-Bold.woff2') format('woff2'), 
+	src: url('fonts/FiraCode/woff2/FiraCode-Bold.woff2') format('woff2'),
 		 url('fonts/FiraCode/woff/FiraCode-Bold.woff') format('woff'),
 		 url('fonts/FiraCode/eot/FiraCode-Bold.eot') format('eot');
 	font-weight: 700;
